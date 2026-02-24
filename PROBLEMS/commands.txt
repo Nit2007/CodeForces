@@ -1,0 +1,2 @@
+//g++ Target_Practice.cpp -o target.exe
+//del *.exe
