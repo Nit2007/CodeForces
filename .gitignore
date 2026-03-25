@@ -1,1 +1,37 @@
-/cpp.json
+
+# IDE/editor folders and files
+.vscode/
+*.code-workspace
+
+# Common build/output folders (ignore everything inside)
+build/
+bin/
+obj/
+Debug/
+Release/
+
+# Compiled objects and binaries
+*.o
+*.obj
+*.exe
+*.out
+*.dll
+*.so
+*.dylib
+*.cph
+
+# Misc
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.bak
+
+# Archives
+*.zip
+*.tar.gz
+*.7z
+
+# Coverage / test outputs
+coverage/
+*.lcov

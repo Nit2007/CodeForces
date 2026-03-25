@@ -3,17 +3,20 @@ using namespace std;//AUTHOR : NITHISH JAISARUN
 using ll = long long int; const int INF = 1e9;
 class Main{
 public:  
-    void solve(){//
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-
-
+    void solve(){//1A
+        ll n,m;
+        double a;
+        cin>>n>>m>>a;
+        if(a >= n && a >= m){cout<<1;return;}
+        ll x = ceil(n/a) ;
+        ll y = ceil(m/a) ;
+        cout<< (x * y);
     }
 
 
     int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
+        int z=1;
         while(z--){ solve();}
         return 0;
     }

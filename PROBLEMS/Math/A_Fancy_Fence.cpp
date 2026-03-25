@@ -3,14 +3,25 @@ using namespace std;//AUTHOR : NITHISH JAISARUN
 using ll = long long int; const int INF = 1e9;
 class Main{
 public:  
-    void solve(){//
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
+    void solve(){//270A
+        int angle;cin>>angle;
+        bool valid = true;
 
+        if(angle < 0 || angle >= 180)valid = false;
 
+        int sides = 360 / (180 - angle);
+        int possible = 360 % (180 - angle);
+        if(sides < 3 || possible != 0)valid = false;
+
+        cout<<((valid)? "YES" : "NO");N();
     }
-
-
+    // Sum(intangle) = (sides - 2) * 180;
+    // angle * sides = (sides - 2) * 180; {Regular_Polygon}
+    // angle * sides = 180 sides - 360; 
+    // angle * sides + 360 = 180 sides
+    // 360 = 180 sides - (angle * sides )
+    // 360 = sides (180 - angle)
+    // sides = 360 / (180 - angle)
     int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
