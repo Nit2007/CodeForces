@@ -1,14 +1,31 @@
 #include <bits/stdc++.h>
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
-#define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
+using namespace std;//AUTHOR : NITHISH JAISARUN
+using ll = long long int; const int INF = 1e9;
 class Main{
 public:  
 
-    void solve(){//
+    void solve(){//1832C
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
 
+        vector<int>u(1,nums[0]);
+        for(int i=1;i<n;i++){
+            if(nums[i-1] == nums[i])continue;
+            u.push_back(nums[i]);
+        }
+#define U ((int)u.size())
+        if(U == 1){
+            cout<<1;N();return;
+        }
 
+        
+        int need=0;
+        for(int i=0;i<U;i++){
+            if(i == 0 || i == U-1 || (u[i-1] > u[i]) == (u[i] < u[i+1]) ){//If flucations ,then that is neeeded
+                need++;
+            }
+        }
+        cout<<need;N();
     }
 
 
@@ -21,7 +38,6 @@ public:
         while(z--){ solve();}
         return 0;
     }
-
     
 
 
@@ -39,21 +55,6 @@ public:
     }
     void N(){cout<<"\n";}
     void ND(){cout<<"---DEBUG___";cout<<"\n";}
-    template<typename... Args>
-    void debugPrint(const string& raw, Args&&... args){
-        vector<string> keys;
-        stringstream ss(raw);
-        string tok;
-        while(getline(ss, tok, ',')){
-            while(!tok.empty() && tok.front()==' ') tok.erase(tok.begin());
-            while(!tok.empty() && tok.back() ==' ') tok.pop_back();
-            keys.push_back(tok);
-        }
-        int i=0;
-        cout << " [DEBUG] ";
-        ([&](auto&& arg){ cout << keys[i++] << " : " << arg << "  |  "; }(args), ...);
-        cout << "\n";
-    }
 
     template<typename T>
     vector<T> readVector(int n){
@@ -62,12 +63,12 @@ public:
         return v;
     }
     template<typename T>
-    vector<T> makeUnique(vector<T>& v){
+    vector<T> makeuque(vector<T>& v){
         unordered_set<T>seen;
-        vector<T>unique;
+        vector<T>uque;
         for(auto &x:v){
-            if(seen.insert(x).second)unique.push_back(x);
-        }return unique;
+            if(seen.insert(x).second)uque.push_back(x);
+        }return uque;
     }
 };
 

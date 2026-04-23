@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/DELL/Desktop/CodeForces/PROBLEMS/dp",
-      "program": "c:/Users/DELL/Desktop/CodeForces/PROBLEMS/dp/build/Debug/outDebug",
+      "cwd": "c:/Users/DELL/Desktop/CodeForces/CP31/1000",
+      "program": "c:/Users/DELL/Desktop/CodeForces/CP31/1000/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

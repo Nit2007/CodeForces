@@ -4,11 +4,20 @@ using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const
 class Main{
 public:  
 
-    void solve(){//
-        int n;cin>>n;
+    void solve(){//2217A
+        int n,k;cin>>n>>k;
         vector<int>nums = readVector<int>(n);
 
-
+        ll sum = accumulate(nums.begin(),nums.end(),0LL);
+        ll reset = 1LL * k * n;
+        if(sum%2 == 1){
+            cout<<"YES";N();return;
+        }
+        if( reset%2 == 0 ){
+            cout<<"YES";N();return;
+        }
+        
+        cout<<"NO";N();return;
     }
 
 
@@ -50,7 +59,7 @@ public:
             keys.push_back(tok);
         }
         int i=0;
-        cout << " [DEBUG] ";
+        cout << "[P] ";
         ([&](auto&& arg){ cout << keys[i++] << " : " << arg << "  |  "; }(args), ...);
         cout << "\n";
     }

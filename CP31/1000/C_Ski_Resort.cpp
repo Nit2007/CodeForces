@@ -1,14 +1,34 @@
 #include <bits/stdc++.h>
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
-#define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
+using namespace std;//AUTHOR : NITHISH JAISARUN
+using ll = long long int; const int INF = 1e9;
 class Main{
 public:  
 
-    void solve(){//
-        int n;cin>>n;
+    void solve(){//1840C
+        int n,k,q;cin>>n>>k>>q;
         vector<int>nums = readVector<int>(n);
+        
+        int block = 0;
+        vector<int>validDates(0);
+        for(int i=0;i<n;i++){
+            if(nums[i] <= q){
+                block++;
+                continue;
+            }else{
+                if(block >= k) validDates.push_back(block);
+                block = 0;
+            }
+        }
+        if(block >= k) validDates.push_back(block);
+        
+        ll ans = 0;
+        for(int i=0;i<validDates.size();i++){
+            if(validDates[i] == k){ans++;continue;}
+            ll rem = validDates[i] - k + 1;
+            ans += ( (rem) * (rem+1) ) / 2;
+        }//PRINT(validDates);ND();
 
-
+        cout<<ans;    N();
     }
 
 
@@ -21,7 +41,6 @@ public:
         while(z--){ solve();}
         return 0;
     }
-
     
 
 
@@ -39,21 +58,6 @@ public:
     }
     void N(){cout<<"\n";}
     void ND(){cout<<"---DEBUG___";cout<<"\n";}
-    template<typename... Args>
-    void debugPrint(const string& raw, Args&&... args){
-        vector<string> keys;
-        stringstream ss(raw);
-        string tok;
-        while(getline(ss, tok, ',')){
-            while(!tok.empty() && tok.front()==' ') tok.erase(tok.begin());
-            while(!tok.empty() && tok.back() ==' ') tok.pop_back();
-            keys.push_back(tok);
-        }
-        int i=0;
-        cout << " [DEBUG] ";
-        ([&](auto&& arg){ cout << keys[i++] << " : " << arg << "  |  "; }(args), ...);
-        cout << "\n";
-    }
 
     template<typename T>
     vector<T> readVector(int n){

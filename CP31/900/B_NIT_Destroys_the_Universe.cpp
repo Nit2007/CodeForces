@@ -1,14 +1,23 @@
 #include <bits/stdc++.h>
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
-#define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
+using namespace std;//AUTHOR : NITHISH JAISARUN
+using ll = long long int; const int INF = 1e9;
 class Main{
 public:  
 
-    void solve(){//
+    void solve(){//1696B
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
 
-
+        int swaps = 0;
+        int seg = 0;
+        for(int i=0;i<n;i++){
+            if(nums[i] != 0 && (i == 0 || nums[i-1] == 0)){
+                seg++;
+            }
+        }
+        if(seg >= 2)seg = 2;
+        swaps = seg;
+        cout<<swaps;N();
     }
 
 
@@ -21,7 +30,6 @@ public:
         while(z--){ solve();}
         return 0;
     }
-
     
 
 
@@ -39,21 +47,6 @@ public:
     }
     void N(){cout<<"\n";}
     void ND(){cout<<"---DEBUG___";cout<<"\n";}
-    template<typename... Args>
-    void debugPrint(const string& raw, Args&&... args){
-        vector<string> keys;
-        stringstream ss(raw);
-        string tok;
-        while(getline(ss, tok, ',')){
-            while(!tok.empty() && tok.front()==' ') tok.erase(tok.begin());
-            while(!tok.empty() && tok.back() ==' ') tok.pop_back();
-            keys.push_back(tok);
-        }
-        int i=0;
-        cout << " [DEBUG] ";
-        ([&](auto&& arg){ cout << keys[i++] << " : " << arg << "  |  "; }(args), ...);
-        cout << "\n";
-    }
 
     template<typename T>
     vector<T> readVector(int n){

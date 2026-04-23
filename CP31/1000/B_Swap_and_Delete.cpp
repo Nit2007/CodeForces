@@ -1,14 +1,36 @@
 #include <bits/stdc++.h>
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
-#define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
+using namespace std;//AUTHOR : NITHISH JAISARUN
+using ll = long long int; const int INF = 1e9;
 class Main{
 public:  
 
-    void solve(){//
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
+    void solve(){//1913B
+        string s ; cin>>s;
+        int n = s.length();
 
-
+        int zero = count(s.begin(),s.end(),'0');
+        int ones = count(s.begin(),s.end(),'1');
+        
+        if(ones == zero){
+            cout<<0;N();
+            return;
+        }
+        int cost = 0;
+        int temp_0 = 0, temp_1 = 0;
+        for(int i=0;i<n;i++){
+            if(s[i] == '0')temp_0++;
+            if(s[i] == '1')temp_1++;
+            //Remove everything else ,if the number of 0 cannot match no of ones 
+            if(temp_0 > ones){
+                cost = n-i;
+                break;
+            }
+            if(temp_1 > zero){
+                cost = n-i;
+                break;
+            }
+        }
+        cout<<cost;N();
     }
 
 
@@ -21,7 +43,6 @@ public:
         while(z--){ solve();}
         return 0;
     }
-
     
 
 
@@ -39,25 +60,10 @@ public:
     }
     void N(){cout<<"\n";}
     void ND(){cout<<"---DEBUG___";cout<<"\n";}
-    template<typename... Args>
-    void debugPrint(const string& raw, Args&&... args){
-        vector<string> keys;
-        stringstream ss(raw);
-        string tok;
-        while(getline(ss, tok, ',')){
-            while(!tok.empty() && tok.front()==' ') tok.erase(tok.begin());
-            while(!tok.empty() && tok.back() ==' ') tok.pop_back();
-            keys.push_back(tok);
-        }
-        int i=0;
-        cout << " [DEBUG] ";
-        ([&](auto&& arg){ cout << keys[i++] << " : " << arg << "  |  "; }(args), ...);
-        cout << "\n";
-    }
 
     template<typename T>
     vector<T> readVector(int n){
-        vector<T> v((unsigned int)n);
+        vector<T> v(n);
         for(auto &x : v) cin >> x;
         return v;
     }

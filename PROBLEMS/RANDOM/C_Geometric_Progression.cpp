@@ -1,14 +1,27 @@
 #include <bits/stdc++.h>
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
-#define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
+using namespace std;//AUTHOR : NITHISH JAISARUN
+using ll = long long int; const int INF = 1e9;
 class Main{
 public:  
 
-    void solve(){//
-        int n;cin>>n;
+    void solve(){//567C - 1700
+        int n,k;cin>>n>>k;
         vector<int>nums = readVector<int>(n);
 
+        map<ll,ll> singles;  // [x]
+        map<ll,ll> doubles; // a1,[x]
+        ll triples = 0;    //a1,a2,[x]
+        for(int i=0;i<n;i++){
+            int x = nums[i];
+            int prev = nums[i]/k;
+            if(x%k == 0){
+                triples += doubles[prev];
+                doubles[x] += singles[prev];
+            }
 
+            singles[x]++;
+        }
+        cout<<triples;N();
     }
 
 
@@ -17,11 +30,10 @@ public:
 
     int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
+        int z=1;
         while(z--){ solve();}
         return 0;
     }
-
     
 
 
@@ -39,21 +51,6 @@ public:
     }
     void N(){cout<<"\n";}
     void ND(){cout<<"---DEBUG___";cout<<"\n";}
-    template<typename... Args>
-    void debugPrint(const string& raw, Args&&... args){
-        vector<string> keys;
-        stringstream ss(raw);
-        string tok;
-        while(getline(ss, tok, ',')){
-            while(!tok.empty() && tok.front()==' ') tok.erase(tok.begin());
-            while(!tok.empty() && tok.back() ==' ') tok.pop_back();
-            keys.push_back(tok);
-        }
-        int i=0;
-        cout << " [DEBUG] ";
-        ([&](auto&& arg){ cout << keys[i++] << " : " << arg << "  |  "; }(args), ...);
-        cout << "\n";
-    }
 
     template<typename T>
     vector<T> readVector(int n){

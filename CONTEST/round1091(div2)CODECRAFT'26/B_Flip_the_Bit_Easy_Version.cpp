@@ -4,11 +4,31 @@ using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const
 class Main{
 public:  
 
-    void solve(){//
-        int n;cin>>n;
+    void solve(){//2217B
+        int n,k,special;cin>>n>>k;
         vector<int>nums = readVector<int>(n);
+        cin>>special;
 
+        special--;
+        int correct = nums[special];
+        int flip = 0;
+        int l = 0, r =0;
 
+        for(int i=0;i<=special;i++){
+            if( ((nums[i] == correct) && flip == 0) ||
+                ((nums[i] != correct) && flip == 1) )continue;
+            l++;
+            flip = flip ^ 1;
+        }
+        flip = 0;
+        for(int i=n-1;i>=special;i--){
+            if( ((nums[i] == correct) && flip == 0) ||
+                ((nums[i] != correct) && flip == 1) )continue;
+            r++;
+            flip = flip ^ 1;
+        }
+        cout<<max(l,r);N();
+        // P(correct,flip,l,r);
     }
 
 

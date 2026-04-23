@@ -1,12 +1,38 @@
 #include <bits/stdc++.h>
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
-#define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
+using namespace std;//AUTHOR : NITHISH JAISARUN
+using ll = long long int; const int INF = 1e9;
 class Main{
 public:  
 
-    void solve(){//
+    void solve(){//2214D
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
+        vector<string>nums ;
+
+    //         1. I want to wash my car and the car wash is 100 meters away. Should I walk or should I drive?
+    nums.push_back("drive");
+    
+    // 2. Are you a robot?
+    nums.push_back("no");
+    
+    // 3. Is April Fools 2026 Codeforces Contest rated?
+    nums.push_back("no");
+    
+    // 4. I was given a cup but it has no bottom and the top is sealed. Can I drink from this?
+    nums.push_back("no");
+    
+    // 5. Does Pikachu's tail have a black tip?
+    nums.push_back("yes");
+    
+    // 6. Is there a seahorse emoji?
+    nums.push_back("yes");
+    
+    // 7. The word backwards spelled backwards.
+    nums.push_back("yes");
+    
+    // 8. Number between 1 to 10.
+    nums.push_back("2");
+
+        cout<<nums[n];
 
 
     }
@@ -17,11 +43,10 @@ public:
 
     int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
+        int z=1;
         while(z--){ solve();}
         return 0;
     }
-
     
 
 
@@ -39,21 +64,6 @@ public:
     }
     void N(){cout<<"\n";}
     void ND(){cout<<"---DEBUG___";cout<<"\n";}
-    template<typename... Args>
-    void debugPrint(const string& raw, Args&&... args){
-        vector<string> keys;
-        stringstream ss(raw);
-        string tok;
-        while(getline(ss, tok, ',')){
-            while(!tok.empty() && tok.front()==' ') tok.erase(tok.begin());
-            while(!tok.empty() && tok.back() ==' ') tok.pop_back();
-            keys.push_back(tok);
-        }
-        int i=0;
-        cout << " [DEBUG] ";
-        ([&](auto&& arg){ cout << keys[i++] << " : " << arg << "  |  "; }(args), ...);
-        cout << "\n";
-    }
 
     template<typename T>
     vector<T> readVector(int n){

@@ -1,15 +1,40 @@
 #include <bits/stdc++.h>
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
-#define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
+using namespace std;//AUTHOR : NITHISH JAISARUN
+using ll = long long int; const int INF = 1e9;
 class Main{
 public:  
 
-    void solve(){//
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
+    void solve(){//1857C
+        ll n;cin>>n;
+        ll m = (n * (n-1))/2 ;
+        vector<ll>nums = readVector<ll>(m);
 
-
+        sort(nums.begin(),nums.end());
+        for(int i=0;i<m;i+= (--n)){
+            cout<<nums[i]<<" ";
+        }
+        cout<<INF;N();
+        //Always the smallest number is going to repeat n-1 times
+        //Always 2nd smallest number is going to repeat n-2 times ....
+        //Always the largest  number is going to repeat  0 times ....
+        //Putting the smallest(or any) number anywhere is not going to change this property, hence
+        // for conveinance ,lets consider the ans is sorted 
     }
+    // map<ll,ll>freq;
+    // for(auto i:nums){
+    //     freq[i]++;
+    // }
+    // vector<ll>ans(n,INF);
+    // int i = 0;
+    // for(auto x:freq){
+    //     ans[i++] = x.first;
+    // }
+    // for(int i=0;i<n;i++){
+    //     if(ans[i] == INF && i > 0){
+    //         ans[i] = ans[i-1];
+    //     }
+    // }
+    // PRINT(ans);
 
 
 
@@ -21,7 +46,6 @@ public:
         while(z--){ solve();}
         return 0;
     }
-
     
 
 
@@ -39,21 +63,6 @@ public:
     }
     void N(){cout<<"\n";}
     void ND(){cout<<"---DEBUG___";cout<<"\n";}
-    template<typename... Args>
-    void debugPrint(const string& raw, Args&&... args){
-        vector<string> keys;
-        stringstream ss(raw);
-        string tok;
-        while(getline(ss, tok, ',')){
-            while(!tok.empty() && tok.front()==' ') tok.erase(tok.begin());
-            while(!tok.empty() && tok.back() ==' ') tok.pop_back();
-            keys.push_back(tok);
-        }
-        int i=0;
-        cout << " [DEBUG] ";
-        ([&](auto&& arg){ cout << keys[i++] << " : " << arg << "  |  "; }(args), ...);
-        cout << "\n";
-    }
 
     template<typename T>
     vector<T> readVector(int n){

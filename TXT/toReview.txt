@@ -1,2 +1,10 @@
 PROBLEMS\Tree\A_Xor_tree.cpp
 PROBLEMS\Tree\D_Apple_Tree.cpp
+PROBLEMS\DS\A_1_Lost_Civilization_Easy_Version.cpp
+CONTEST\Round1088(Neibius)\B_Mickey_Mouse_Constructive.cpp
+C:\Users\DELL\Desktop\CodeForces\CP31\1000\A_Helmets_in_Night_Light.cpp
+C:\Users\DELL\Desktop\CodeForces\PROBLEMS\RANDOM\C_Geometric_Progression.cpp
+C:\Users\DELL\Desktop\CodeForces\CP31\1200\B_Make_Almost_Equal_With_Mod.cpp
+C:\Users\DELL\Desktop\CodeForces\CONTEST\Round1093(div2)\C_Grid_L.cpp
+C:\Users\DELL\Desktop\CodeForces\CP31\1200\C_Assembly_via_Minimums.cpp
+C:\Users\DELL\Desktop\CodeForces\CP31\1000\M_Minimum_LCM.cpp

@@ -4,10 +4,18 @@ using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const
 class Main{
 public:  
 
-    void solve(){//
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
+    void solve(){//2225A
+        ll x,y;cin>>x>>y;
 
+        ll i = 1LL;
+        for(ll z=i*x;z<y;z = i*x){
+            if(z%x == 0  && y%z != 0){
+                cout<<"YES";N();return;
+            }
+            i++;
+        }
+        
+        cout<<"NO";N();return;
 
     }
 
@@ -39,21 +47,21 @@ public:
     }
     void N(){cout<<"\n";}
     void ND(){cout<<"---DEBUG___";cout<<"\n";}
-    template<typename... Args>
-    void debugPrint(const string& raw, Args&&... args){
-        vector<string> keys;
-        stringstream ss(raw);
-        string tok;
-        while(getline(ss, tok, ',')){
-            while(!tok.empty() && tok.front()==' ') tok.erase(tok.begin());
-            while(!tok.empty() && tok.back() ==' ') tok.pop_back();
-            keys.push_back(tok);
-        }
-        int i=0;
-        cout << " [DEBUG] ";
-        ([&](auto&& arg){ cout << keys[i++] << " : " << arg << "  |  "; }(args), ...);
-        cout << "\n";
-    }
+    // template<typename... Args>
+    // void debugPrint(const string& raw, Args&&... args){
+    //     vector<string> keys;
+    //     stringstream ss(raw);
+    //     string tok;
+    //     while(getline(ss, tok, ',')){
+    //         while(!tok.empty() && tok.front()==' ') tok.erase(tok.begin());
+    //         while(!tok.empty() && tok.back() ==' ') tok.pop_back();
+    //         keys.push_back(tok);
+    //     }
+    //     int i=0;
+    //     cout << "[P] ";
+    //     ([&]{ cout << keys[i++] << " : " << args << "  |  "; }(), ...);
+    //     cout << "\n";
+    // }
 
     template<typename T>
     vector<T> readVector(int n){

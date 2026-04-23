@@ -1,14 +1,34 @@
 #include <bits/stdc++.h>
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
-#define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
+using namespace std;//AUTHOR : NITHISH JAISARUN
+using ll = long long int; const int INF = 1e9;
 class Main{
 public:  
 
-    void solve(){//
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
+    void solve(){//2218F
+        int x_even,y_odd;
+        cin>>x_even>>y_odd;
 
+        int rootSize = (x_even + y_odd);
+        if(rootSize%2 == 0 && x_even == 0){
+            cout<<"NO\n";return;
+        }
+        if(rootSize%2 == 1 && y_odd == 0){
+            cout<<"NO\n";return;
+        }
 
+        if(x_even > y_odd){//Every Even_sized Node is going to contain at least one Odd_sized Node (or more)
+            cout<<"NO\n";return;
+        }
+
+        cout<<"YES\n";
+        int chain = 2 * x_even + (y_odd - x_even)%2;//Fill the Even first , so we have x Evens and x Odds ,
+        //still we want (y-x) Odds,attach the remaining nodes to the last Node
+        for(int i=2;i<=chain;i++){
+            cout<<i-1<<" "<<i;N();
+        }
+        for(int i=chain+1;i<=rootSize;i++){
+            cout<<chain<<" "<<i;N();
+        }
     }
 
 
@@ -21,7 +41,6 @@ public:
         while(z--){ solve();}
         return 0;
     }
-
     
 
 
@@ -39,21 +58,6 @@ public:
     }
     void N(){cout<<"\n";}
     void ND(){cout<<"---DEBUG___";cout<<"\n";}
-    template<typename... Args>
-    void debugPrint(const string& raw, Args&&... args){
-        vector<string> keys;
-        stringstream ss(raw);
-        string tok;
-        while(getline(ss, tok, ',')){
-            while(!tok.empty() && tok.front()==' ') tok.erase(tok.begin());
-            while(!tok.empty() && tok.back() ==' ') tok.pop_back();
-            keys.push_back(tok);
-        }
-        int i=0;
-        cout << " [DEBUG] ";
-        ([&](auto&& arg){ cout << keys[i++] << " : " << arg << "  |  "; }(args), ...);
-        cout << "\n";
-    }
 
     template<typename T>
     vector<T> readVector(int n){

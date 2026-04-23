@@ -1,18 +1,20 @@
 #include <bits/stdc++.h>
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
-#define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
+using namespace std;//AUTHOR : NITHISH JAISARUN
+using ll = long long int; const int INF = 1e9;
 class Main{
 public:  
-
-    void solve(){//
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-
-
+    void solve(){//1878C
+        ll n,k,x;cin>>n>>k>>x;
+        ll sum = ((n+1) * n)/2;
+        ll smallest = ((k+1) * k)/2;
+        ll rem = n-k;
+        ll sumOfSmall = ((rem+1) * rem)/2;
+        ll largest = sum - sumOfSmall; //To extract last k numbers ,[1...k..n]
+        if(x < smallest || x > largest ){
+            cout<<"NO\n";return;
+        }//Always createable ,assuming u used i ,then we can simply use (i+1) to get the next sum
+        cout<<"YES\n";
     }
-
-
-
 
 
     int run() {
@@ -21,7 +23,6 @@ public:
         while(z--){ solve();}
         return 0;
     }
-
     
 
 
@@ -39,25 +40,10 @@ public:
     }
     void N(){cout<<"\n";}
     void ND(){cout<<"---DEBUG___";cout<<"\n";}
-    template<typename... Args>
-    void debugPrint(const string& raw, Args&&... args){
-        vector<string> keys;
-        stringstream ss(raw);
-        string tok;
-        while(getline(ss, tok, ',')){
-            while(!tok.empty() && tok.front()==' ') tok.erase(tok.begin());
-            while(!tok.empty() && tok.back() ==' ') tok.pop_back();
-            keys.push_back(tok);
-        }
-        int i=0;
-        cout << " [DEBUG] ";
-        ([&](auto&& arg){ cout << keys[i++] << " : " << arg << "  |  "; }(args), ...);
-        cout << "\n";
-    }
 
     template<typename T>
     vector<T> readVector(int n){
-        vector<T> v((unsigned int)n);
+        vector<T> v(n);
         for(auto &x : v) cin >> x;
         return v;
     }

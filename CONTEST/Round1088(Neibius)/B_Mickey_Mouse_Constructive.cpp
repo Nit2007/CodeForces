@@ -1,16 +1,37 @@
 #include <bits/stdc++.h>
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
-#define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
+using namespace std;//AUTHOR : NITHISH JAISARUN
+using ll = long long int; const int INF = 1e9;
 class Main{
 public:  
-
-    void solve(){//
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-
-
+    const int limit = 200005;
+    vector<int>factors = vector<int>(limit,0);
+    // sum = x + (-y) = x - y
+    // sum = K_subarray * sumOfsubarray
+    // K_subarray * sumOfsubarray = x - y
+    // sumOfsubarray = x - y / K_subarray
+    // f(a) = no of valid K , which means what are the possible divisors of abs(x-y)
+    void solve(){//2211B
+        int x,y; cin>>x>>y;
+        int diff = abs(x - y) ;
+        
+        int ans = factors[diff];
+        if(x == y)ans = 1;
+        cout<<ans<<endl;//ND();
+        for(int i=0;i<x;i++){
+            cout<<1<<" ";
+        }
+        for(int i=0;i<y;i++){
+            cout<<-1<<" ";
+        }
+        N();
     }
-
+    void precompute(){
+        for(int i =1 ;i<limit;i++){
+            for(int j=i;j<limit;j+=i){
+                factors[j] += 1;
+            }
+        }
+    }
 
 
 
@@ -18,10 +39,10 @@ public:
     int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
+        precompute();
         while(z--){ solve();}
         return 0;
     }
-
     
 
 
@@ -39,25 +60,10 @@ public:
     }
     void N(){cout<<"\n";}
     void ND(){cout<<"---DEBUG___";cout<<"\n";}
-    template<typename... Args>
-    void debugPrint(const string& raw, Args&&... args){
-        vector<string> keys;
-        stringstream ss(raw);
-        string tok;
-        while(getline(ss, tok, ',')){
-            while(!tok.empty() && tok.front()==' ') tok.erase(tok.begin());
-            while(!tok.empty() && tok.back() ==' ') tok.pop_back();
-            keys.push_back(tok);
-        }
-        int i=0;
-        cout << " [DEBUG] ";
-        ([&](auto&& arg){ cout << keys[i++] << " : " << arg << "  |  "; }(args), ...);
-        cout << "\n";
-    }
 
     template<typename T>
     vector<T> readVector(int n){
-        vector<T> v((unsigned int)n);
+        vector<T> v(n);
         for(auto &x : v) cin >> x;
         return v;
     }

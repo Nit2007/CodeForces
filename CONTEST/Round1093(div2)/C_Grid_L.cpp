@@ -1,15 +1,35 @@
 #include <bits/stdc++.h>
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
-#define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
+using namespace std;//AUTHOR : NITHISH JAISARUN
+using ll = long long int; const int INF = 1e9;
 class Main{
 public:  
 
-    void solve(){//
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
+    void solve(){//2220C -- 100TH problem
+        ll p,q;cin>>p>>q;
+        
+        int N = 2*p + 4*q + 1;
+        for(int i=1;i*i<=N;i+=2){
+            if(N%i != 0)continue;
 
-
+            int n = (i-1)/2;
+            int m = (N/i-1)/2;
+            int hLines = m*(n+1);// (row+1) sized , m lines 
+            int vLines = n*(m+1);// (col+1) sized , n lines 
+            //q contributes 1 vertical + 1 horizontal
+            //If q is more than the grid dimension ,we got too many,cannot form a valid rectangle
+            if(q <= hLines && q <= vLines){
+                cout<<n<<" "<<m<<endl;
+                return;
+            }
+        }
+        cout<<-1<<endl;
     }
+    // p + 2q = Vertical_lines + horizontal_lines
+    // p + 2q = m(n+1) + n(m+1)
+    // p + 2q = 2nm + m + n
+    // x = 2nm + m + n
+    // 2x + 1 = 4nm + 2m + 2n + 1 = (2n+1)(2m+1)
+    // Hence the no of edges factor to two Odd Numbers
 
 
 
@@ -21,7 +41,6 @@ public:
         while(z--){ solve();}
         return 0;
     }
-
     
 
 
@@ -39,21 +58,6 @@ public:
     }
     void N(){cout<<"\n";}
     void ND(){cout<<"---DEBUG___";cout<<"\n";}
-    template<typename... Args>
-    void debugPrint(const string& raw, Args&&... args){
-        vector<string> keys;
-        stringstream ss(raw);
-        string tok;
-        while(getline(ss, tok, ',')){
-            while(!tok.empty() && tok.front()==' ') tok.erase(tok.begin());
-            while(!tok.empty() && tok.back() ==' ') tok.pop_back();
-            keys.push_back(tok);
-        }
-        int i=0;
-        cout << " [DEBUG] ";
-        ([&](auto&& arg){ cout << keys[i++] << " : " << arg << "  |  "; }(args), ...);
-        cout << "\n";
-    }
 
     template<typename T>
     vector<T> readVector(int n){
@@ -75,3 +79,5 @@ int main(){
     Main OBJ;
     return OBJ.run();
 }
+
+

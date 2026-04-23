@@ -4,12 +4,58 @@ using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const
 class Main{
 public:  
 
-    void solve(){//
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
+    void solve(){//2225B
+        string s;cin>>s;
+        int n = (int)s.length();
 
-
+        int r = 0;
+        for(int i=1;i<n;i++){
+            if(s[i-1] == s[i] ){
+                r++;
+            }
+        }
+        if(r<=2){cout<<"YES";N();return;}
+        else {cout<<"NO";N();return;}
+        //one bad rep can be fixed , 2 bad reps can be fixed by selecting them as boudary
+        //But 3 bad reps cannot be fixed in a single operation because ,internal bad either gets flipped
+        //or rotated but not correct ,hence 3 or more bads => NO
     }
+    // rep = max(rep,temp);
+    // if(rep >= 4){
+    //     cout<<"NO";N();return;
+    // }
+    // vector<string>seq;
+    // string t = {s[0]};
+    // int i=1;
+    // for(int i=1;i<n;i++){
+    //     if(s[i-1] == s[i] ){
+    //         t += s[i];
+    //     }else{
+    //         seq.push_back(t);
+    //         t = {s[i]};
+    //     }
+        
+    // }
+    // seq.push_back(t);
+    // // PRINT(seq);
+    
+    // int singles = 0;
+    // int doubles = 0;
+    // for(auto x:seq){
+    //     if(x.size() == 1){
+    //         singles++;
+    //     }
+    //     if(x.size() == 2){
+    //         doubles++;
+    //     }
+    // }
+    // if(singles == seq.size()){
+    //     cout<<"YES";N();return;
+    // }else if (doubles >= 3){
+    //     cout<<"NO";N();return;
+    // }else{
+    //     cout<<"YES";N();return;
+    // }
 
 
 
@@ -50,7 +96,7 @@ public:
             keys.push_back(tok);
         }
         int i=0;
-        cout << " [DEBUG] ";
+        cout << "[P] ";
         ([&](auto&& arg){ cout << keys[i++] << " : " << arg << "  |  "; }(args), ...);
         cout << "\n";
     }

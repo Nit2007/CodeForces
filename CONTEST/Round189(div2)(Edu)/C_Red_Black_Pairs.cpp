@@ -4,11 +4,22 @@ using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const
 class Main{
 public:  
 
-    void solve(){//
+    void solve(){//2225C
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
+        string a,b; cin>>a>>b;
 
-
+        vector<int>cost(n+1,0);
+        if(a[0] != b[0])cost[1] = 1;
+        for(int i=1;i<n;i++){
+            int v = 0, h = 0 ;
+            if(a[i] != b[i]) v++;
+            if(a[i-1] != a[i]) h++;
+            if(b[i-1] != b[i]) h++;
+            //Vertical{connect a[i]-b[i]}                 --> cost[i] reprsents cost till i-1
+            //Horizontal{connect a[i-1]-a[i],b[i-1]-b[i]} --> cost[i-1]represents cost till i-2
+            cost[i+1] = min(cost[i]+v,cost[i-1]+h);
+        }
+        cout<<cost[n];N();
     }
 
 
@@ -39,21 +50,21 @@ public:
     }
     void N(){cout<<"\n";}
     void ND(){cout<<"---DEBUG___";cout<<"\n";}
-    template<typename... Args>
-    void debugPrint(const string& raw, Args&&... args){
-        vector<string> keys;
-        stringstream ss(raw);
-        string tok;
-        while(getline(ss, tok, ',')){
-            while(!tok.empty() && tok.front()==' ') tok.erase(tok.begin());
-            while(!tok.empty() && tok.back() ==' ') tok.pop_back();
-            keys.push_back(tok);
-        }
-        int i=0;
-        cout << " [DEBUG] ";
-        ([&](auto&& arg){ cout << keys[i++] << " : " << arg << "  |  "; }(args), ...);
-        cout << "\n";
-    }
+    // template<typename... Args>
+    // void debugPrint(const string& raw, Args&&... args){
+    //     vector<string> keys;
+    //     stringstream ss(raw);
+    //     string tok;
+    //     while(getline(ss, tok, ',')){
+    //         while(!tok.empty() && tok.front()==' ') tok.erase(tok.begin());
+    //         while(!tok.empty() && tok.back() ==' ') tok.pop_back();
+    //         keys.push_back(tok);
+    //     }
+    //     int i=0;
+    //     cout << "[P] ";
+    //     ([&]{ cout << keys[i++] << " : " << args << "  |  "; }(), ...);
+    //     cout << "\n";
+    // }
 
     template<typename T>
     vector<T> readVector(int n){
