@@ -1,17 +1,34 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//2227B
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string s;
+        cin>>s;
+
+        int x=0,y=0;
+        for(char c:s){
+            if(c == '('){
+                x++;
+            }
+            if(c == ')'){
+                y++;
+            }
+        }
+        if(x == y){
+            cout<<"YES";N();return;
+        }
+        cout<<"NO";N();return;
     }
 
 
-    signed run() {
+
+
+
+    int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
         while(z--){ solve();}
@@ -67,7 +84,7 @@ public:
     }
 };
 
-signed main(){
+int main(){
     Main OBJ;
     return OBJ.run();
 }

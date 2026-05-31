@@ -1,15 +1,21 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
+    void solve(){//2228B
+        int n,s,d,k;cin>>n>>s>>d>>k;
+        if(n <= 3){
+            cout<<1;N();return;
+        }
+        int r = abs(s-d);
+        int l = n-r;
+        int diff = min(l,r);
         
+        cout<<diff + k;N();
     }
-
+    // . s . . d .
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);

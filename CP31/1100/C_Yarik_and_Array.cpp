@@ -1,17 +1,40 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
-    void solve(){
+    #define PARITY(x) (abs(x)%2)
+    void solve(){//1899C
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+
+        int maxi = INT_MIN;
+        int sum = 0;
+        vector<int>used = {};
+        for(int i=0;i<n;i++){//Modified_Kadane_Alg
+            if(i == 0 || (used.size() == 0) || (PARITY(used.back()) != (PARITY(nums[i]))) ){
+                sum += nums[i];
+                used.push_back(nums[i]);
+            }
+            else{
+                maxi = max(sum,maxi);
+                sum = (nums[i]>0)? nums[i] : 0;
+                used =(nums[i]>0)? vector<int>{nums[i]} : vector<int>{};
+            }
+            maxi = max(sum,maxi);
+            if(sum < 0){
+                used = {};
+                sum = 0;
+            }
+        }
+        cout<<maxi;N();
     }
 
 
-    signed run() {
+
+
+
+    int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
         while(z--){ solve();}
@@ -67,7 +90,7 @@ public:
     }
 };
 
-signed main(){
+int main(){
     Main OBJ;
     return OBJ.run();
 }

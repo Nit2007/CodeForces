@@ -1,13 +1,27 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//1665B
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        map<int,int>freq;
+        for(int i:nums){
+            freq[i]++;
+        }
+        int max_rep = 0;
+        for(auto x:freq){
+            max_rep = max(max_rep,x.second);
+        }
+        int op = 0;
+        ll i = max_rep;
+        while(i < n){
+            i *= 2;
+            op++;
+        }
+        cout<< (op+n-max_rep);N();
     }
 
 

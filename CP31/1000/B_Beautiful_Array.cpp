@@ -1,17 +1,50 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
+    void solve(){//1715B
+        ll n,k,b,s;
+        cin>>n>>k>>b>>s;
+
+        ll maxSum = ((n)*(k-1)) + (b*k);
+        ll minSum =  (b*k);
+        if(s > maxSum || s < minSum || ((s==0)&&(b!=0)) ){
+            cout<<-1;N();return;
+        }
+        vector<ll>nums(n,0);
+        nums[n-1] = minSum;
+        ll rem = s - minSum;
+        for(int i=0;i<n;i++){
+            if(rem == 0)break;
+            int add = min(rem,k-1);
+            nums[i] += add;
+            rem-= add;
+        }
         
+        PRINT(nums);
+        // if(b == 0){
+        //     vector<ll>ans(n,0);
+        //     int j=0;
+        //     while(j<n && s != 0){
+        //         ll add = min(s,k-1);
+        //         ans[j] += add;
+        //         s-= add;
+        //         j++;
+        //     }
+        //     PRINT(ans);return;
+        // }
     }
+    // 5 5 b*k - 1 --> b = 3
+    // n,k,b,s
+    // 5,4,7,38
+    // 0 0 0 0 0
+    // 1 1 1 1 34
 
 
-    signed run() {
+
+    int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
         while(z--){ solve();}
@@ -67,7 +100,7 @@ public:
     }
 };
 
-signed main(){
+int main(){
     Main OBJ;
     return OBJ.run();
 }

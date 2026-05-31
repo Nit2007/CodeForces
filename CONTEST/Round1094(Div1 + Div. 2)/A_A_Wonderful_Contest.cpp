@@ -1,17 +1,46 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//2222A
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
+        vector<int>score(n,0);
+        sort(nums.begin(),nums.end());
+        for(int i=0;i<n;i++){
+            score[i] = 100 / nums[i];
+        }
+        sort(score.begin(),score.end(),greater<int>());
+        int total = 0;
+        while(total <= (100*n)){
+            int temp = total;
+            int i = 0;
+            while(temp>0 && i <= n-1){
+                if(i<n && temp < score[i]){
+                    i++;
+                    continue;
+                }
+                if(i >= n)break;
+                while(temp >= score[i])temp -= score[i];
+            }
+            if(temp != 0){
+                cout<<"NO";N();return;
+            }
+            total++;
+        }
+        cout<<"YES";N();return;
         
+        PRINT(nums);
+        PRINT(score);ND();
     }
 
 
-    signed run() {
+
+
+
+    int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
         while(z--){ solve();}
@@ -67,7 +96,7 @@ public:
     }
 };
 
-signed main(){
+int main(){
     Main OBJ;
     return OBJ.run();
 }

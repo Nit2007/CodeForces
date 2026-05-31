@@ -1,17 +1,57 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+    void solve(){//1808B
+        ll n,m;cin>>n>>m;
+        vector<vector<ll>>playerCard(0);
+        for(ll v=0;v<n;v++){
+            vector<ll>nums = readVector<ll>(m);
+            playerCard.push_back(nums);
+        }
+        vector<vector<ll>>cardPlayer(m,vector<ll>(n,0));
+        for(ll v=0;v<n;v++){
+            for(ll i=0;i<m;i++){
+                cardPlayer[i][v] = playerCard[v][i];
+            }//Each col is dependent only on the col elements 
+        }
+        for(auto &x:cardPlayer){
+            sort(x.begin(),x.end());
+        }//As the elements are sorted ,consider a row i,the elements are [a0...aj...am] here the
+        // jth element has contributed to all of its preceding element j elements  ,Subract the rem diff of small contributors
+        ll ans = 0;
+        for(ll i=0;i<m;i++){
+            ll prefixSum = 0;
+            for(ll j=0;j<n;j++){
+                ans += abs(cardPlayer[i][j]*j - prefixSum);
+                prefixSum += cardPlayer[i][j];
+            }
+        }
+       cout<<ans;N();
     }
+    
+    // vector<vector<int>>prefixRow(0);
+    // for(int i=0;i<=n;i++){
+    //     if(i==0){
+    //         vector<int> row(m,0);
+    //         prefixRow.push_back(row);
+    //     }else{
+    //         vector<int>prev = prefixRow[i-1];
+    //         vector<int>curr = playerCard[i-1];
+    //         for(int j=0;j<prev.size();j++){
+    //             curr[j] += prev[j];
+    //         }
+    //         prefixRow.push_back(curr);
+    //     }
+    // }
+    // for(auto v:prefixRow){PRINT(v);}
 
 
-    signed run() {
+
+
+    int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
         while(z--){ solve();}
@@ -67,7 +107,7 @@ public:
     }
 };
 
-signed main(){
+int main(){
     Main OBJ;
     return OBJ.run();
 }

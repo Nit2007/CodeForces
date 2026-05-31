@@ -6,3 +6,5 @@
 C:\Users\DELL\Desktop\CodeForces\PROBLEMS\Tree\Party.cpp
 CONTEST\RoundEdu188(div2)\G.cpp
 CONTEST\RoundEdu188(div2)\D.cpp
+CONTEST\Round1095(div2)\C_Mental_Monumental_Easy_Version.cpp
+CodeForces\CONTEST\Round1098(div2)\C_1_Cirno_and_Number_Easy_Version.cpp

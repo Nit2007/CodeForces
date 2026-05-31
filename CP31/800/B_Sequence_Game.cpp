@@ -1,13 +1,23 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//1862B
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<int>nums = readVector<int>(n);//R exist if there is a small L
+        vector<int>ans(1,nums[0]);
+        for(int i=1;i<n;i++){
+            if(nums[i-1] > nums[i]){//If L aint small ,then the small L was removed 
+                ans.push_back(nums[i]);
+                ans.push_back(nums[i]);
+            }else{
+                ans.push_back(nums[i]);
+            }
+        }
+        cout<<ans.size();N();
+        PRINT(ans);
     }
 
 

@@ -1,17 +1,33 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//1790D
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+
+        sort(nums.begin(),end(nums));
+        map<int,int>freq;
+        for(int i:nums){
+            freq[i]++;
+        }
+        int sets = 0;
+        for(auto x:freq){//Trying to map current char with previous set ,to minimize sets 
+            int value = x.first;
+            int rep =  x.second;
+            int newSet = (rep - freq[value-1] ) ;
+            sets += (newSet > 0)? newSet : 0;//If we have more number of previous sets ,thats already counted
+        }
+        cout<<sets;N();
     }
 
 
-    signed run() {
+
+
+
+    int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
         while(z--){ solve();}
@@ -67,7 +83,7 @@ public:
     }
 };
 
-signed main(){
+int main(){
     Main OBJ;
     return OBJ.run();
 }

@@ -1,13 +1,19 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+    void solve(){//2230A
+        ll n,a,b;cin>>n>>a>>b;
+        ll ans = LLONG_MAX;
+            
+        ll allGrp = ceil((n+2)/3) * b;
+        ll allSin = (n) * a;
+        ll mixed = (n/3) * b + (n%3) * a ;
+        ans = min({allGrp,allSin,mixed});
+         // P(allGrp,allSin,mixed);
+        cout<<ans;N();return;
     }
 
 

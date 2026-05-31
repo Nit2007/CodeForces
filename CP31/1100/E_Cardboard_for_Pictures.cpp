@@ -1,13 +1,31 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+    void solve(){//1850E
+        ll n,area;cin>>n>>area;
+        vector<ll>sq = readVector<ll>(n);
+        ll w = 1;
+        ll comp = 0;
+        ll l = 1 , r = 1e9;
+        while(l <= r){
+            ll m = l + (r-l)/2 ;
+            comp = 0;
+            for(int i=0;i<n;i++){
+                ll side = (sq[i] + (2*m));
+                comp += side * side;
+                if(comp > area)break;
+            }
+            if(comp <= area){
+                l = m+1;
+                w = m;
+            }else{
+                r = m-1;
+            }
+        }
+        cout<<w;N();
     }
 
 

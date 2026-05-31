@@ -1,13 +1,41 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//1691B
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        map<int,int>freq;
+        for(int i:nums){
+            freq[i]++;
+        }
+        int i = n-1;
+        int maxi = nums[i];
+        while(i>=0){
+            if(freq[maxi] == 1){
+                cout<<-1;N();return;
+            }
+            maxi = nums[i--];
+        }
+        if(freq[maxi] == 1){
+            cout<<-1;N();return;
+        }
+        vector<int>uni = makeUnique(nums);
+        vector<int>ans(0);
+        i=0;
+        for(auto x:uni){
+            int rep = freq[x];
+            vector<int>temp(0);
+            temp.push_back(rep+i);
+            while(--rep){
+                temp.push_back(++i);
+            }
+            i++;
+            ans.insert(ans.end(),temp.begin(), temp.end());
+        }
+        PRINT(ans);
     }
 
 

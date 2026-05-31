@@ -1,17 +1,45 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//1917B
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string s;
+        cin>>s;
+
+        vector<int>c(26,0);
+        map<char,int>freq;
+        for(int i=0;i<n;i++){
+            if(!freq.count(s[i])){
+                c[s[i] - 'a'] = n-i;
+            }
+            freq[s[i]]++;
+        }
+        ll ans = accumulate(c.begin(),c.end(),0LL);
+        cout<<ans;N();
     }
+    // set<string>uni;
+    // BRUTE(s,uni);
+    // cout<<uni.size();N();
+    // void BRUTE(string s,set<string>&uni){
+    //     uni.insert(s);
+    //     if(s.length() >= 1){
+    //         string a = s.substr(1);
+    //         if(!a.empty())
+    //             BRUTE(a,uni);
+    //     }
+    //     if(s.length() >= 2){
+    //         string b = s[0] + s.substr(2);
+    //         if(!b.empty())
+    //             BRUTE(b,uni);
+    //     }
+    // }
 
 
-    signed run() {
+
+    int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
         while(z--){ solve();}
@@ -67,7 +95,7 @@ public:
     }
 };
 
-signed main(){
+int main(){
     Main OBJ;
     return OBJ.run();
 }

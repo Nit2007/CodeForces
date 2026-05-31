@@ -1,14 +1,44 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
+    void solve(){//1832B
+        int n,k;cin>>n>>k;
         vector<int>nums = readVector<int>(n);
+        sort(nums.begin(),nums.end());
         
+        vector<ll>prefixSum(n+1,0);
+        for(int i=1;i<=n;i++){
+            prefixSum[i] = prefixSum[i-1] + nums[i-1];
+        }
+        // PRINT(nums);PRINT(prefixSum);ND();
+        ll ans = LLONG_MIN;
+        for(int m=0;m<=k;m++){
+            int l = 2*m;
+            int r = n-(k-m);
+            ll sum = prefixSum[r] - prefixSum[l];
+            ans = max(ans,sum);
+        }
+        cout<<ans;N();
     }
+
+    // void solve(){//1832B
+    //     int n,k;cin>>n>>k;
+    //     vector<int>nums = readVector<int>(n);
+    //     sort(nums.begin(),nums.end());
+    //     int l = 0 , r = n-1;
+    //     while(k--){
+    //         if(nums[r] >= nums[l] + nums[l+1]){
+    //             l += 2;
+    //         }else{
+    //             r -= 1;
+    //         }
+    //     }
+    //     ll ans = accumulate(nums.begin()+l,nums.begin()+r+1,0LL);
+    //     cout<<ans;N();
+    // }
 
 
     signed run() {

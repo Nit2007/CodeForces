@@ -1,20 +1,36 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+    void solve(){//1914C
+        int n,k;cin>>n>>k;
+        vector<int>a = readVector<int>(n);
+        vector<int>b = readVector<int>(n);
+        int sum = a[0];
+        int maxi = b[0];
+        int exp = 0 , rem = 0;
+        //To touch a[i] - p operations
+        //To touch b[i] - rem operations (Ggreedily choose the bigger one)
+        for(int p=1;p<min(n,k);p++){
+            rem = k - p;
+            exp = max(exp, (sum + (rem * maxi)) );
+            sum += a[p];
+            maxi = max(b[p],maxi);
+        }
+        exp = max(exp, (sum + ((k-min(n,k)) * maxi)) );
+        cout<<exp;N();
     }
 
 
-    signed run() {
+
+
+
+    int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve();}
+        while(z--){solve();}
         return 0;
     }
 
@@ -67,7 +83,7 @@ public:
     }
 };
 
-signed main(){
+int main(){
     Main OBJ;
     return OBJ.run();
 }

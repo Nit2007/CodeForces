@@ -1,14 +1,71 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
-    void solve(){
+    void solve(){//2231
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        int dips = 0 , k = 0;
+        for(int i=1;i<n;i++){
+            if(nums[i-1] > nums[i]){
+                dips++;
+                k = max(k,nums[i-1] - nums[i]);
+            }
+        }
+        if(dips <= 1){
+            cout<<"YES";N();return;
+        }
+        for(int i=1;i<n;i++){
+            if(nums[i-1] > nums[i]){
+                nums[i] += k;
+            }
+        }
+        bool valid = true;
+        for(int i=1;i<n;i++){
+            if(nums[i-1] > nums[i]){
+                valid = false;
+                break;
+            }
+        }
+        if(valid){
+            cout<<"YES";N();return;
+        }
+        cout<<"NO";N();return;
+        // 5 2 8 2 3 2 
+
     }
+
+    // void solve(){//2231
+    //     int n;cin>>n;
+    //     vector<int>nums = readVector<int>(n);
+    //     int debt = 0 , invalid = 0 , maxi = 0;
+    //     for(int i=0;i<n;i++){
+    //         if(i > 0 && nums[i-1] <= nums[i])continue;
+    //         else if (i > 0 && nums[i-1] > nums[i]){
+    //             if(debt != 0){
+    //                 debt = nums[i-1] - nums[i];
+    //             }
+    //             if(maxi != 0 && i+1 < n && nums[i] < nums[i+1]){
+    //                 maxi = nums[i+1] - nums[i];
+    //             }
+    //         }
+    //         if(debt != 0){
+    //             invalid = i;
+    //             break;
+    //         }
+    //     }
+    //     nums[invalid] += debt;
+    //     for(int i = invalid+1;i<n;i++){
+    //         if(i>0 && nums[i-1] > nums[i]){
+    //             nums[i] += debt;
+    //             if(nums[i-1] > nums[i]){
+    //                 cout<<"NO";N();return;
+    //             }
+    //         }
+    //     }
+    //     cout<<"YES";N();return;
+    // }
 
 
     signed run() {

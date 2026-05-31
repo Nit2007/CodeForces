@@ -1,13 +1,31 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//2230C
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        ll sum = accumulate(nums.begin(),nums.end(),0LL);
+        ll slot = 0 ,ones = 0;
+        for(int i:nums){
+            if(i == 1){
+                ones++;
+            }else{
+                slot += floor(i/2)-1;
+            }
+        }
+        if(ones == n-1){
+            slot++;
+        }
+        ll wasted = max(0LL,ones-slot);
+        if(sum-wasted < 3){
+            cout<<0;
+        }else{
+            cout<<sum-wasted;
+        }
+        N();
     }
 
 

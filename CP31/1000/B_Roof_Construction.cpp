@@ -1,14 +1,28 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//1632B
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<int>nums(0);
+        int k = 0;
+        while((1<<(k+1)) <= n-1){//Set an Bit and verify that it exist or not
+            k++;
+        }
+        for(int i=pow(2,k)-1;i>=0;i--){//LHS is always small ,cause kth bit aint set
+            nums.push_back(i);
+        }//0 ^ RHS_1st_val is the cost of the construction => 0 ^ (1<<k)
+        for(int i=pow(2,k);n>i;i++){//RHS is also small ,cause kth bit is set at both adj
+            nums.push_back(i);
+        }
+        PRINT(nums);
     }
+    //Max_XOR of consecutive elements is always greater than or equal to 
+    //pow(2,k) where k is the highest set bit in n−1 , as there is going to be 
+    //an adjancent pair such that highest set bit is 1 & 0 for neighbour 
+    //There is also a case of multiple bits differing ,so >=
 
 
     signed run() {

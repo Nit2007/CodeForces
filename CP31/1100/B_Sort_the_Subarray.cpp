@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1821/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,8 +6,29 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<int>a = readVector<int>(n);
+        vector<int>a_ = readVector<int>(n);
+        int l = -1;
+        int r = -1;
+        for(int i=0;i<n;i++){
+            if(a[i] != a_[i]){
+                if(l == -1){
+                    l = i;
+                }
+                r = i;
+            }
+        }
+        while(l > 0){
+            if(a_[l] >= a[l-1]){
+                l--;
+            }else{ break; }
+        }
+        while(r < n-1){
+            if(a_[r] <= a[r+1]){
+                r++;
+            }else{ break; }
+        }
+        cout<<l+1<<" "<<r+1;N();
     }
 
 

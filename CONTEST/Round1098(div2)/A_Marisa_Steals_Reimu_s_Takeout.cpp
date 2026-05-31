@@ -1,13 +1,22 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//2228A
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        sort(nums.begin(),nums.end());
+        int ans = 0;
+        int zero = count(nums.begin(),nums.end(),0);
+        int one = count(nums.begin(),nums.end(),1);
+        int two = count(nums.begin(),nums.end(),2);
+
+        int rem = abs(one-two)/3;
+        int pair = min(one,two);
+        ans = zero + pair + rem;
+        cout<<ans;N();
     }
 
 

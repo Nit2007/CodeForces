@@ -1,17 +1,53 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//2224A
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<ll>nums = readVector<ll>(n);
+
+        for(int i=n-2;i>=0;i--){
+            if(nums[i+1] > 0){
+                nums[i] += nums[i+1] ;
+            }
+        }
+        ll pos = 0;
+        for(auto a:nums){
+            if(a > 0)pos++;
+        }
+        cout<<pos;N();
+    }
+    void solve__MY_ATTEMPT_WORKING(){//2224A
+        int n;cin>>n;
+        vector<ll>nums = readVector<ll>(n);
+
+        ll pos = (nums.back()>0)? 1 : 0;
+        ll sum = (nums.back()>0)? nums.back() : 0;
+        for(int i=n-2;i>=0;i--){
+            if(nums[i] > 0){
+                pos++;
+                sum += nums[i];
+            }else if(nums[i] == 0){
+                if(sum > 0) pos++;
+            }else{
+                if(sum + (nums[i]) > 0){
+                    pos++;
+                    sum = sum + nums[i] ;
+                }else{
+                    sum = 0;
+                }
+            }
+        }
+        cout<<pos;N();
     }
 
 
-    signed run() {
+
+
+
+    int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
         while(z--){ solve();}
@@ -67,7 +103,7 @@ public:
     }
 };
 
-signed main(){
+int main(){
     Main OBJ;
     return OBJ.run();
 }

@@ -1,15 +1,28 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
+    void solve(){//1891B
+        int n,q;cin>>n>>q;
         vector<int>nums = readVector<int>(n);
-        
+        vector<int>x = readVector<int>(q);
+        int mini = 31;
+        for(auto p:x){
+            if(mini <= p)continue;
+            mini = min(p,mini);
+            int div = (1<<p);
+            for(int i=0;i<n;i++){
+                if(nums[i]%div == 0){
+                    nums[i] += (div/2);
+                }
+            }
+        }
+        PRINT(nums);
     }
-
+    // n(2^x) + (2^(x-1))
+    // (2^(x-1)) (2n+1)
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);

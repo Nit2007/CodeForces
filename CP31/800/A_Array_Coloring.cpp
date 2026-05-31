@@ -1,13 +1,22 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//1857A
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        int odds = 0;
+        for(int i:nums){
+            if(i%2)odds++;
+        }
+        if(odds%2 == 0){
+            cout<<"YES";
+        }else{
+            cout<<"NO";
+        }
+        N();
     }
 
 

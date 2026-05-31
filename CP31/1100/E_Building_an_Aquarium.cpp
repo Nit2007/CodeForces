@@ -1,13 +1,32 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+    void solve(){//1873E
+        ll n,x;cin>>n>>x;
+        vector<ll>nums = readVector<ll>(n);
+        ll l = 1;
+        ll r = *max_element(nums.begin(),nums.end()) + x;
+        ll ans = l;
+        while(l<=r){
+            ll m = r + (l-r)/2;
+            ll water = 0;
+            for(int i=0;i<n;i++){
+                water += max(0LL,m-nums[i]);
+            }
+            if(water > x){
+                r = m-1;
+            }else if(water == x){
+                ans = m;
+                break;
+            }else{
+                l = m+1;
+                ans = m;
+            }
+        }
+        cout<<ans;N();
     }
 
 

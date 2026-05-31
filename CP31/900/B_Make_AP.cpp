@@ -1,13 +1,29 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+    void solve(){//1624B
+        int a,b,c;cin>>a>>b>>c;
+        bool found = false;
+        int new_a = (2*b - c);
+        if((new_a/a) > 0 && (new_a%a) == 0)  { // a*m b c -> b-c == a*m - b -> (2b -c)/a >0 as m is +ve & INT
+            found = true;
+        }
+        int new_b = (a+c)/2;
+        if( (new_b/b) > 0 && (new_b%b) == 0 && (c-a)%2 == 0)  { // a b*m c -> b*m-c == a - b*m -> (a+c)/2 > 0 as m is +ve & INT
+            found = true;
+        }
+        int new_c = (2*b-a);
+        if( (new_c/c) > 0 && (new_c%c) == 0)  { // a b c*m -> b-c*m == a - b -> (2b-a)  {as m is +ve & INT}
+            found = true;
+        }
+        if(found){
+            cout<<"YES\n";
+        }else{
+            cout<<"NO";N();
+        }
     }
 
 

@@ -1,14 +1,45 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+    void solve(){//1659A
+        int n,r,b;cin>>n>>r>>b;
+        string Result = "";
+        vector<int>nums(++b,0);
+        int i=0;
+        while(i<r){
+            nums[i%b]++;
+            i++;
+        }
+        for(int j=0;j<nums.size();++j){
+            auto&size = nums[j];
+            Result += string(size,'R');
+            if(j != (nums.size()-1))
+                Result += string(1,'B');
+        }
+        cout<<Result;N();
     }
+    // void solve(){//1659A
+    //     int n,r,b;cin>>n>>r>>b;
+    //     string Result = "";
+    //     if(b == 1){
+    //         int ratio = (r/2);
+    //         Result += string(ratio+(r%2),'R');
+    //         Result += "B";
+    //         Result += string(ratio,'R');
+    //     }else{
+    //         int ratio = (r/b);
+    //         while(n > Result.size()){
+    //             Result += string(ratio,'R');
+    //             if(b--){
+    //                 Result += "B";
+    //             }
+    //         }
+    //     }
+    //     cout<<Result;N();
+    // }
 
 
     signed run() {

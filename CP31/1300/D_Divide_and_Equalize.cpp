@@ -1,15 +1,48 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
-    void solve(){
+    void PrimeFactors(int n,map<int,int>&factors){
+        while(n%2 == 0){
+            factors[2]++;
+            n /= 2;
+        }
+        for(int j=3;j*j<=n;j+=2){
+            while(n%j == 0){
+                factors[j]++;
+                n /= j;
+            }
+        }
+        if(n > 2){
+            factors[n]++;
+        }
+    }
+    void solve(){//1881D
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        map<int,int>factors;
+        for(int i=0;i<n;i++){
+            auto&x = nums[i];
+            PrimeFactors(x,factors);
+        }
+        for(auto&[factor,freq]:factors){
+            // cout<<factor<<" "<<freq;ND();
+            if(freq%n != 0){
+                cout<<"NO";N();return;
+            }
+        }
+        cout<<"YES";N();return;
     }
+// 2 2 5 5 
+// 2 
+// 2 5 5
+// 2 5
 
+// 2 3 5
+// 2 5 5
+// 3 3 3
+// 2 2 5
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);

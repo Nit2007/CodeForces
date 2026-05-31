@@ -1,17 +1,28 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//2226B
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+
+        ll valid = 0;
+        for(int i=0;i<n;i++){
+            if(i>0 ){
+                if(abs(nums[i-1] - nums[i]) == gcd(nums[i-1],nums[i]))
+                    valid++;
+            }
+        }
+        cout<<valid;N();
     }
 
 
-    signed run() {
+
+
+
+    int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
         while(z--){ solve();}
@@ -67,7 +78,7 @@ public:
     }
 };
 
-signed main(){
+int main(){
     Main OBJ;
     return OBJ.run();
 }

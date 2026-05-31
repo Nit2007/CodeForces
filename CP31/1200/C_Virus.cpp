@@ -1,14 +1,52 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+    void solve(){//1704C    
+        int n,m;cin>>n>>m;
+        vector<int>virus = readVector<int>(m);
+        sort(virus.begin(),virus.end());
+        vector<int>gaps(0);
+        gaps.push_back(n - (virus[m-1]) + (virus[0]) -1);
+        for(int i=1;i<m;++i){
+            gaps.push_back(virus[i]-virus[i-1] -1);
+        }
+        sort(gaps.begin(),gaps.end(),greater<int>());
+        int days = 0;
+        int saved = 0;
+        for(auto&G:gaps){//Trying to save something would shrink all segements by 2
+            int current = G - (2*2*days);//LR contributes each one | save 1 ->shrinks Rest of the gaps
+            if(current <= 0)continue;
+            if(current == 1)saved++;
+            if(current >= 2)saved += current-1 ;
+            days+=1;
+        }
+        int infected = n-saved;
+        cout<<infected;N();
     }
+    // void solve(){//1704C    
+    //     int n,m;cin>>n>>m;
+    //     vector<int>virus = readVector<int>(m);
+    //     sort(virus.begin(),virus.end());
+    //     int infected = m;
+    //     vector<int>l(m,0),r(m,0);
+    //     l[0] = n - (virus[m-1]) + (virus[0]);
+    //     for(int i=1;i<m;++i){
+    //         l[i] = virus[i] - virus[i-1];
+    //     }
+    //     for(int i=0;i<m-1;++i){
+    //         r[i] = l[i+1];
+    //     }
+    //     r[m-1] = l[0];
+    //     //Seal the Largest l,r
+    //     //Increment the infection
+    //     //Sealing could lead to NO_INFECTION & Stopage of infection -> then make the l,r value 0
+    //     while(true){
+
+    //     }
+    // }
 
 
     signed run() {
@@ -18,7 +56,7 @@ public:
         return 0;
     }
 
-    
+// 1 {2} 3 4 {5} 6 
 
 
     template<typename T>

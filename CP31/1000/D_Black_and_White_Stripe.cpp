@@ -1,14 +1,47 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+    void solve(){//1690D
+        int n,k;cin>>n>>k;
+        string s;cin>>s;
+        vector<int>w(n+1,0);
+        for(int i=1;i<=n;i++){
+            w[i] = w[i-1] + int((s[i-1] == 'W')? 1 : 0);
+        }
+        // PRINT(w);
+        int paint = INT_MAX;
+        for(int r=k;r<=n;r++){
+            int l = r-k;
+            paint = min(paint,w[r]-w[l]);
+        }
+        cout<<paint;N();
+        //Try all segments of length k (as we want only consecutive segs)
     }
+    // void solve(){//1690D
+    //     int n,k;cin>>n>>k;
+    //     string s;cin>>s;
+    //     int maxi = 0 , seg = 1;
+    //     for(int i=1;i<n;i++){
+    //         if(s[i-1] == s[i] && s[i-1] == 'B'){
+    //             seg++;
+    //             maxi = max(maxi,seg);
+    //         }else{
+    //             seg = 1;
+    //         }
+    //     }  
+    //     maxi = max(maxi,seg);
+    //     if(maxi >= k){
+    //         cout<<0;N();return;  
+    //     } 
+    //     int Black = count(s.begin(),s.end(),'B');
+    //     int White = n - Black;
+    //     if(n == k){
+    //         cout<<White;N();return;  
+    //     }
+    // }
 
 
     signed run() {

@@ -1,17 +1,48 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
+    const ll MOD = 676767677 ;
+    void solve(){//2226A
+        ll n;cin>>n;
+        vector<ll>nums = readVector<ll>(n);
 
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
+        ll ans = 0LL;
+        ll sum = accumulate(nums.begin(),nums.end(),0LL);
+        ll valid  = false;
+        for(ll i=0;i<n;i++){
+            if(i>0 && nums[i-1] == 1){
+                valid++;
+            }
+        }
+            
+        cout<<sum - valid;N();return;
         
+
     }
+    // ll ans = 0LL;
+    // vector<vector<ll>>inc(0);
+    // vector<ll>t(1,nums[0]);
+    // for(int i=1;i<n;i++){
+    //     if(nums[i-1] < nums[i]){
+    //         t.push_back(nums[i]);
+    //     }else{
+    //         inc.push_back(t);
+    //         t.clear();
+    //         t = {nums[i]};
+    //     }
+    // }
+    // inc.push_back(t);
+    // for(auto x:inc){
+    //     PRINT(x);
+    // }ND();
 
 
-    signed run() {
+
+
+
+    int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
         while(z--){ solve();}
@@ -67,7 +98,7 @@ public:
     }
 };
 
-signed main(){
+int main(){
     Main OBJ;
     return OBJ.run();
 }

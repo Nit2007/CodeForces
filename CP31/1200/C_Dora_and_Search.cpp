@@ -1,17 +1,42 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//1793C
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        int l = 0, r = n-1;
+        int mini = 1 , mega = n;
+        while(l<r){
+            if(nums[l] == mini){
+                l++;
+                mini++;
+            }else if(nums[r] == mini){
+                r--;
+                mini++;
+            }
+            else if(nums[l] == mega){
+                l++;
+                mega--;
+            }else if(nums[r] == mega){
+                r--;
+                mega--;
+            }else{
+                cout<<l+1<<" "<<r+1;N();return;
+            }
+        }
+        if(l == r){
+            cout<<-1;N();return;
+        }
     }
 
 
-    signed run() {
+
+
+
+    int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
         while(z--){ solve();}
@@ -67,7 +92,7 @@ public:
     }
 };
 
-signed main(){
+int main(){
     Main OBJ;
     return OBJ.run();
 }

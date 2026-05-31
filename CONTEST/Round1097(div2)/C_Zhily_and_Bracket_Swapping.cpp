@@ -1,17 +1,43 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//2224C
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string a,b;
+        cin>>a>>b;
+
+        int bal = 0;
+        for(int i=1;i<=n;i++){
+            if(a[i-1] == '(')bal++;
+            else bal--;
+            if(b[i-1] == '(')bal++;
+            else bal--;
+            //bal_a + bal_b = bal 
+            // Odd_index => bal_a = 1 , bal_b = 1 , hence bal = 2 or more (because of previous state)
+            // Eve_index => bal_a = 0 , bal_b = 0 , hence bal = 0 or more
+            if(i%2 == 0 && bal < 0){
+                cout<<"NO";
+                N();return;
+            }
+            if(i%2 == 1 && bal < 2){
+                cout<<"NO";
+                N();return;
+            }
+        }
+        if(bal == 0){
+            cout<<"YES";
+            N();return;
+        }else{
+            cout<<"NO";
+            N();return;
+        }
     }
 
 
-    signed run() {
+    int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
         while(z--){ solve();}
@@ -67,7 +93,7 @@ public:
     }
 };
 
-signed main(){
+int main(){
     Main OBJ;
     return OBJ.run();
 }

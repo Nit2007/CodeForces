@@ -1,10 +1,19 @@
-PROBLEMS\Tree\A_Xor_tree.cpp
+PROBLEMS\Tree\A_Xor_tree.cpp 
 PROBLEMS\Tree\D_Apple_Tree.cpp
 PROBLEMS\DS\A_1_Lost_Civilization_Easy_Version.cpp
 CONTEST\Round1088(Neibius)\B_Mickey_Mouse_Constructive.cpp
-C:\Users\DELL\Desktop\CodeForces\CP31\1000\A_Helmets_in_Night_Light.cpp
-C:\Users\DELL\Desktop\CodeForces\PROBLEMS\RANDOM\C_Geometric_Progression.cpp
-C:\Users\DELL\Desktop\CodeForces\CP31\1200\B_Make_Almost_Equal_With_Mod.cpp
-C:\Users\DELL\Desktop\CodeForces\CONTEST\Round1093(div2)\C_Grid_L.cpp
-C:\Users\DELL\Desktop\CodeForces\CP31\1200\C_Assembly_via_Minimums.cpp
-C:\Users\DELL\Desktop\CodeForces\CP31\1000\M_Minimum_LCM.cpp
+CP31\1000\A_Helmets_in_Night_Light.cpp
+PROBLEMS\RANDOM\C_Geometric_Progression.cpp
+CP31\1200\B_Make_Almost_Equal_With_Mod.cpp
+CONTEST\Round1093(div2)\C_Grid_L.cpp
+CP31\1200\C_Assembly_via_Minimums.cpp
+CP31\1000\M_Minimum_LCM.cpp
+CONTEST\Round1094(Div1 + Div. 2)\B_Artistic_Balance_Tree.cpp
+CP31\1200\C_Removing_Smallest_Multiples.cpp
+CONTEST\Round1097(div2)\C_Zhily_and_Bracket_Swapping.cpp
+CP31\1100\B_Erase_First_or_Second_Letter.cpp
+CONTEST\Round190(Edu)(div2)\C_Arrange_the_Numbers_in_a_Circle.cpp
+CONTEST\Round1099(div2)\C_Chipmunk_Theo_and_Equality.cpp
+CP31\1000\B_Roof_Construction.cpp - Bitmask
+CP31\1200\C_Virus.cpp - Operation on current state affects the Rest
+CP31\1200\E_Mirror_Grid.cpp - Recursize Sq check

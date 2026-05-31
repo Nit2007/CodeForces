@@ -1,17 +1,44 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+    void solve(){//1899B
+        ll n;cin>>n;
+        vector<ll>nums = readVector<ll>(n);
+
+        // sort(nums.begin(),nums.end());
+        vector<ll>prefixSum(n+1,0);
+        for (ll i = 0; i < n; ++i) {
+            prefixSum[i + 1] = prefixSum[i] + nums[i];
+        }
+        ll ans = 0;
+        for(ll d=1;d*d<=n;d++){
+            if(n%d==0){
+                vector<ll>choice = {d,n/d};
+                for(ll k : choice){
+                    ll smallSum = LLONG_MAX;
+                    ll bigSum = LLONG_MIN;
+                    ll i = 0;
+                    while(i<n){
+                        ll sum = prefixSum[i+k] - prefixSum[i];
+                        smallSum = min(smallSum,sum);
+                        bigSum = max(bigSum,sum);
+                        i+=k;
+                    }
+                    ans = max(bigSum-smallSum,ans);
+                }
+            }
+        }
+        cout<<ans;N();
     }
 
 
-    signed run() {
+
+
+
+    int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
         while(z--){ solve();}
@@ -67,7 +94,7 @@ public:
     }
 };
 
-signed main(){
+int main(){
     Main OBJ;
     return OBJ.run();
 }

@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1826/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,8 +7,36 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        int ans = 0;
+        for(int i=0;i<n;++i){
+            int diff = abs(nums[i] - nums[n-i-1]);
+            ans = gcd(ans,diff);
+        }
+        cout<<ans;N();
+        // a[0]%x == a[n-1]%x
+        // a[0] - a[n-1] %x = 0
+        // Find a largest X such that it is divisible ,for every Number needs 
+        // this condition  hence take GCD
     }
+    // void solve(){
+    //     int n;cin>>n;
+    //     vector<int>nums = readVector<int>(n);
+    //     int ans = 0;
+    //     for(int i=1;i<=(*max_element(nums.begin(),nums.end()));++i){
+    //         int l = 0 , r = n-1;
+    //         bool valid = true;;
+    //         while(l <= r){
+    //             if(nums[l]%i == nums[r]%i){
+    //                 l++;
+    //                 r--;
+    //             }
+    //             else {valid = false;break;}
+    //         }
+    //         if(valid)ans = max(ans,i);
+    //     }
+    //     if(ans == *max_element(nums.begin(),nums.end()))ans = 0;
+    //     cout<<ans;N();
+    // }
 
 
     signed run() {

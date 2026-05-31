@@ -1,13 +1,44 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//2231C
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        unordered_map<int,int>cost,cnt;
+        cost.reserve(n * 50);
+        cnt.reserve (n * 50);
+        for(int i=0;i<n;i++){
+            int x = nums[i];
+            int op = 0;
+            cnt[x]++;
+            cost[x] += 0;
+            if(x == 1){
+                cnt[2]++; 
+                cost[2]++;
+                continue;
+            }
+            while(x>1){
+                if(x%2 == 1){ x++; }
+                else{ x /= 2; }
+                op++;
+                cnt[x]++;
+                cost[x] += op; //nums[i] ---> x
+            }
+        }
+        int ans = INT_MAX;
+        for(auto& [x,freq] : cnt){
+            if(freq == n){
+                ans = min(ans,cost[x]);
+            }
+        }
+        cout<<ans;N();
+        // 8 -> 4 -> 2 -> 1
+        // 7 -> 8 -> 4 -> 2 -> 1
+        // 2 -> 1
+        // 1 -> 2
     }
 
 

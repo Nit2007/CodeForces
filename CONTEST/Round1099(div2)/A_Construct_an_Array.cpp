@@ -1,13 +1,17 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//2231
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<int>nums(0);
+        for(int i=1;i<=2*n;i++){
+            if(i%2)
+            nums.push_back(i);
+        }
+        PRINT(nums);
     }
 
 

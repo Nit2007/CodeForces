@@ -1,17 +1,41 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//1734C
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<int>nums;
+        string t ; 
+        cin>>t;
+        for(int i=1;i<=n;i++){
+            nums.push_back(i);
+        }
+        ll ans = 0;
+        vector<int>removed(n+1,false);
+        bool first = true;
+        for(int i=1;i<=n;i++){
+            for(int j=i;j<=n;j+=i)
+            {//Choose a small k ,then iterate over multiples of 'i' in hunt of deletion of smallest divisor
+                if(t[j-1] == '1'){//We cannot delete any elements further 
+                    break;
+                }
+                if(removed[j])continue;
+                else{
+                    removed[j] = true;
+                    ans += i;
+                }
+            }
+        }
+        cout<<ans;N();
     }
 
 
-    signed run() {
+
+
+
+    int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
         while(z--){ solve();}
@@ -67,7 +91,7 @@ public:
     }
 };
 
-signed main(){
+int main(){
     Main OBJ;
     return OBJ.run();
 }

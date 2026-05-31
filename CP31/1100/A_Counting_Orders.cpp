@@ -1,13 +1,34 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1827/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
+    const ll MOD = pow(10,9)+7;
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<int>a = readVector<int>(n);
+        vector<int>b = readVector<int>(n);
+        sort(a.begin(),a.end());
+        sort(b.begin(),b.end());
+        ll ans = 1LL;
+        bool valid = true;
+        ll used = 0;
+        for(int i=n-1;i>=0;--i){
+            ll ele = a.end() - upper_bound(a.begin(),a.end(),b[i]);
+            ll choices = ele - used;
+            if(choices <= 0){
+                valid = false;
+                break;
+            }
+            used++;
+            ans *= (choices)%MOD;
+            ans %= MOD;
+        }
+        if(valid){
+            cout<<ans;
+        }else{
+            cout<<0;
+        }N();
     }
 
 

@@ -1,13 +1,34 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+    void solve(){//1842B
+        int n,x;cin>>n>>x;
+        vector<int>a = readVector<int>(n);
+        vector<int>b = readVector<int>(n);
+        vector<int>c = readVector<int>(n);
+        int i=0,j=0,k=0;
+        int ans = 0 ;
+        while(i<n && ((x|a[i]) == x)){
+            ans |= a[i];
+            i++;
+        }
+        while(j<n && ((x|b[j]) == x)){
+            ans |= b[j];
+            j++;
+        }
+        while(k<n && ((x|c[k]) == x)){
+            ans |= c[k];
+            k++;
+        }
+        if(ans == x){
+            cout<<"Yes";
+        }else{
+            cout<<"No";
+        }
+        N();
     }
 
 

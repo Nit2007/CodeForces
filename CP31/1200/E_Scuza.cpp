@@ -1,17 +1,48 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+    void solve(){//1742E
+        ll n,q;cin>>n>>q;
+        vector<ll>nums = readVector<ll>(n);
+        vector<ll>query = readVector<ll>(q);
+
+        vector<ll>height(n,nums[0]);
+        vector<ll>prefixMax(n,nums[0]);
+        for(ll i=1;i<n;i++){
+            height[i] = height[i-1] + nums[i] ;
+            prefixMax[i] = max(prefixMax[i-1],nums[i]);
+        }
+        // PRINT(height);
+        for(auto Q:query){
+            ll l = 0;
+            ll r = n-1;
+            ll ans = -1;
+            while(l<=r){
+                ll m = (r-l)/2 + l;
+                 if(prefixMax[m] <= Q){
+                    l = m+1;
+                    ans = m;
+                }else{//Too BIG
+                    r = m-1;
+                }
+            }
+            if(ans == -1){
+                cout<<0<<" ";
+            }else{
+                cout<<height[ans]<<" ";
+            }
+        }
+        N();
     }
 
 
-    signed run() {
+
+
+
+    int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
         while(z--){ solve();}
@@ -67,7 +98,7 @@ public:
     }
 };
 
-signed main(){
+int main(){
     Main OBJ;
     return OBJ.run();
 }

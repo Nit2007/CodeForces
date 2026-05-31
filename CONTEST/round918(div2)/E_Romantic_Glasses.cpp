@@ -1,13 +1,34 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//1915E
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        vector<ll>pe(n+1,0),po(n+1,0);
+        for(int i=1;i<=n;i++){
+            if(i%2){
+                pe[i] = pe[i-1] + nums[i-1];  
+                po[i] = po[i-1]; 
+            }else{
+                po[i] = po[i-1] + nums[i-1];  
+                pe[i] = pe[i-1]; 
+            }
+        }
+        bool found = false;
+        map<ll,int>seen = {{0LL,true}};
+        for(int i=1;i<=n;i++){
+            if(seen.count(pe[i] - po[i]) ){found = true;}
+            seen[pe[i]-po[i]]++;
+        }
+        if(found){
+            cout<<"YES";
+        }else{
+            cout<<"NO";
+        }
+        N();
     }
 
 

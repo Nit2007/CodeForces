@@ -1,17 +1,48 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+    void solve(){//2222B
+        ll n,m;cin>>n>>m;
+        vector<ll>nums = readVector<ll>(n);
+        vector<ll>index = readVector<ll>(m);
+
+        vector<vector<ll>>a(0);
+        vector<ll>odd(0),even(0);
+        for(int i=0;i<n;i++){
+            if(i%2)odd.push_back(nums[i]);
+            else even.push_back(nums[i]);
+        }
+        sort(odd.begin(),odd.end());
+        sort(even.begin(),even.end());
+        int remove[2] = {false,false};
+        for(ll x:index){
+            --x;
+            ++remove[x%2];
+        }
+        a.push_back(even);
+        a.push_back(odd);
+        ll ans = 0LL;
+        for(int parity=0;parity<2;parity++){//Either remove one element(if ALL -) ,or remove all positives => Minimize the sum
+            bool once = remove[parity];
+            while(remove[parity] && (once || (!a[parity].empty() && a[parity].back() > 0) ) ){
+                --remove[parity];
+                a[parity].pop_back();
+                once = false;
+            }
+            // PRINT(a[parity]);ND();
+            ans  += accumulate(a[parity].begin(),a[parity].end(),0LL);
+        }
+        cout<<ans;N();
     }
 
 
-    signed run() {
+
+
+
+    int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
         while(z--){ solve();}
@@ -67,7 +98,7 @@ public:
     }
 };
 
-signed main(){
+int main(){
     Main OBJ;
     return OBJ.run();
 }

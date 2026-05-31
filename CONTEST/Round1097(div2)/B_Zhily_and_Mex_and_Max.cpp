@@ -1,17 +1,46 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void solve(){//2224B
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
+
+        ll maxi = *max_element(nums.begin(),nums.end());
+        ll maxContribution = maxi * 1LL * n ;
+
+        if(maxi == 0){
+            cout << n;  N();return;
+        }
+        sort(nums.begin(),nums.end());
         
+        ll mexContribution = 0;
+        map<int,int>exist;
+        for(int i=0;i<n;i++){
+            exist[nums[i]] = true;
+        }
+        int mex = 0;
+        for(int i=1;i<n;i++){
+            if(exist[mex]){
+                mex++;
+            }
+            if(mex == maxi ){
+                mex++;
+            }
+            mexContribution += mex ;
+        }
+        
+
+        cout<<mexContribution + maxContribution;N();
     }
 
 
-    signed run() {
+
+
+
+    int run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
         while(z--){ solve();}
@@ -67,7 +96,7 @@ public:
     }
 };
 
-signed main(){
+int main(){
     Main OBJ;
     return OBJ.run();
 }

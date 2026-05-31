@@ -1,13 +1,28 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h>
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+    void solve(){//1915B
+        int n = 3;
+        vector<string>nums = readVector<string>(n);
+        for(auto&s:nums){
+            bool found = false;
+            for(char x:s){
+                if(x == '?')found = true;
+            }
+            if(found){
+                int A = count(s.begin(),s.end(),'A');
+                int B = count(s.begin(),s.end(),'B');
+                int C = count(s.begin(),s.end(),'C');
+                char ans = '#';
+                if(A == 0)ans = 'A';
+                if(B == 0)ans = 'B';
+                if(C == 0)ans = 'C';
+                cout<<ans;N();return;
+            }
+        }
     }
 
 
