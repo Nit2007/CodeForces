@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1834/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,14 +7,25 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        int m{},p{};
+        for(int x:nums){
+            if(x == -1)m++;
+            if(x ==  1)p++;
+        }
+        int op = 0;
+        while( (p-m) < 0 || m%2 == 1){
+            m--;
+            p++;
+            op++;
+        }
+        cout<<op;N();
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

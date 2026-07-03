@@ -1,20 +1,37 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1797/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,k;cin>>n>>k;
+        vector<vector<int>>nums(n);
+        for(int i=0;i<n;i++){
+            nums[i] = readVector<int>(n);
+        }
+        int op = 0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(nums[i][j] != nums[n-i-1][n-j-1]){
+                    op++;
+                }
+            }
+        }
+        op /= 2;
+        if(op > k || ((k-op)%2 && (n%2 == 0)) ){
+            cout<<"NO";
+        }else{ //when n is Odd , k-op could be anything ,as we can toggle at center
+            cout<<"YES";
+        }
+        N();
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

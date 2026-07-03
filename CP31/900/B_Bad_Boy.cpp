@@ -1,20 +1,31 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1537/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,m,i,j;cin>>n>>m>>i>>j;
+        vector<pair<int,int>> corners = {{1,1},{n,1},{1,m},{n,m}} ;
+        vector<pair<int,int>> indexDist(4);
+
+        for(int c=0;c<corners.size();c++){
+            indexDist[c] = {dist(i,j,corners[c].first,corners[c].second),c};
+        }
+        map<int,int>opp = {{0,3},{3,0},{1,2},{2,1}};
+        sort(indexDist.begin(),indexDist.end());
+        cout<<corners[indexDist[3].second].first << " "<<corners[indexDist[3].second].second<<" ";
+        cout<<corners[indexDist[opp[3]].second].first << " "<<corners[indexDist[opp[3]].second].second;N();
+    }
+    int dist(int i,int j,int x,int y){
+        return abs(i-x) + abs(j-y);
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

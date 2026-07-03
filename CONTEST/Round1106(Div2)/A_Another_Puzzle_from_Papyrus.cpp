@@ -1,13 +1,41 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2238/problem/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,c;cin>>n>>c;
+        vector<int>a = readVector<int>(n);
+        vector<int>b = readVector<int>(n);
+        int ans = INT_MAX , op = 0 ,valid = true;
+        for(int i=0;i<n;i++){
+            if(a[i] < b[i]){
+                valid = false;
+                break;
+            }else{
+                op += (a[i] - b[i]);
+            }
+        }
+        if(valid){
+            ans = min(ans,op);
+        }
+        op = c ,valid = true;
+        sort(a.begin(),a.end());
+        sort(b.begin(),b.end());
+        for(int i=0;i<n;i++){
+            if(a[i] < b[i]){
+                valid = false;
+                break;
+            }else{
+                op += (a[i] - b[i]);
+            }
+        }
+        if(valid){
+            ans = min(ans,op);
+        }
+        if(ans == INT_MAX)ans = -1;
+        cout<<ans;N();
     }
 
 

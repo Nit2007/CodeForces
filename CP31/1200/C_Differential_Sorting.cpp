@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1635/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,14 +7,28 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        if(n>= 2 && nums[n-2] > nums[n-1]){
+            cout<<-1;N();return;
+        }else if(nums[n-1] >= 0){
+            cout<<n-2;N();
+            for(int i=1;i<=n-2;i++){
+                cout<<i<<" "<<n-1<<" "<<n;N();
+            }
+        }else{
+            if(is_sorted(nums.begin(),nums.end())){
+                cout<<0;N();
+            }else{
+                cout<<-1;N();
+            }
+        }
+
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

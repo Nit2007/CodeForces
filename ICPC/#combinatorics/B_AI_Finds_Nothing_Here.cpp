@@ -1,16 +1,30 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/2240/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
+    const int MOD = 998244353;
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,m,r,c;cin>>n>>m>>r>>c;
+        ll box = (n-r+1) * 1LL * (m-c+1);
+        ll cells = n * 1ll * m;
+        ll free = cells-box;
+        cout<<binPower(2,free);N();
     }
-
-
+// if the big box needs to have even 1s , 2 ^ ((n*m) - 1)
+// Free cells = Total cells − Number of independent equations
+// Free cells = nm − (n−r+1)(m−c+1)
+    ll binPower(ll a,ll b){ 
+        ll res = 1;
+        while(b){
+            if(b&1){
+                res = (res * a) % MOD ;
+            } 
+            a = (a * a ) % MOD;
+            b >>= 1;
+        }
+        return res;
+    }
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;

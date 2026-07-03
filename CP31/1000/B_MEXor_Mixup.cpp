@@ -1,20 +1,33 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1567/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int a,b;cin>>a>>b;
+        int x = a-1;
+        vector<int>possibleXOR = {x,1,x+1,0};
+        int currXor = possibleXOR[x%4];
+        // int currXor = 0;
+        // for(int i=0;i<a;i++){
+        //     currXor ^= i;
+        // }
+        if(currXor == b){ //Included elements from [0,a-1] also got XOR = b
+            cout<<a;N();return;
+        }
+        if((currXor^b) == a){ //[0,a-1] XOR^b != a , XOR^(XOR^B^1)^(1) = B
+            cout<<a+2;N();return;
+        }
+        //[0,a-1] , XOR^b != a , XOR^(XOR^B) = B
+        cout<<a+1;N();return;
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

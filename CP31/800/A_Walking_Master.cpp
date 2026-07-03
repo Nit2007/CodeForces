@@ -1,20 +1,47 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1806/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int a,b,c,d;cin>>a>>b>>c>>d;
+        // a+1,b+1
+        // a-1,b
+        if(b > d){
+            cout<<-1;N();return;
+        }
+        if(b <= d){
+            if(a+abs(d-b) >= c){
+                cout<<(d-b) + (a+(d-b)-c);N();return;
+            }else{
+                cout<<-1;N();return;
+            }
+        }
+        cout<<INT_FAST16_MAX;N();return;
     }
+    // void solve(){
+    //     int a,b,c,d;cin>>a>>b>>c>>d;
+    //     if(a >= c){
+    //         if(b <= d){
+    //             cout<<(a-c) + (d-b);N();return;
+    //         }else{
+    //             cout<<-1;N();return;
+    //         }
+    //     }else if(a < c){
+    //         if(b + (c-a) < d){
+    //             cout<<-1;N();return;
+    //         }else{
+    //             cout<<c-a + b - d;N();return;
+    //         }
+    //     }
+    // }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

@@ -1,15 +1,51 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1594/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
+    const ll MOD = 1e9+7;
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,k;cin>>n>>k;
+        ll ans = 0 , p = 1;
+        for(int bit=0;bit<=31;bit++){ // BASE 'N'
+            if(k & (1ll<<bit)){
+                ans += p;
+            }
+            p *= n;
+            ans %= MOD;
+            p %= MOD;
+        }
+        cout<<ans%MOD;N();
     }
-
+    // const ll MOD = 1e9+7;
+    // void solve(){
+    //     int n,k;cin>>n>>k;
+    //     vector<ll> base_n = convert_n(n,k);
+    //     ll ans = 0 , i = 0;
+    //     PRINT(base_n);ND();
+    //     for(auto x:base_n){
+    //         ans += ((x-'0')%MOD) * ((1ll<<i) % MOD);
+    //         ans %= MOD;
+    //         i++;
+    //     }
+    //     cout<<ans;N();
+    // }
+    // vector<ll> convert_n(int n,int k){
+    //    vector<ll> s ;
+    //     while(k){
+    //         s.push_back(k%n);
+    //         k /= n;
+    //     }
+    //     while(s.size() < n){
+    //         s.push_back(0);
+    //     }
+    //     reverse(s.begin(),s.end());
+    //     return s;
+    // }
+// 1100 - 12
+// 010 - 4
+// 213 - 6 chances
+// 113 - 3 chances
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);

@@ -1,20 +1,53 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1543/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll a,b;cin>>a>>b;
+        ll i = abs(a-b);
+        if(a == b){
+            cout<<"0 0\n";
+            return ;
+        }
+        ll r = b%i ;
+        ll moves = min(r,i-r);
+        cout<<i<<" "<<moves;N();
     }
+    //Difference is never gonna change
+    //so find the nearest GCD in smaller or larger range
+    // a----d---b
+    // a------X-b----Y : the dist bw X and Y is d
 
+//     void solve(){
+//         ll a,b;cin>>a>>b;
+//         ll i = gcd(a,b);
+//         ll d = abs(a-b);
+//         // if(i < d){
+//         //     cout<<min(a,b)<<" "<<d;N();
+//         //     return;
+//         // }
+//         if(d == 0){
+//             cout<<"0 0\n";
+//             return ;
+//         }
+//         if(a > b)swap(a,b);
+//         ll op = abs((b/2) - a);
+//         cout<<op<<" "<<a;N();
+//     }
+// // gcd(a,a+x) = a
+// // gcd(a,2a) = a
+// // a , b
+// // a+x , 2(a+x)
+// // b = 2(a+x)
+// // b/2 = a+x
+// // (b/2) - a = x
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

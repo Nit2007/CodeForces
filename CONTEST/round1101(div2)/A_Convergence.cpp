@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/2232/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,14 +7,67 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        sort(nums.begin(),nums.end());//PRINT(nums);
+        int ans = INT_MAX;
+        for(int middle=0;middle<n;middle++){
+            int l = 0 , r = 0;
+            for(int i=0;i<middle;++i){
+                if(nums[middle] != nums[i])l++;
+            }
+            for(int i=middle+1;i<n;++i){
+                if(nums[middle] != nums[i])r++;
+            }
+            int op = max(r,l);
+            ans = min(op,ans);
+        }
+        cout<<ans;N();
     }
+
+    void working(){
+        int n;cin>>n;
+        vector<int>nums = readVector<int>(n);
+        sort(nums.begin(),nums.end());//PRINT(nums);
+        ll ans = 0;
+        for(int i=0;i<n/2;i++){
+           if(nums[i] != nums[n-i-1])ans++;
+        }
+        cout<<ans;N();
+    }
+    // void solve(){
+    //     int n;cin>>n;
+    //     vector<int>nums = readVector<int>(n);
+    //     sort(nums.begin(),nums.end());//PRINT(nums);
+    //     ll op = 0,ans = INT64_MAX;
+    //     for(int i=0;i<n;i++){
+    //         op = 0;
+    //         int l = i-1 , r = i+1;
+    //         while(l >= 0 && r <= n-1){
+    //             if(nums[l] == nums[r] && nums[l] == nums[i]){}
+    //             else if(nums[l] != nums[r])op++;
+    //             l--; r++;
+    //         }
+    //         while(l >= 0){
+    //             if(nums[i] != nums[l]){
+    //                 op ++;
+    //             }
+    //             l--;
+    //         }
+    //         while(r <= n-1){
+    //             if(nums[i] != nums[r]){
+    //                 op ++;
+    //             }
+    //             r++;
+    //         }
+    //         ans = min(ans,op);
+    //     }
+    //     cout<<ans;N();
+    // }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

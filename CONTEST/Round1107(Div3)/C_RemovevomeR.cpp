@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2241/problem/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,8 +6,44 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string s;cin>>s;
+        int zero = count(s.begin(),s.end(),'0');
+        int one = count(s.begin(),s.end(),'1');
+        if(!zero || !one){
+            cout<<1;N();return;
+        }
+        bool lz{0},rz{0},lo{0},ro{0};
+        for(int i=0;i<n;i++){
+            if(s[i] == '0'){
+                for(int j=0;j<i;j++){
+                    if(s[j] == '1'){
+                        lo = true;
+                    }
+                }
+                for(int j=i+1;j<n;j++){
+                    if(s[j] == '1'){
+                        ro = true;
+                    }
+                }
+            }
+            if(s[i] == '1'){
+                for(int j=0;j<i;j++){
+                    if(s[j] == '0'){
+                        lz = true;
+                    }
+                }
+                for(int j=i+1;j<n;j++){
+                    if(s[j] == '0'){
+                        rz = true;
+                    }
+                }
+            }
+        }   
+        if((lz && rz) || (lo && ro)){
+            cout<<1;N();return;
+        }else{
+            cout<<2;N();return;
+        }
     }
 
 

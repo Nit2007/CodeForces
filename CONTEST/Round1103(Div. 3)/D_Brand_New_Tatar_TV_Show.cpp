@@ -1,20 +1,49 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2236/problem/D*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
+        int n,k;cin>>n>>k;
         vector<int>nums = readVector<int>(n);
-        
+        map<int,int>freq;
+        for(auto x:nums){
+            freq[x]++;
+        }
+        while(!freq.empty()){
+            if(freq.rbegin()->second%2 == 0 || 
+                (freq.size() > 1 && freq.rbegin()->first - next(freq.rbegin())->first <= k) ){
+                cout<<"YES";N();return;
+            }
+            freq.erase(prev(freq.end()));
+        }
+        cout<<"NO";N();return;
+        //if an element x is choosen ,then next element 'y' should be in the range [x,x+k]
+        //A E D E - Goal make E win
+        //Even parity makes Egor win 
+        //A E D E D
+        //Here we waste a move 
+        //Hence choosing the second max at odd parity - forces E to make the parity even by picking the largest ele
     }
+    // void solve(){
+    //     int n,k;cin>>n>>k;
+    //     vector<int>nums = readVector<int>(n);
+    //     sort(nums.begin(),nums.end());
+    //     int last = nums[0];
+    //     for(int i=1;i<n;i++){
+    //         if(last+k < nums[i]){
+    //             cout<<"YES";N();return;
+    //         }
+    //     }
+    //     cout<<"NO";N();return;
+    // }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

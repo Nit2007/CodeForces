@@ -1,20 +1,49 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1671/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
+    void solve(){//Instead of iterating over days to make choices ,iterate over the items 
+        int n,coins;cin>>n>>coins;
         vector<int>nums = readVector<int>(n);
-        
+        int maxDays = coins - *min_element(nums.begin(),nums.end()) + 1;
+        sort(nums.begin(),nums.end());
+        ll items = 0 , sum = 0L;
+        for(int i=0;i<n;i++){
+            sum += nums[i];
+            if(sum <= coins){
+                int rem = (coins-sum);
+                items += rem / (i + 1) + 1;
+            }
+        }
+        cout<<items;N();
+    }
+    void BRUTE(){ //TLE on Test 3
+        int n,coins;cin>>n>>coins;
+        vector<int>nums = readVector<int>(n);
+        int maxDays = coins - *min_element(nums.begin(),nums.end()) + 1;
+        sort(nums.begin(),nums.end());
+        int day = 0;
+        ll items = 0;
+        while(day<=maxDays){
+            int i=0 , spent = 0;
+            while(spent<coins && i<n){
+                if( (coins-spent) < (nums[i] + day) )break;
+                items += 1;
+                spent += nums[i] + day;
+                i++;
+            }
+            day++;
+        }
+        cout<<items;N();
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

@@ -1,25 +1,39 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2234/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n;cin>>n;
+        ll r = n%12;
+        if(r == 10){
+            if(n < 22){
+                cout<<-1;
+            }else{
+                cout<<22<<" "<<n-22;
+            }
+        }else{
+            cout<<r<<" "<<n-r;
+        }
+        N();
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 
+    // a   b
+    // n-b b
+    // a   n-a
+    // n = a+b
+    // n = a+12x
+  
     
-
 
     template<typename T>
     void PRINT(const vector<T>& v){

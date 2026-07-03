@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/2237/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,7 +7,12 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        int mini = INT_MAX;
+        for(int i=0;i<n;i++){
+            nums[i] = min(nums[i],mini);
+            mini =  min(nums[i],mini);
+        }
+        cout<<accumulate(nums.begin(),nums.end(),0LL);N();
     }
 
 

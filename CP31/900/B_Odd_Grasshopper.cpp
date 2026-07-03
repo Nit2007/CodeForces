@@ -1,20 +1,31 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1607/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll intial,jump;cin>>intial>>jump;
+        ll last = jump;
+        jump %= 4;
+        while(jump--){
+            if(intial%2 == 0){
+                intial -= (last-jump);
+            }else{
+                intial += (last-jump);
+            }
+        }
+        cout<<intial;N();
     }
-
+// o e o e o e - jump dist
+// Intial - Odd 
+// Intial - Eve  
+//No matter Intial is Odd/Eve ,we get back to the starting point at every 4th jump
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

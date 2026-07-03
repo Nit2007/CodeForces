@@ -1,20 +1,41 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/2217/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n,m,a,b;cin>>n>>m>>a>>b;
+        if(gcd(n,a) == 1 && gcd(m,b) == 1 && gcd(n,m) <= 2){
+            cout<<"YES";N();return;
+        }
+        cout<<"NO";N();return;
     }
+    // for all [i,j] in [n,m]:
+    //     [(1+xa)%n,(1+yb)%m]; where x,y could be any number
+    // i-1 = xa %n
+    // j-1 = yb %m
+    // in 1D => (7/3) , (8/3) works but (9/3),(9,6) wont cause it loops on the same path
+    // Potential of A : {0, a, 2a, 3a, ...} mod n , there are ( n / gcd(n,a) ) states possible
+    // as we need to visit all nos from 1 to n, (n/gcd(n,a)) = n --> gcd(n,a) = 1
+
+    // to return back to the start(0,0) where k is the smallest number 
+    // ka = 0 mod n        if n divides (k*a) , but gcd(n,a) = 1 ,then n divides k
+    // kb = 0 mod m        if m divides (k*b) , but gcd(n,b) = 1 ,then m divides k
+    // as both n & m divides k , 
+    // k = LCM(n,m) 
+    // max no of states is 2 * LCM(n,m)
+
+    // 2·lcm(n,m) ≥ n·m
+    // 2·lcm(n,m) ≥ gcd(n,m)·lcm(n,m)          {n * m = gcd(n,m) * lcm(n,m)}
+    // 2 ≥ gcd(n,m)
+
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

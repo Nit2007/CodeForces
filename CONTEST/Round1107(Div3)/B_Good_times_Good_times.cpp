@@ -1,15 +1,37 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2241/problem/b*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int x;cin>>x;
+        if(x < 10){
+            cout<<2;N();return;
+        }//As x is GOOD
+        int dig = to_string(x).length();
+        int y = pow(10,dig) + 1;
+        cout<<y;
+        N();
     }
+    // 300 -1
+    // (299 + 1) * y 
+    // 299 * y+1
 
+    // 73y + 27y = 100y
+    // 73 => (10 + 63)  * (y) - 63 y => y [10+63 - 63]
+    // 100 => (100 - 27) * y + 27y
+
+
+    bool Good(int x){
+        string s = to_string(x);
+        set<char>u;
+        for(char a:s){
+            u.insert(a);
+        }
+        if(u.size() <= 2)return true;
+        return false;
+    }
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);

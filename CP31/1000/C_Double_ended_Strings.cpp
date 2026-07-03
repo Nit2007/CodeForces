@@ -1,20 +1,39 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1506/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string a,b;
+        cin>>a>>b;
+        int n = a.length();
+        int m = b.length();
+        int ans = INF;
+        if(a == b){
+            ans = 0;
+        }
+        for(int l=0;l<n;l++){
+            for(int r=0;l+r<=n;r++){
+                for(int i=0;i<m;i++){
+                    for(int j=0;i+j<=m;j++){
+                        string x = a.substr(l,r);
+                        string y = b.substr(i,j);
+                        if(x == y){
+                            ans = min(ans, (l+i) + (n-r-l) + (m-j-i)); 
+                        }
+                    }
+                }
+            }
+        }
+        cout<<ans;N();
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

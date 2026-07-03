@@ -1,20 +1,37 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/727/problem/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int a,b;cin>>a>>b;
+        vector<int>seq(1,b);
+        while(a < b){
+            if(b%2 == 0){
+                b /= 2;
+            }else if (b%10 == 1){
+                b /= 10;
+            }else {
+                break;
+            }
+            seq.push_back(b);
+        }
+        if(a != b){
+            cout<<"NO";N();
+        }else{
+            reverse(seq.begin(),seq.end());
+            cout<<"YES";N();
+            cout<<seq.size();N();
+            PRINT(seq);
+        }
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
-        while(z--){ solve(); }
+        int z=1;
+        while(z--){ solve();}
         return 0;
     }
 

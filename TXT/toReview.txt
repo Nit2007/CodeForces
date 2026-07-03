@@ -17,3 +17,15 @@ CONTEST\Round1099(div2)\C_Chipmunk_Theo_and_Equality.cpp
 CP31\1000\B_Roof_Construction.cpp - Bitmask
 CP31\1200\C_Virus.cpp - Operation on current state affects the Rest
 CP31\1200\E_Mirror_Grid.cpp - Recursize Sq check
+CP31\1200\B_Stone_Age_Problem.cpp - Query time wise lazy updation , missed query overwriting on global var allset
+CONTEST\round1101(div2)\C_1_Seating_Arrangement_Easy_Version.cpp - Rigid constraints means forced ,but if flexible we can buffer them and used them based on need instead of DP
+CP31\1200\C_Dolce_Vita.cpp - Flipping the axis of iteration , Reshaping the problem
+CP31\1400\C_Grouping_Increases.cpp - The whole array doesn t need simulation as the answer is dependent only on last number
+CONTEST\Round191(div2)(edu)\C_Cost_of_a_Bracket_Sequence.cpp 
+CP31/1000/B_Divan_and_a_New_Project.cpp
+CP31\1400\C_Array_Game.cpp - Breaking down simple operations into steps rather than simulation , abs
+ICPC\Number Theory\C_Grid_Covering.cpp - state estimation and deriving the pruning condition 
+ICPC\Number Theory\C_1_A_Simple_GCD_Problem_Easy_Version.cpp - gcd of all subarray => gcd of adj ele
+CP31\1200\C_Differential_Sorting.cpp - Reverse simulation , dont need to minimize operation translates try to perform operation on every place
+ICPC\#Number Theory\D_Retaliation.cpp - Deriving eq from observation
+ICPC\#Bit Manip\A_You_Are_Given_Two_Binary_Strings.cpp - Hitting two Binaries , (2^k + y(base2)) => y{k_zeros}(base2)

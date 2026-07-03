@@ -1,15 +1,50 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/2134/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n,k;cin>>n>>k;
+        vector<ll>nums = readVector<ll>(n);
+        if(k%2){
+            for(int i=0;i<n;i++){
+                if(nums[i]%2 == 1){
+                    nums[i] += k;
+                }
+            }
+            PRINT(nums);
+        }else{
+            int g = nums[0];
+            for(auto x:nums){
+                g = gcd(g,x);
+            }
+            if(g > 1){
+                PRINT(nums);
+            }else{
+                for(int i=0;i<n;i++){
+                    int c = nums[i] % (k+1);
+                    nums[i] = nums[i] + (k * c);
+                }
+                PRINT(nums);
+            }
+        }
     }
 
+// {a+ck,b+ck,e+ck,d+ck} where c in [1,2,....,k]
+// gcd(A,B,C,D) > 1
+// A = a + ck , we want to find c (given a,k to assign A)
+// c = a % (k+1)
+//  (a = 10) and (k = 3) => (c = 2) --->  A = 16 
+
+// CONSTRAINS : c <= k, A%g == 0
+// A = a + ck
+// A mod g = 0 mod g 
+// 0 mod g = a + ck
+// -a mod g = ck
+// -a mod (k+1) = ck   (put g = k+1) , k = -1 mod (k+1)
+// -a mod (k+1) = -c
+// c = a mod (k+1)
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);

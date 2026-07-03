@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2233/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,15 +6,26 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<int>nums(n,0);
+        for(int i=1;i<=n;i++){
+            nums[i-1] = i;
+        }
+        if(n == 2){
+            cout<<"1 2 1 1 2 2 1 2";N();return;
+        }
+        vector<int>ans;
+        ans.insert(ans.begin(),nums.begin(),nums.end());
+        ans.insert(ans.begin(),nums.begin()+1,nums.end());ans.push_back(nums[0]);
+        ans.insert(ans.begin(),nums.begin()+2,nums.end());ans.push_back(nums[0]);ans.push_back(nums[1]);
+        ans.insert(ans.begin(),nums.begin()+3,nums.end());ans.push_back(nums[0]);ans.push_back(nums[1]);ans.push_back(nums[2]);
+        PRINT(ans);
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

@@ -1,13 +1,25 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1883/G1*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,m;cin>>n>>m;
+        vector<int>a = readVector<int>(n-1);
+        vector<int>b = readVector<int>(n);
+        a.push_back(1);
+        sort(a.begin(),a.end());
+        sort(b.begin(),b.end());
+        // PRINT(a);
+        // PRINT(b);ND();
+        int  j=0;
+        for(int i=0;i<n;i++){
+            if(b[i] > a[j]){
+                j++;
+            }
+        }
+        cout<<n-j;N();
     }
 
 

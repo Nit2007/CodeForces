@@ -1,20 +1,42 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1879/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
+const int MOD = 998244353;
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string s;
+        cin>>s;
+        int n = (int)s.length();
+        vector<int>same(0);
+        int curr = 1;
+        for(int i=0;i+1<n;++i){
+            if(s[i] == s[i+1]){
+                curr++;
+            }else{
+                same.push_back(curr);
+                curr = 1;
+            }
+        }
+        same.push_back(curr);
+        // PRINT(same);ND();
+        ll minOperation = 0;
+        ll ways = 1;
+        for(int x:same){ 
+            minOperation += x-1;
+            ways = (ways * x) %MOD;//Fix the survivor at every Block
+        }
+        for(ll i=1;i<=minOperation;++i){//Order of deletions matter
+            ways = (ways*i) % MOD;
+        }
+        cout<<minOperation<<" "<<ways;N();
     }
-
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

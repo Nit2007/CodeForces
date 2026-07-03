@@ -8,3 +8,5 @@ CONTEST\RoundEdu188(div2)\G.cpp
 CONTEST\RoundEdu188(div2)\D.cpp
 CONTEST\Round1095(div2)\C_Mental_Monumental_Easy_Version.cpp
 CodeForces\CONTEST\Round1098(div2)\C_1_Cirno_and_Number_Easy_Version.cpp
+https://codeforces.com/problemset/problem/474/D
+https://codeforces.com/problemset/problem/577/B

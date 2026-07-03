@@ -1,20 +1,43 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1679/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
     void solve(){
-        int n;cin>>n;
+        int n,q;cin>>n>>q;
         vector<int>nums = readVector<int>(n);
-        
+        ll sum = accumulate(nums.begin(),nums.end(),0LL);
+        int allset = -1;
+        int alltime = -1;
+        vector<int>last_updated(n,-1);
+        for(int j=0;j<q;j++){
+            int t,i = -1,x;
+            cin>>t;
+            if(t == 1){
+                cin>>i>>x; 
+                i--;
+                if(allset != -1 && last_updated[i] < alltime){
+                    nums[i] = allset;
+                }
+                last_updated[i] = j;
+                sum -= nums[i];
+                nums[i] = x;
+                sum += nums[i];
+            }else if(t == 2){
+                cin>>x;
+                sum = ((ll)n * x);
+                allset = x;
+                alltime = j;
+            }
+            cout<<sum;N();
+        }
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
-        while(z--){ solve(); }
+        int z=1;
+        while(z--){ solve();}
         return 0;
     }
 

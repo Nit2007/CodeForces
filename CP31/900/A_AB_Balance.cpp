@@ -1,20 +1,60 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1606/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string s;cin>>s;
+        int n = s.length();
+        int ab = 0 , ba = 0;
+        for(int i=1;i<n;i++){
+            if(s[i-1] == 'a' && s[i] == 'b'){
+                ab++;
+            }
+            if(s[i-1] == 'b' && s[i] == 'a'){
+                ba++;
+            }
+        }
+        if(ab == ba){
+            cout<<s;N();return;
+        }
+        //aababa , bababb
+        s[0] = s[n-1];
+        cout<<s;N();return;
     }
+    // void solve(){
+    //     string s;cin>>s;
+    //     int n = s.length();
+    //     int ab = 0 , ba = 0;
+    //     for(int i=1;i<n;i++){
+    //         if(s[i-1] == 'a' && s[i] == 'b'){
+    //             ab++;
+    //         }
+    //         if(s[i-1] == 'b' && s[i] == 'a'){
+    //             ba++;
+    //         }
+    //     }
+    //     if(ab == ba){
+    //         cout<<s;N();return;
+    //     }
+    //     int diff = ab - ba ;
+    //     char remove = (diff > 0)? 'b' : 'a' ;
+    //     for(int i=n-1;i>=0;--i){
+    //         if(s[i] == remove){
+    //             s[i] = (remove == 'a') ? 'b' : 'a';
+    //             diff--;
+    //         }
+    //         if(diff == 0)break;
+    //     }
+    //     cout<<s;N();return;
+    // }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

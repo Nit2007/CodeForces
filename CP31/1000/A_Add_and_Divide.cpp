@@ -1,20 +1,30 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1485/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int a,b;cin>>a>>b;//it is more rewarding to operation B first
+        int ans = INT_MAX;
+        for(int opB = 0;opB <= log(1e9);opB++){
+            if(b + opB < 2)continue;
+            int opA = 0 , temp = a;
+            while(temp){
+                temp /= (b+opB);
+                opA++;
+            }
+            ans = min(ans, (opA + opB)) ;
+            // P(opA,opB);
+        }
+        cout<<ans;N();
     }
-
+    // int opA = (a/b) + ((a%b == 0)? 0 : 1 );
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

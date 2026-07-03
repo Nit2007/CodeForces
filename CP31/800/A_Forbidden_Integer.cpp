@@ -1,20 +1,38 @@
-#include <bits/stdc++.h> /*$url$*/
+    #include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1845/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,k,x;cin>>n>>k>>x;
+        if(x != 1){
+            cout<<"YES"<<endl;
+            cout<<n;N();
+            for(int i=0;i<n;i+=1){
+                cout<<1<<" ";
+            }N();
+        }
+        else if(k == 1 || (k == 2 && n%2)){
+            cout<<"NO";N();return;
+        }
+        else{
+            cout<<"YES"<<endl;
+            cout<<n/2;N();
+            char x = (n%2 == 1) ? '3' : '2';
+            cout<<x<<" ";
+            for(int i=0;i+1<n/2;i++){
+                cout<<2<<" ";
+            }
+            N();
+        }
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

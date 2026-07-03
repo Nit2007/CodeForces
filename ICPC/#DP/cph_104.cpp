@@ -5,16 +5,44 @@ class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,limit;cin>>n>>limit;
+        vector<int>weight ;
+        for(int i=0;i<n;i++){
+            int x;cin>>x;
+            weight.push_back(x);
+        }
+        ll ans = INT_MAX;
+        pair<int,int>best [1<<n]; //Rides : filled weight in current ride
+        best[0] = {1,0}; //Empty Ride : No weight
+        for(int combo=1;combo<(1<<n);combo++){
+            best[combo] = {n+1,0} ;
+            for(int bit=0;bit<n;bit++){
+                if(combo & (1<<bit)){
+                    // 1011 comes from {1010,1001,0011} + new Person
+                    auto option = best[combo^(1<<bit)];
+                    if(option.second + weight[bit] <= limit){
+                        option.second += weight[bit];
+                    }else {
+                        option.first++; //Book a new Ride
+                        option.second = weight[bit];
+                    }
+                    best[combo] = min(best[combo],option);
+                }
+            }
+        }
+        ans = best[(1<<n)-1].first;
+        cout<<ans;N();
     }
+    /*
+    10 15
+    2 5 4 7 1 3 8 6 9 10
+    */
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
-        while(z--){ solve(); }
+        int z=1;
+        while(z--){ solve();}
         return 0;
     }
 

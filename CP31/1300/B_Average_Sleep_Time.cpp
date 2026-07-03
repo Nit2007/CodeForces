@@ -1,20 +1,31 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/808/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,k;cin>>n>>k;
+        vector<int>sleep = readVector<int>(n);
+
+        vector<ll>prefixSum (n+1,0);
+        for(int i=1;i<=n;++i){
+            prefixSum[i] = prefixSum[i-1] + sleep[i-1];
+        }
+        long double sum = 0;
+        for(int i=0;i+k<=n;++i){
+            ll curr = prefixSum[i+k] - prefixSum[i];
+            // cout<<curr;ND();
+            sum += curr;
+        }
+        cout<<fixed<<setprecision(6)<<(sum/(n-k+1));
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
-        while(z--){ solve(); }
+        int z=1;
+        while(z--){ solve();}
         return 0;
     }
 

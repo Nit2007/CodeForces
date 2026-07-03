@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2238/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,10 +6,19 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll ans = 1;
+        for(int i=1;i<n;i++){
+            ll nos = n/i;
+            ans += (nos * 1LL * nos);
+        }   
+        cout<<ans;N();
     }
+// a = lcm(a,b) = lcm(b,bx)
+// c = lcm(b,c) = lcm(b,bx)
 
+// gcd(lcm(a,b),lcm(b,c))=gcd(a,c)
+// gcd(ab,bc) = b = gcd(a,c)
+// gcd(a,c) , gcd(a,b) , gcd(b,c) , gcd(b,b)
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);

@@ -1,20 +1,32 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/665/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string s;
+        cin>>s;
+        int n = s.length();
+        for(int i=1;i<n;++i){
+            if(s[i-1] == s[i]){
+                int j = 1;
+                char uni = s[i];
+                while(s[i] == uni || ((i+1<n && s[i+1] == uni))){
+                    uni = ('a' + (s[i] - 'a' + j) % 26) ;
+                    j++;
+                }
+                s[i] = uni;
+            }
+        }
+        cout<<s;
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
-        while(z--){ solve(); }
+        int z=1;
+        while(z--){ solve();}
         return 0;
     }
 

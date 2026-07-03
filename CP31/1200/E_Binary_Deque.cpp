@@ -1,20 +1,42 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1692/E*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
+        int n,target;cin>>n>>target;
         vector<int>nums = readVector<int>(n);
-        
+        ll sum = accumulate(nums.begin(),nums.end(),0LL);
+        if(sum < target){  cout<<-1;N();return;  }
+        if(sum == target){  cout<<0;N();return;  }
+        int remove = sum - target;
+        vector<int>L(1,0);//Number of operations from Left to dec size by i
+        for(int i=0;i<n;++i){
+            if(nums[i] == 1){
+                L.push_back(i+1);
+            }
+        }
+        vector<int>R(1,0);//Number of operations from Right to dec size by i
+        for(int i=n-1;i>=0;--i){
+            if(nums[i] == 1){
+                R.push_back(n-i);
+            }
+        }
+        // ND();PRINT(L);PRINT(R);ND();
+        int operations = INT_MAX;
+        for(int i=0;i<=remove;++i){
+            int rest = remove - i;
+            operations = min(L[i]+R[rest],operations);
+        }
+        cout<<operations<<endl;
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

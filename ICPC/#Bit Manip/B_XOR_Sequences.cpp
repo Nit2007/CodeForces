@@ -1,13 +1,44 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1979/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
+#define BIT 64
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll x,y;cin>>x>>y;
+        bitset<BIT>bx(x) , by(y);
+        ll lcs = 0;
+        for(int i=0;i<BIT;i++){
+            if(bx[i] == by[i])
+            {
+                lcs++;
+            }
+            else{break;}
+        }
+        cout<<(1ll<<lcs);N();
+    }
+    void WRONG_APPROACH(){
+        ll x,y;cin>>x>>y;
+        bitset<BIT>bx(x) , by(y);
+        ll lcs = 0 , c = 0 , xlz = false , ylz{false};
+        for(int i=BIT-1;i>=0;i--){
+            if( (bx[i] == 0 && !xlz ) || (by[i] == 0 && !ylz )){
+                continue;
+            }
+            if(bx[i] == 1){ xlz = true; }
+            if(by[i] == 1){ ylz = true; }
+            if(bx[i] == by[i])
+            {
+                c++;
+            }
+            else
+            {
+                c = 0;
+            }
+            lcs = max(c,lcs);
+        }
+        lcs = max(c,lcs);
+        cout<<(1<<lcs);N();
     }
 
 

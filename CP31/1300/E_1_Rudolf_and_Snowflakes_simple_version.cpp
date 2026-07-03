@@ -1,23 +1,40 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1846/E1*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
+    const int LIMIT = 1e6;
+    unordered_map<int,int>snow;
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        if(snow.count(n)){
+            cout<<"YES";N();return;
+        }        
+        cout<<"NO";N();return;
     }
-
-
+    
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        for(int k=2;k<=LIMIT/100;k++){
+            int sum = 1;
+            int i=1;
+            while(sum < LIMIT){
+                sum += pow(k,i);
+                if(i>=2)snow[sum]++;
+                i++;
+            }
+        }
+        while(z--){ solve();}
         return 0;
     }
-
+    // 1 1 2 3 5 8 13 21 44 65 
+    // 1 5 21 8  - (k = 4)
+    // 1
+    // 4
+    // 16
+    // 64
+    
     
 
 

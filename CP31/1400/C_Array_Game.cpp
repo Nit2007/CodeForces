@@ -1,20 +1,46 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1904/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
+        ll n,k;cin>>n>>k;
+        vector<ll>nums = readVector<ll>(n);
+        if(k >= 3){
+            cout<<0;N();return;
+        }
+        vector<ll>diff(0);
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                diff.push_back(abs(nums[i] - nums[j]));
+            }
+        }
+        sort(diff.begin(),diff.end());
+        ll ans = *min_element(nums.begin(),nums.end());
+        ans = min(ans,diff[0]);
         
+        if(k == 2){
+            for(auto x:nums){
+                auto it = lower_bound(diff.begin(),diff.end(),x);
+                //Compare both sides 
+                if(it != diff.end()){//Comparing Right if exist
+                    ans = min(ans,abs(x - *it));
+                }
+                if(it != diff.begin()){//Comparing Left if exist
+                    it--;
+                    ans = min(ans,abs(x - *it));
+                }
+            }
+        }
+        cout<<ans;N();
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

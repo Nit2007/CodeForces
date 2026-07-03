@@ -1,13 +1,42 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1494/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string s;cin>>s;
+        vector<bool>opens ;
+        vector<bool>ans;
+        opens = {1,1,0}; ans.push_back(check(s,opens));
+        opens = {1,0,1}; ans.push_back(check(s,opens));
+        opens = {0,1,1}; ans.push_back(check(s,opens));
+
+        opens = {0,0,1}; ans.push_back(check(s,opens));
+        opens = {0,1,0}; ans.push_back(check(s,opens));
+        opens = {1,0,0}; ans.push_back(check(s,opens));
+        sort(ans.begin(),ans.end());
+        if(*(ans.end()-1)){
+            cout<<"YES";
+        } 
+        else{
+            cout<<"NO";
+        }
+        N();
+    }
+    bool check(string s,vector<bool>opens){
+        map<char,int> charVal = {{'A', 0} , {'B',1} , {'C',2}} ;
+        int bal = 0;
+        for(char x:s){
+            if(opens[charVal[x]]){
+                bal++;
+            }else{
+                bal--;
+            }
+            if(bal < 0){return false;}
+        }
+        if(bal != 0){return false;}
+        return true;
     }
 
 

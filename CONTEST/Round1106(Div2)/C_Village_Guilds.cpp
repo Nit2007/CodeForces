@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2238/problem/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,9 +6,52 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<vector<int>>adj(n);
+        for(int child=1;child<n;child++){
+            int parent;cin>>parent;
+            parent--;
+            adj[parent].push_back(child);
+        }
+        ll ans = 0;
+        dfs(ans,adj,0);
+        cout<<ans;N();
     }
+    int dfs(ll&ans,vector<vector<int>>&adj,int node){
+        if(adj[node].size() == 0){
+            ans++;
+            return 1LL;
+        }
+        vector<int>branch;
+        for(int child:adj[node]){
+            branch.push_back(dfs(ans,adj,child));
+        }
+        sort(branch.begin(),branch.end(),greater<int>());
+        if(branch.size() == 1){
+            ans++;
+        }else{
+            ans += branch[1] + 1;
+        }
+        return branch[0] + 1;
+    }
+    // void solve(){
+    //     int n;cin>>n;
+    //     vector<int>parent(n,0);
+    //     for(int i=1;i<n;i++){
+    //         cin>>parent[i];
+    //     }
+    //     vector<vector<int>>adj(n);
+    //     int child = 0;
+    //     for(auto p:parent){
+    //         adj[p].push_back(child);
+    //         child++;
+    //     }
+    //     // for(auto x:adj){    PRINT(x);   }ND();
+    //     ll leaf = 0;
+    //     for(int i=0;i<n;i++){
+    //         if(adj[i].size() == 0 )leaf++;
+    //     }
+    //     cout<<leaf+n;N();
+    // }
 
 
     signed run() {

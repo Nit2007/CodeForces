@@ -1,20 +1,34 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1620/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll w,h;cin>>w>>h;
+        ll area = LLONG_MIN;
+        for(ll side=0;side<4;side++){
+            ll k,first,last;
+            cin>>k;
+            for(ll j=0;j<k;j++){
+                ll x; cin>>x;
+                if(j == 0)first = x;
+                if(j == k-1)last = x;
+            }
+            ll base = last - first;
+            ll height ;
+            if(side <= 1)height = h;
+            else height = w;
+            area = max(area,base * height);
+        }
+        cout<<area;N();
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

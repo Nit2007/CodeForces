@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1794/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,15 +6,65 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<int>nums = readVector<int>(n),res;
+        for(int k=0;k<n;k++){
+            int l=1 , r = k+1;
+            while(l<=r){
+                int m = l + (r-l)/2;
+                if(nums[k-m+1] >= m){
+                    l = m+1;
+                }else{
+                    r = m-1;
+                }
+            }
+            res.push_back(r);
+        }
+        PRINT(res);
     }
+    // l - first false  {4 5} - l = 4
+    // r - last true {1 2 3} - r = 3
+    void BRUTE(){
+        int n;cin>>n;
+        vector<int>nums = readVector<int>(n);
+        ll prev = 1;
+        for(int k=0;k<n;k++){
+            int i=k;
+            while(i>=0){
+                if((k-i+1) <= nums[i]){
+                    i--;
+                }
+                else   { break; }
+            }
+            cout<<k-i<<" ";
+        }
+        N();
+    }
+
+    // void solve(){
+    //     int n;cin>>n;
+    //     vector<int>nums = readVector<int>(n);
+    //     ll prev = 1;
+    //     for(int k=0;k<n;k++){
+    //         ll m = nums[k] , cost = 1 , num = 1;
+    //         ll fact = (k+1LL) * prev ;
+    //         for(int i=k;i>=0;i--){
+    //             num = nums[k] * num;
+    //             if(m < (num/fact)){
+    //                 m = num / fact;
+    //                 cost = (k-i);
+    //             }
+    //         }
+    //         cout<<cost<<" ";
+    //         prev = fact;
+    //     }
+    //     N();
+    // }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

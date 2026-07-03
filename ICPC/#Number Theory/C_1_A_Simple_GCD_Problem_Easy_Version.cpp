@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/2210/C1*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,15 +6,24 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<int>a = readVector<int>(n);
+        vector<int>b = readVector<int>(n);
+        int reduce = 0;
+        if(gcd(a[0], a[1]) < a[0]) reduce++;
+        for(int i=1;i<n-1;i++){//Make adjacent GCD same even after reducing a[i] to something
+            int A = gcd(a[i],a[i-1]);
+            int B = gcd(a[i],a[i+1]);
+            if(lcm(A,B) < a[i])reduce++;
+        }
+        if(gcd(a[n-2], a[n-1]) < a[n-1]) reduce++;
+        cout<<reduce;N();
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ solve();}
         return 0;
     }
 

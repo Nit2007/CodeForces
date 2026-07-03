@@ -1,13 +1,17 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2241/problem/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int x,y;cin>>x>>y;
+        if(x%y == 0){
+            cout<<"YES";
+        }else{
+            cout<<"NO";
+        }
+        N();
     }
 
 

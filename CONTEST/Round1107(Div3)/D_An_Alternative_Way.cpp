@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2241/problem/D*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,9 +6,65 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<ll>a = readVector<ll>(n);
+        vector<ll>b = readVector<ll>(n);
+        ll valid = true ;
+        for(ll i=n-1;i>=0;i--){
+            if(a[i] > b[i]){
+                if(i > 0){
+                    ll shave = a[i] - b[i];
+                    a[i-1] += shave;
+                }else{
+                    valid = false;
+                    break;
+                }
+            }
+        }
+        if(valid){
+            cout<<"YES";
+        }else{
+            cout<<"NO";
+        }
+        N();
     }
+    // int valid = true , tolerance = 0;
+    // for(int i=0;i<n;i++){
+    //     if(a[i] > b[i]){
+    //         if(i > 0){
+    //             int shave = a[i] - b[i];
+    //             if((a[i-1] + shave > tolerance) && (a[i-1] + shave > b[i-1]) ){
+    //                 valid = false;
+    //                 break;
+    //             }
+    //             tolerance -= shave;
+    //         }else{
+    //             valid = false;
+    //             break;
+    //         }
+    //     }else{
+    //         tolerance++;
+    //     }
+    // }
+    // if(valid){
+    //     cout<<"YES";
+    // }else{
+    //     cout<<"NO";
+    // }
+    // N();
+
+    // if(a[i] - b[i-1] != b[i-1] - a[i]){
+    //     cout<<"NO"<<i;N();return;
+    // }
+    
+    // int shave = a[i] - b[i];
+    // int tolerance = max(0,b[i-1] - a[i-1]);
+    // if(shave > tolerance){
+    //     cout<<"NO"<<i;N();return;
+    // }
+
+    // &&  ( (a[i] - b[i]) <= (-a[i-1] + b[i-1]) )
+    // a j i
+    // b j i
 
 
     signed run() {
@@ -71,3 +127,4 @@ signed main(){
     Main OBJ;
     return OBJ.run();
 }
+// C:\Users\DELL\Desktop\CodeForces\D_An_Alternative_Way.cpp

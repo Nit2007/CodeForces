@@ -1,20 +1,35 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/622/F*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+    const int MOD = pow(10,9) + 7;
+    void solve(){ //Complexity = O(n log k) , expected = O(k log MOD)
+        ll n,k;cin>>n>>k;
+        ll res = 0;
+        for(int i=1;i<=n;i++){
+            res += binPower(i,k) ;
+            res %= MOD;
+        }
+        cout<<res%MOD;
+    }
+    ll binPower(ll n,ll k){
+        ll res = 1;
+        while(k){
+            if(k&1){
+                res = (res * n)%MOD;
+            }
+            k >>= 1;
+            n = (n * n) %MOD;
+        }
+        return (res%MOD);
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
-        while(z--){ solve(); }
+        int z=1;
+        while(z--){ solve();}
         return 0;
     }
 
