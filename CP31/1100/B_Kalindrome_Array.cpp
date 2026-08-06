@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1610/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,10 +7,96 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        vector<int>uni = makeUnique(nums);
+        if(uni.size() <= 2){
+            cout<<"YES";N();return;
+        }
+        int l = 0 , r = n-1 ; 
+        while(l<=r && nums[l] == nums[r]){
+            r-- , l++;
+        }
+        if(l >= r){cout<<"YES";N();return;}
+        int L = nums[l] , R = nums[r];
+        for(int x:{L,R}){
+            l = 0 , r = n-1;
+            while(l<r){
+                if(nums[l] == nums[r]){
+                    l++;r--;
+                }else if(nums[l] == x){
+                    l++;
+                }else if(nums[r] == x){
+                    r--;
+                }else{
+                    break;
+                }
+            }
+            if(l >= r){cout<<"YES";N();return;}
+        }
+        cout<<"NO";N();return;
     }
 
-
+    // void solve(){
+    //     int n;cin>>n;
+    //     vector<int>nums = readVector<int>(n);
+    //     vector<int>uni = makeUnique(nums);
+    //     if(uni.size() <= 2){
+    //         cout<<"YES";N();return;
+    //     }
+    //     int l = n/2 + (n%2), r = l ; 
+    //     vector<int>pos;
+    //     while(l>=0 && r<n){
+    //         if(nums[l] != nums[r]){
+    //             pos.push_back(nums[l]);
+    //             pos.push_back(nums[r]);
+    //             break;
+    //         }
+    //         l-- , r++;
+    //     }
+    //     l = n/2 + (n%2), r = l ; 
+    //     while(l>=0 && r<n){
+    //         if(nums[l] != nums[r]){
+    //             if(nums[l] == pos[0]){
+    //                 l--;
+    //                 continue;
+    //             }
+    //             else if(nums[r] == pos[0]){
+    //                 r++;
+    //                 continue;
+    //             }else{
+    //                 break;
+    //             }
+    //         }
+    //         l-- , r++;
+    //     }
+    //     if(l == -1 && r == n){
+    //         cout<<"YES";N();return;
+    //     }
+        
+    //     l = n/2 + (n%2), r = l ; 
+    //     while(l>=0 && r<n){
+    //         if(nums[l] != nums[r]){
+    //             if(nums[l] == pos[1]){
+    //                 l--;
+    //                 continue;
+    //             }
+    //             else if(nums[r] == pos[1]){
+    //                 r++;
+    //                 continue;
+    //             }else{
+    //                 break;
+    //             }
+    //         }
+    //         l-- , r++;
+    //     }
+    //     if(l == -1 && r == n){
+    //         cout<<"YES";N();return;
+    //     }
+    //     cout<<"NO";N();return;
+    // }
+    
+/*
+1 3 4 4 1 4 3
+*/
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;

@@ -1,13 +1,27 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2244/problem/A*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string s;cin>>s;
+        vector<int>line(1,0);
+        int temp = 0;
+        for(int i=0;i<n;i++){
+            if(s[i] == '#'){
+                temp++;
+            }else if(temp > 0){
+                line.push_back(temp);
+                temp = 0;
+            }
+        } 
+        if(temp > 0){
+            line.push_back(temp);
+        }  
+        int l = *max_element(line.begin(),line.end());
+        cout<<(l+1)/2;N();
     }
 
 

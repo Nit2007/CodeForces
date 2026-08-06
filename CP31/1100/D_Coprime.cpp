@@ -1,13 +1,27 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1742/D*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
+const int MAXN = 1001 ;
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        vector<int>val(MAXN,0);
+        for(int i=0;i<n;i++){
+            val[nums[i]] = i+1;
+        }
+        int maxi = -1;
+        for(int i=0;i<MAXN;i++){
+            if(val[i] == 0 )continue;
+            for(int j=0;j<MAXN;j++){
+                if(val[j] == 0)continue;
+                if(gcd(i,j) == 1){
+                    maxi = max(maxi,val[i] + val[j]);
+                }
+            }
+        }
+        cout<<maxi;N();
     }
 
 

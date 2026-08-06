@@ -1,13 +1,34 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/contest/1602/problem/C*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
+const int BIT = 31;
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        int g = -1;
+        for(int bit=BIT;bit>=0;bit--){
+            int set = 0;
+            for(auto x:nums){
+                if(x & (1LL<<bit)){
+                    set++;
+                }
+            }
+            if(g == -1)g = set;
+            else {g = gcd(g,set) ;}
+        }
+        vector<int>ans = primeFactors(g);
+        if(g == 0){
+            for(int i=1;i<=n;++i){
+                cout<<i<<" ";
+            }N();return;
+        }
+        for(auto x:ans){
+            if(x <= n){
+                cout<<x<<" ";
+            }
+        }N();
     }
 
 

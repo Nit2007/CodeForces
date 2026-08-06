@@ -1,14 +1,46 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1411/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
+        ll n;cin>>n;
         
+        for(ll i=n;i<=(n+2520);i++){
+            bool token = true;
+            ll t = i;
+            while(t){
+                int r = (t%10) ;
+                t /= 10;
+                if(r != 0 && i%r != 0){
+                    token = false;
+                    break;
+                }
+            }
+            if(token){
+                cout<<i;N();
+                break;
+            }
+        }
     }
+
+    // void solve(){
+    //     ll n;cin>>n;
+    //     vector<ll>d;
+    //     ll t = n;
+    //     while(t){
+    //         d.push_back(t%10);
+    //         t /= 10;
+    //     }
+    //     ll l = 1;
+    //     for(auto x:d){
+    //         if(x == 0)continue;
+    //         l = lcm(l,x);
+    //     }
+    //     ll ans = l * ((n+l-1)/l) ;
+    //     cout<<ans;N();
+    // }
 
 
     signed run() {

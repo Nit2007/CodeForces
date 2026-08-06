@@ -1,15 +1,42 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2254/problem/D*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n;cin>>n;
+        vector<ll>shadow = readVector<ll>(n);
+        map<ll,ll>ans,f;
+        for(auto x:shadow){
+            f[x]++;
+        }
+        if(!f[0]){cout<<"-1";N();return;}
+        ll prevRep = f[0] , prevShadow = 0 , prevAns = 0;
+        for(auto [currShadow,rep]:f){
+            if(currShadow == 0)continue;
+            ll diff = currShadow - prevShadow;
+            if(diff % prevRep != 0){
+                cout<<"-1";N();return;
+            }
+            ll currAns = diff / prevRep;
+            if(currAns <= prevAns){
+                cout<<"-1";N();return;
+            }
+            ans[prevShadow] = currAns;
+            prevAns = currAns;
+            prevRep = rep;
+            prevShadow = currShadow;
+        }
+        ans[prevShadow] = prevAns+1; //Lexicographically small
+        for(auto x:shadow){
+            cout<<ans[x]<<" ";
+        }N();
     }
-
+/*
+[1,1,4,5]
+[0,0,2,6]
+*/
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);

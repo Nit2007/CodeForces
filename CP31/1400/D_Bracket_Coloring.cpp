@@ -1,16 +1,68 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1837/D*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string s;cin>>s;
+        int open = 0 , close = 0;
+        for(auto c:s){
+            if(c == '(')open++;
+            else close++;
+        }
+        if((open-close) != 0){
+            cout<<-1;N();return;
+        }
+        string r(s.rbegin(),s.rend());
+        if(max(RBS(s),RBS(r)) == true){
+            cout<<1;N();
+            for(int i=0;i<n;i++){cout<<1<<" ";}N();return;
+        }
+        vector<int>ans(n,1);
+        int bal = 0;
+        for(int i=0;i<n;i++){
+            if(s[i] == '('){
+                bal++;
+            }else{
+                bal--;
+                if(bal < 0){
+                    ans[i] = 2;
+                }
+            }
+        }
+        bal = 0;
+        for(int i=n-1;i>=0;i--){
+            if(s[i] == '('){
+                bal++;
+                if(bal > 0){
+                    ans[i] = 2;
+                }
+            }else{
+                bal--;
+            }
+        }
+        cout<<2;N();
+        PRINT(ans);
     }
-
-
+    bool RBS(string s){
+        int bal = 0;
+        for(int i=0;i<s.length();i++){
+            if(s[i] == '('){
+                bal++;
+            }else{
+                bal--;
+            }
+            if(bal < 0){
+                return false;
+            }
+        }
+        return true;
+    }
+/*
+After using min clrs => same clr should be beautiful(RBS / Rev RBS)
+*/
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
@@ -112,23 +164,24 @@ public:
             if(seen.insert(x).second)unique.push_back(x);
         }return unique;
     }
-    /*---------------------NUMBER-THEORY-----------------------*/
-    vector<int>primeFactors(int x){
-        vector<int>f;
-        for(int i=1;i*i<=x;i++){
-            if(x%i == 0){
-                f.push_back(i);
-                if(i != (x/i)){
-                    f.push_back(x/i);
-                }
-            }
-        }
-        sort(f.begin(),f.end());
-        return f;
-    }
 };
 
 signed main(){
     Main OBJ;
     return OBJ.run();
+}
+
+/*---------------------NUMBER-THEORY-----------------------*/
+vector<int>primeFactors(int x){
+    vector<int>f;
+    for(int i=1;i*i<=x;i++){
+        if(x%i == 0){
+            f.push_back(i);
+            if(i != (x/i)){
+                f.push_back(x/i);
+            }
+        }
+    }
+    sort(f.begin(),f.end());
+    return f;
 }

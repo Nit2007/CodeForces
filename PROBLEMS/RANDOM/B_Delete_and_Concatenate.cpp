@@ -1,13 +1,40 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2245/problem/b*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n,cost;cin>>n>>cost;
+        vector<ll>nums = readVector<ll>(n);
+        sort(nums.rbegin(),nums.rend());
+        vector<ll>p(n,0);
+        ll ans = 0;
+        for(int i=0;i<n;i++){
+            p[i] = (nums[i] - cost);
+        }
+        vector<int>pos,neg;
+        for(auto x:p){
+            if(x >= 0){
+                pos.push_back(x);
+                ans += x;
+            }else{
+                neg.push_back(x);
+            }
+        }
+        int posPair = pos.size();
+        while(posPair>0 && neg.size() > 0){
+            neg.pop_back();
+            posPair--;
+        }
+        int half = neg.size()/2;
+        for(int i=0;i<half;i++){
+            ans += neg[i];
+        }
+        if(neg.size() % 2 == 1){
+            ans += neg[half];   
+        }
+        cout<<ans;N();
     }
 
 

@@ -1,16 +1,28 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1527/B1*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string s;cin>>s;
+        int zeros = count(s.begin(),s.end(),'0');
+        if(zeros == 0){
+            cout<<"DRAW";
+        }
+        if(zeros == 1 || zeros%2 == 0){//Bob just reverses the string
+            cout<<"BOB";
+        }else{ //Odd no of zeros => Mid must contain zero as s is a PAL
+            cout<<"ALICE";
+        }
+        N();
     }
+//Rev only when not a pal
+// Even zero => A Br A Br A => A-B = 2
 
-
+//Flip the mid , Bob starts --> Bob wins {HENCE PRESERVE THE MID_ZERO}
+//Odd zero => A B A B mid_a_flips B=> Alice wins    
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;

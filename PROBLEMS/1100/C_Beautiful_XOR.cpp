@@ -1,16 +1,47 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/2162/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll a,b;cin>>a>>b;
+        if(a == b){cout<<0;N();return;};
+        if(__builtin_clzll(a) > __builtin_clzll(b)){
+            cout<<-1;N();return;
+        }
+        vector<ll>Xor;
+        for(int bit=0;bit<=BIT;bit++){
+            ll x = (1ULL<<bit);
+            if((x <= a)  && (a & x) == 0){
+                a ^= x;
+                Xor.push_back(x);
+            }
+        }
+        for(int bit=0;bit<=BIT;bit++){
+            ll x = (1ULL<<bit);
+            if((x <= a)  && (b & x) == 0){
+                Xor.push_back(x);
+            }
+        }
+        cout<<Xor.size();N();
+        PRINT(Xor);
     }
+    /*
+Prune bigger Bs that are not reachable (as the x is smaller or equal to a)
+Set A into 2^(msb(a)+1) - 1 , now all bits are set
+Carve out the rem A to make it B , if B[i] is zero ,then we toggle A
 
+1001
+0110
 
+if( (a&(1<<bit)) != (b&(1<<bit)) ){
+                op++;
+                a = a ^ (1<<bit);
+                ll x = (~a ^ (1<<bit)) & ((1ULL << (bit+1)) - 1);
+                xor.push_back(x);
+            }
+*/
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;

@@ -1,16 +1,33 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2246/problem/B*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        if(n == 1){
+            cout<<1;N();return;
+        }
+        if(n == 2){
+            cout<<-1;N();return;
+        }  
+        vector<ll>ans = {2,4,6};
+        ll sum = 12;
+        for(int i=3;i<n;i++){
+            ans.push_back(sum);
+            sum += sum;
+        }
+        PRINT(ans);
     }
-
-
+/*
+100 + 200 = 300 
+8 10 
+1 2 3 
+5 15 25
+2 4 8 
+SUM -> some nos where all are factors subset
+*/
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
@@ -112,23 +129,24 @@ public:
             if(seen.insert(x).second)unique.push_back(x);
         }return unique;
     }
-    /*---------------------NUMBER-THEORY-----------------------*/
-    vector<int>primeFactors(int x){
-        vector<int>f;
-        for(int i=1;i*i<=x;i++){
-            if(x%i == 0){
-                f.push_back(i);
-                if(i != (x/i)){
-                    f.push_back(x/i);
-                }
-            }
-        }
-        sort(f.begin(),f.end());
-        return f;
-    }
 };
 
 signed main(){
     Main OBJ;
     return OBJ.run();
+}
+
+/*---------------------NUMBER-THEORY-----------------------*/
+vector<int>primeFactors(int x){
+    vector<int>f;
+    for(int i=1;i*i<=x;i++){
+        if(x%i == 0){
+            f.push_back(i);
+            if(i != (x/i)){
+                f.push_back(x/i);
+            }
+        }
+    }
+    sort(f.begin(),f.end());
+    return f;
 }

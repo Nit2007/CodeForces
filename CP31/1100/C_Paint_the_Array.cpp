@@ -1,13 +1,45 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1618/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n,ans = 0;cin>>n;
+        vector<ll>nums = readVector<ll>(n);
+        vector<ll>odd,even;
+        for(ll i=0;i<n;i++){
+            if(i%2){
+                even.push_back(nums[i]);
+            }else{
+                odd.push_back(nums[i]);
+            }
+        }
+        ll  ehcf = even[0];
+        ll ohcf = odd[0];
+        for(auto x:even){
+            ehcf = gcd(ehcf,x);
+        }
+        for(auto x:odd){
+            ohcf = gcd(ohcf,x);
+        }
+        int valid = true;
+        for(auto x:even){
+            if(x%ohcf == 0){
+                valid = false;
+            }
+        }
+        if(valid)ans = max(ans,ohcf);
+
+        valid = true;
+        for(auto x:odd){
+            if(x%ehcf == 0){
+                valid = false;
+            }
+        }
+        if(valid)ans = max(ans,ehcf);
+        cout<<ans;N();
+        // P(ehcf,ohcf);
     }
 
 

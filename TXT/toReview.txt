@@ -29,3 +29,10 @@ ICPC\Number Theory\C_1_A_Simple_GCD_Problem_Easy_Version.cpp - gcd of all subarr
 CP31\1200\C_Differential_Sorting.cpp - Reverse simulation , dont need to minimize operation translates try to perform operation on every place
 ICPC\#Number Theory\D_Retaliation.cpp - Deriving eq from observation
 ICPC\#Bit Manip\A_You_Are_Given_Two_Binary_Strings.cpp - Hitting two Binaries , (2^k + y(base2)) => y{k_zeros}(base2)
+CP31\1400\E_Iva_Pav.cpp - arr[n][bit] for bit check on ranges + Bin Search 
+CP31\1300\A_Array_Elimination.cpp - Bitmask + Num Theory
+https://codeforces.com/contest/2244/problem/D #Misleading wordings
+CP31\1400\B_Hossam_and_Friends.cpp - subarray breaking using prefix array
+CP31\1400\D_Make_It_Round.cpp - no of zeros depends upon no of {2,5} factor pairs
+CP31\1400\E_Add_Modulo_10.cpp - First principles based observations
+CP31\1400\A_Weird_Sum.cpp - Basic properties of MODULUS & MANHATTAN dist

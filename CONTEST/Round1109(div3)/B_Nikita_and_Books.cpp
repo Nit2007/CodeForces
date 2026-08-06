@@ -1,13 +1,30 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2244/problem/B*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
+        ll n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        ll sum = accumulate(nums.begin(),nums.end(),0LL);
+        if(sum < (n*(n+1))/2){
+            cout<<"NO";N();return;
+        }
+        ll bag = nums[0]-1;
+        for(int i=1;i<n;i++){
+            int mini = (i+1);
+            if(mini > nums[i]){
+                if(mini > (bag + nums[i]) ) {
+                    cout<<"NO";N();return;
+                }else{
+                    bag -= (mini-nums[i]);
+                }
+            }else{
+                bag += nums[i]-mini;
+            }
+        }
+        cout<<"YES";N();
     }
 
 

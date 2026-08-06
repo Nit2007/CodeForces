@@ -1,16 +1,52 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/2242/D*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string a,b;cin>>a>>b;
+        int n = a.length() , m = b.length() ;
+        vector<int>pa(n+1,0) , pb(m+1,0);
+        for(int i=1;i<=n;i++){
+            pa[i] = (pa[i-1] + (a[i-1]-'0'))%10;
+        }
+        for(int i=1;i<=m;i++){
+            pb[i] = (pb[i-1] + (b[i-1]-'0'))%10;
+        }
+        if(*pa.rbegin() != *pb.rbegin()){
+            cout<<-1;N();return;
+        }
+        vector<vector<int>>dp(n+1,vector<int>(m+1,0));
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
+                if(pa[i] == pb[j]){ //New segment
+                    dp[i][j] = dp[i-1][j-1] + 1 ;
+                }else{ 
+                    dp[i][j] = max(dp[i-1][j],dp[i][j-1]) ;
+                }
+            }
+        }
+        // for(auto v:dp){PRINT(v);}  ND();   
+        cout<<dp[n][m];N();
     }
+/*
+PARITION A,B BASED ON ADJACENT ELEMENTS SUCH 
+THAT BOTH OF ITS SUM%10 ARE EQUAL {WITH MAXIMAL NO OF SEGEMENTS}
+a - { [0,i1] [i1+1,i2] [i2+1,n] }
+a - { [0,j1] [j1+1,j2] [j2+1,n] }
+a - [0,i]
+b - [0,j]
+dp[i][j] = max No of chars
+if(pa[i] == pb[j]){
+    dp[i][j] = dp[i-1][j-1] + 1
+}else{
+    dp[i][j] = max(dp[i-1][j],dp[i][j-1])
+}
 
-
+05147-> [0,5,6,1,8]
+44441-> [4,8,2,6,7]
+*/
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;

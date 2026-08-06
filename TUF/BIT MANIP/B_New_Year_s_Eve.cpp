@@ -1,19 +1,37 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/912/B*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
+const int BIT = 62;
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n,k;cin>>n>>k;
+        if(k == 1){
+            cout<<n;return;
+        }
+        ll ans = n;
+        for(int i=countBins(n)-1;i>=0;i--){
+            if(ans & (1LL<<i) ){continue;}
+            ans = ans | (1LL<<i);
+        }
+        cout<<ans;
     }
-
+    //k is irrelvant as we can always choose a that has Ai th bit not set ,rest set and XOR it to maximize things
+    int countBins(ll n){
+        int c = 0;
+        while(n){
+            c++;
+            n >>= 1;
+        }
+        return c;
+    }
+    // if(countBins(n) >= k){
+    //     cout<<pow(2,k)-1;return;
+    // }
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
+        int z=1;
         while(z--){ solve(); }
         return 0;
     }

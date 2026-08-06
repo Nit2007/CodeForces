@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2250/problem/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,9 +7,77 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        if(n&1 == 1){
+            cout<<"NO";N();return;
+        }
+        int low = INT_MAX , high = INT_MIN;
+        for(int i=0;i<n;i++){
+            if(i%2 == 0){
+                low = min(nums[i],low);
+            }else{
+                high = max(nums[i],high);
+            }
+        }
+        if(low-high <= 1){
+            cout<<"NO";N();return;
+        }
+        cout<<"YES";N();return;
     }
+/*
+kr_shivansh1908
+k < a0  , a1 < k
+k < a2  , a3 < k
+k belongs to [high<k<low]
+*/
 
+
+    // void solve(){
+    //     int n;cin>>n;
+    //     vector<int>nums = readVector<int>(n);
+    //     if(n == 1){
+    //         cout<<"NO";N();return;
+    //     }
+    //     if(n == 2){
+    //         if(abs(nums[1]-nums[0])<=1){
+    //             cout<<"NO";N();return;
+    //         }
+    //     }
+    //     for(int i=1;i<n;i++){
+    //         if(abs(nums[i] - nums[i-1]) <= 1){ //Leaves no space
+    //             cout<<"NO";N();return;
+    //         }
+    //     }
+    //     bool inc = (nums[1]-nums[0] < 0);
+    //     for(int i=2;i<n;i++){
+    //         if(inc){
+    //             if(nums[i]-nums[i-1] <= 0){
+    //                 cout<<"NO";N();return;
+    //             }
+    //         }else{
+    //             if(nums[i]-nums[i-1] >= 0){
+    //                 cout<<"NO";N();return;
+    //             }
+    //         }
+    //         inc ^= 1;
+    //     }
+    //     cout<<"YES";N();return;
+    // }
+
+    // 8 6 3 9
+
+    // void solve(){
+    //     int n;cin>>n;
+    //     vector<int>nums = readVector<int>(n);
+    //     if(n == 1){
+    //         cout<<"NO";N();return;
+    //     }
+    //     for(int i=1;i<n;i++){
+    //         if(abs(nums[i] - nums[i-1]) <= 1){ //Leaves no space
+    //             cout<<"NO";N();return;
+    //         }
+    //     }
+    //     cout<<"YES";N();return;
+    // }
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);

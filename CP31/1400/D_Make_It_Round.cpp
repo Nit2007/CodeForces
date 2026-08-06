@@ -1,15 +1,61 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1759/D*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n,m;cin>>n>>m;
+        ll ans = n * m;
+        int five = 0 , two = 0 , temp = n;
+        while(temp>0 && temp%2 == 0){
+            temp /= 2;
+            two++;
+        }
+        while(temp>0 && temp%5 == 0){
+            temp /= 5;
+            five++;
+        }
+        for(int d=18;d>=0;d--){
+            ll need = 1;// pow(2,d-two) * pow(5,d-five)
+            for(int i=1;i<=d-two;i++)need *= 2;
+            for(int i=1;i<=d-five;i++)need *= 5;
+            if(need <= m){
+                ll bigMultiple = m - (m%need);
+                ans = bigMultiple * n;
+                break;
+            }
+        }
+        cout<<ans;N();
     }
+    // Target{two,five} => 2^d * 5^d => 2^(d-two) * 5^(d-five) is the m value that fetches 'd' zeros
 
+
+    // void solve(){
+    //     ll n,m;cin>>n>>m;
+    //     ll ans = n * m;
+    //     int maxZero = 0;
+    //     string s = to_string(ans);
+    //     int zero = 0;
+    //     for(int i=s.length()-1;i>=0;i--){
+    //         if(s[i] != '0')break;
+    //         maxZero = max(maxZero,++zero);
+    //     }
+    //     int l = 1;
+    //     for(int k=l;k<m;k++){
+    //         ll x = k * n;
+    //         string s = to_string(x);
+    //         int zero = 0;
+    //         for(int i=s.length()-1;i>=0;i--){
+    //             if(s[i] != '0')break;
+    //             maxZero = max(maxZero,++zero);
+    //             if(maxZero == zero){
+    //                 ans = x;
+    //             }
+    //         }
+    //     }
+    //     cout<<ans;N();
+    // }
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);

@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2254/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,8 +6,33 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string s;cin>>s;
+        int rep {false};
+        for(int i=1;i<n-1;i++){
+            if(s[i-1] == s[i+1] && s[i] != s[i+1]){
+                s[i] = s[i+1];
+                rep = true;
+                break;
+            }
+        }
+        if(!rep){
+            for(int i=1;i<n-1;i++){
+                if(s[i-1] != s[i] && s[i] != s[i+1]){
+                    s[i] = s[i+1];
+                    rep = true;
+                    break;
+                }
+            }
+        }
+        int  ans{1};
+        for(int i=1;i<n;i++){
+            if(s[i-1] == s[i]){
+                continue;
+            }else{
+                ans++;
+            }
+        }
+        cout<<ans;N();   
     }
 
 

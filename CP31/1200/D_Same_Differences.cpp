@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1520/D*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,7 +7,20 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        vector<int>d(n,0);
+        for(int i=1;i<=n;i++){
+            d[i-1] = nums[i-1] - i;
+        }
+        map<ll,ll>freq;
+        for(auto x:d){
+            freq[x]++;
+        }
+        ll z = 0;
+        for(auto [x,rep]:freq){
+            if(rep == 1)continue;
+            z += ((rep) * (rep-1)) /2;
+        }
+        cout<<z;N();
     }
 
 
@@ -17,9 +30,22 @@ public:
         while(z--){ solve(); }
         return 0;
     }
+/*
+a[j] - a[i] = j-i
+a[j] - j = a[i] - i
 
-    
+3 5 1 4 6 6
+1 2 3 4 5 6
+2 3-2 0 1 0 
 
+1 3 3 4
+1 2 3 4
+0 1 0 0
+
+1 6 3 4 5 6
+1 2 3 4 5 6
+0 4 0 0 0 0 -> 5C2 => 10
+*/
 
     template<typename T>
     void PRINT(const vector<T>& v){

@@ -1,20 +1,119 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2248/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+    void Arpa(){
+        int n,m;cin>>n>>m;
+        vector<int>a = readVector<int>(n);
+        vector<int>b = readVector<int>(m);
+        if( (n/2) < m){
+            cout<<"NO";N();return;
+        }
+        map<int,int>line;
+        for(int i:a){
+            line[i]++;
+        }
+        for(int i:b){
+            line[i]--;
+        }
+        bool ans = true;
+        int box{};
+        for(auto [val,rep] : line){
+            box += rep;
+            if(box < 0){
+                ans = false;
+                break;
+            }
+        }
+        box = 0;
+        for (auto it = line.rbegin(); it != line.rend(); ++it) {
+            auto [val,rep] = *it;
+            box += rep;
+            if(box < 0){
+                ans = false;
+                break;
+            }
+        }
+        if(ans){
+            cout<<"YES";
+        }else{
+            cout<<"NO";
+        }
+        N();
     }
+    void solve(){
+        int n,m;cin>>n>>m;
+        vector<int>a = readVector<int>(n);
+        vector<int>b = readVector<int>(m);
+        if( (n/2) < m){
+            cout<<"NO";N();return;
+        }
+        sort(a.begin(),a.end());
+        sort(b.begin(),b.end());
+        int i=0;
+        bool ans = true;
+        while(i<m && a[i] <= b[i] && b[i] <= a[n-m+i]){//Interval of [smallest , extra] for b[i]
+            i++;
+        }
+        if(i<m){ans = false;}
+        if(ans){
+            cout<<"YES";
+        }else{
+            cout<<"NO";
+        }
+        N();
+    }
+
+    // void solve(){
+    //     int n,m;cin>>n>>m;
+    //     vector<int>a = readVector<int>(n);
+    //     vector<int>b = readVector<int>(m);
+    //     sort(a.begin(),a.end());
+    //     sort(b.begin(),b.end());
+    //     int i{n-1},j{m-1};
+    //     bool ans = true;
+    //     while(j>=0 && i>=0){
+    //         if(i > 0){
+    //             if(a[i-1] <= b[j] && b[j] <= a[i]){
+    //                 i -= 2;
+    //                 j -= 1;
+    //                 continue;
+    //             }else{
+    //                 ans = false;break;
+    //             }
+    //         }else{
+    //             ans = false;break;
+    //         }
+    //     }
+    //     // if(i == 0 && j>=0){ans = false;}
+    //     if(ans){
+    //         cout<<"YES";
+    //     }else{
+    //         cout<<"NO";
+    //     }
+    //     N();
+    // }
+
+/*
+1 2 6 9 
+7 8
+
+4 2
+1 3 5 7
+4 6
+
+3 2
+1 3 5
+2 4
+*/
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ Arpa(); }
         return 0;
     }
 

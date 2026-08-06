@@ -1,16 +1,34 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2244/problem/C*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
+        int n,x,y;cin>>n>>x>>y;
+        int d = abs(x-y);
         vector<int>nums = readVector<int>(n);
-        
+        vector<int>displacement(n,0);
+        for(int i=0;i<n;i++){
+            displacement[i] = abs((i+1) - nums[i]);
+        }
+        int g = gcd(x,y);
+        for(int i=0;i<n;i++){
+            if(!displacement[i]){continue;}
+            if( (displacement[i])%g != 0 ){
+                cout<<"NO";N();return;
+            }
+        }
+        cout<<"YES";N();return;
     }
+/*
+    Instead of trying (x-y),x,y,(x+y) ,it can be writeen more correctly as Ax+By = gcd(x,y) {where A,B could be (+/-) ints} 
+    // if(!( (d != 0 && (displacement[i]%d == 0)) || (displacement[i]%x == 0) || 
+    // (displacement[i]%y == 0)  || (displacement[i] % (x+y) == 0) )){
 
-
+    POSSIBLE VIA UNION_FIND , AS AN ELE CAN ONLY BELONG TO {Ax+By} , WE CAN UNION (I,I+X) , (I,I+Y) 
+    AND COMPARE findParent(nums[i]) == findParent(i) , to understand do they belong to the same possibility set
+*/
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;

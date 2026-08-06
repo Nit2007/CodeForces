@@ -1,15 +1,31 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1692/G*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
+        int n,k;cin>>n>>k;
         vector<int>nums = readVector<int>(n);
-        
+        int seg = 1,ans{};
+        for(int i=1;i<n;i++){
+            if(nums[i-1] < 2*nums[i]){
+                seg++;
+            }else{
+                ans += max(0,seg-k);
+                seg = 1;
+            }
+        }
+        ans += max(0,seg-k);
+        cout<<ans;N();
     }
-
+/*
+7 3
+22 12 16 4 3 22 12
+g  g  b  b g  g  g
+22 24 48 32 - Fails
+4 6 88 96 - Works
+*/
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);

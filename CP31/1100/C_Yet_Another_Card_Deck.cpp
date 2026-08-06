@@ -1,19 +1,33 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1511/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,q;cin>>n>>q;
+        vector<int>deck = readVector<int>(n);
+        vector<int>query = readVector<int>(q);
+        vector<int>col(51,0);
+        for(auto i=0;i<n;i++){
+            if(col[deck[i]] != 0)continue;
+            col[deck[i]] = i+1;
+        }
+        for(auto Q:query){
+            cout<<col[Q]<<" ";
+            for(int c=0;c<=50;c++){
+                if(col[c] < col[Q]){
+                    col[c]++;
+                }
+            }
+            col[Q] = 1;
+        }
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
+        int z=1;
         while(z--){ solve(); }
         return 0;
     }

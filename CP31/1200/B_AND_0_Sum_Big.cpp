@@ -1,15 +1,25 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1514/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n,k;cin>>n>>k;
+        const int MOD = 1e9+7;
+        ll ans = 1;
+        for(int i=0;i<k;i++){
+            ans = (ans * n) % MOD;
+        }
+        cout<<ans;N();
     }
-
+/*
+k = 4 => {n,n^2,n^3,n^4} combo
+11111110
+11111101
+11111011
+11110111
+*/
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);

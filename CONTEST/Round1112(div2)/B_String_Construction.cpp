@@ -1,17 +1,99 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2250/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n,k;cin>>n>>k;
+        int maxSupport = 0;
+        string m = string(n/2 + (n%2) ,'0') + string(n/2,'1');
+        for(int i=1;i<n;i++){
+            if(m[i] == m[i-1]){
+                maxSupport++;
+            }
+        }
+        if(maxSupport == k){
+            cout<<m;N();return;
+        }
+        if(maxSupport < k){
+            cout<<-1;N();return;
+        }
+        string ans = "";//Form the pairs
+        int c0 = k/2 +1;
+        int c1 = k/2 + (k%2) +1;
+        ans += string(c0,'0') + string(c1,'1');
+        int rem = n-ans.size();
+        for(int i=1;i<=rem;i++){//Shuffle the rest
+            if(i%2){
+                ans += '0';
+            }else{
+                ans += '1';
+            }
+        }
+        assert(valid(n,k,ans));
+        cout<<ans;N();
     }
-
-
-    signed run() {
+    int valid(int n,int k,string ans){
+        if(ans.length() != n)return 0;
+        int test{};
+        for(int i=1;i<n;i++){
+            if(ans[i] == ans[i-1]){
+                test++;
+            }
+        }
+        if(test == k)return true;
+        return false;
+    }
+    /*
+    k pairs , abs(C0-C1) <= 1
+    01100
+    */
+//    void solve(){
+//        ll n,k;cin>>n>>k;
+//        int maxSupport = 0;
+//        string m = string(n/2 + (n%2) ,'0') + string(n/2,'1');
+//        for(int i=1;i<n;i++){
+//            if(m[i] == m[i-1]){
+//                maxSupport++;
+//            }
+//        }
+//        if(maxSupport == k){
+//            cout<<m;N();return;
+//        }
+//        if(maxSupport < k){
+//            cout<<-1;N();return;
+//        }
+//        string ans = "";
+//        int shuffle = maxSupport - k;
+//        int alt = 0;
+//        for(int i=0;i<=shuffle;i++){
+//            ans += to_string(alt);
+//            alt ^= 1;
+//        }
+//        int rem = n-shuffle;
+//        int size = ans.length();
+//        string x = ans + string(rem/2  ,ans.back()) + string(n-size-rem/2,(ans.back() == '0') ? '1':'0');
+//        string y = ans + string(rem/2  ,(ans.back() == '0') ? '1':'0') + string(n-size-rem/2,ans.back());
+//        if(valid(n,k,x)){
+//            cout<<x;N();return;
+//        }
+//        if(valid(n,k,y)){
+//            cout<<y;N();return;
+//        }
+//    }
+//    int valid(int n,int k,string ans){
+//        if(ans.length() != n)return 0;
+//        int test{};
+//        for(int i=1;i<n;i++){
+//            if(ans[i] == ans[i-1]){
+//                test++;
+//            }
+//        }
+//        if(test == k)return 1;
+//        return false;
+//    }
+   signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
         while(z--){ solve(); }

@@ -1,16 +1,42 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1731/B*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
+const int MOD  = 1e9+7;
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n;cin>>n;
+        ll invOf6 = 166666668 , invOf2 = 5e8+4;
+        // Sum of i * i
+        ll ans = ((((n) * (n+1))%MOD * (2*n+1))%MOD  *  invOf6)%MOD;  
+        //Sum of i * (i+1) = i*i + i
+        ll m = n-1;
+        ans += ((((m) * (m+1))%MOD * (2*m+1))%MOD  *  invOf6)%MOD 
+                +   (((m) * (n))%MOD * invOf2)%MOD;
+        cout<<((ans%MOD)*2022LL)%MOD;N();
     }
 
+    // ll i=1,j=2;
+    // while(j<=n){
+    //     ans += (i*j);
+    //     ans %= MOD;
+    //     i++;
+    //     j++;
+    // }
 
+
+// 1 2 3
+// 2 4 6
+// 3 6 9
+// => 1 2 4 6 9
+// (1*2) + (2*3) + (3*4)
+
+// 1 2 3 4
+// 2 4 6 8 
+// 3 6 9 12
+// 4 8 12 16
+// => 1 2 3 4 8 12 16
+// => 1 2 4 6 9 12 16
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;

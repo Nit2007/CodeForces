@@ -1,15 +1,46 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1372/B*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
-    }
+        vector<int>factor = primeFactors(n);
+        if(factor.size() == 2){
+            cout<<1<<" "<<n-1;N();return;
+        }
+        for(auto f:factor){ 
+            if(f == 1 || f == n)continue;
+            int parts = n/f;
+            cout<<parts<<" "<<n-parts;N();return;
+        }
 
+    }
+// a + b = n
+// lcm(a,n-a) => [max(a,b),a*b]
+// lcm(a,b) = (a*b) / gcd(a,b)
+// gcd(a,b) = gcd(a,a+b) = gcd(a,n) 
+
+/*
+18 -> 2 , 3 
+breakable into {9,9} , {6,12} -> choose {6,12} as LCM is Min
+If unbreakable , then lcm is n-1 (MIN)
+*/
+
+vector<int>primeFactors(int x){
+    vector<int>f;
+    for(int i=1;i*i<=x;i++){
+        if(x%i == 0){
+            f.push_back(i);
+            if(i != (x/i)){
+                f.push_back(x/i);
+            }
+        }
+    }
+    sort(f.begin(),f.end());
+    return f;
+}
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
@@ -111,20 +142,6 @@ public:
         for(auto &x:v){
             if(seen.insert(x).second)unique.push_back(x);
         }return unique;
-    }
-    /*---------------------NUMBER-THEORY-----------------------*/
-    vector<int>primeFactors(int x){
-        vector<int>f;
-        for(int i=1;i*i<=x;i++){
-            if(x%i == 0){
-                f.push_back(i);
-                if(i != (x/i)){
-                    f.push_back(x/i);
-                }
-            }
-        }
-        sort(f.begin(),f.end());
-        return f;
     }
 };
 

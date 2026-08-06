@@ -1,13 +1,26 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1498/B*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
+        int n,w;cin>>n>>w;
         vector<int>nums = readVector<int>(n);
-        
+        sort(nums.begin(),nums.end(),greater<int>());
+        vector<int>box(n,w);
+        for(int rect:nums){ /*2 4 8 8 8 8*/
+            auto it = lower_bound(box.begin(),box.end(),rect);
+            int index = distance(box.begin(),it);
+            box[index] -= rect;
+        }
+        int filled = 0;
+        for(auto fill:box){
+            if(fill == w)continue;
+            filled++;
+        }
+        cout<<filled;N();
+        // PRINT(box);
     }
 
 
@@ -112,23 +125,24 @@ public:
             if(seen.insert(x).second)unique.push_back(x);
         }return unique;
     }
-    /*---------------------NUMBER-THEORY-----------------------*/
-    vector<int>primeFactors(int x){
-        vector<int>f;
-        for(int i=1;i*i<=x;i++){
-            if(x%i == 0){
-                f.push_back(i);
-                if(i != (x/i)){
-                    f.push_back(x/i);
-                }
-            }
-        }
-        sort(f.begin(),f.end());
-        return f;
-    }
 };
 
 signed main(){
     Main OBJ;
     return OBJ.run();
+}
+
+/*---------------------NUMBER-THEORY-----------------------*/
+vector<int>primeFactors(int x){
+    vector<int>f;
+    for(int i=1;i*i<=x;i++){
+        if(x%i == 0){
+            f.push_back(i);
+            if(i != (x/i)){
+                f.push_back(x/i);
+            }
+        }
+    }
+    sort(f.begin(),f.end());
+    return f;
 }

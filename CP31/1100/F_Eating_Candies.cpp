@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1669/F*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,7 +7,29 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        vector<int>ps(n+1,0);
+        vector<int>ss(n+1,0);
+        for (int i = 0; i < n; i++) {
+            ps[i + 1] = ps[i] + nums[i];
+        }
+        for (int i = n - 1; i >= 0; i--) {
+            ss[i] = ss[i + 1] + nums[i];
+        }
+        // PRINT(ps);
+        // PRINT(ss);
+        map<int,int>sfLocation;
+        for(int i=0;i<n;i++){
+            sfLocation[ss[i]] = i;
+        }
+        int ans = 0;
+        for(int l=1;l<=n;l++){
+            if(!sfLocation.count(ps[l]))continue;
+            int r = n-sfLocation[ps[l]];
+            if(l+r > n)continue;
+            // P(l,r);
+            ans = max(ans, (l+r) );
+        }
+        cout<<ans;N();
     }
 
 

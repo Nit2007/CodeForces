@@ -1,16 +1,56 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2133/problem/c*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        map<int,vector<int>>lenIn;
+        for(int i=1;i<=n;i++){
+            int q = query(i,n);
+            lenIn[q].push_back(i);
+        }    
+        int maxLen = INT_MIN;
+        for(auto [len,indexes]:lenIn){
+            maxLen = max(len,maxLen);
+        }
+        vector<int>path = {lenIn[maxLen][0]};  
+        for(int len=maxLen-1;len>=1;len--){
+            for(int child : lenIn[len]){
+                int q = query_2(path.back(),child);
+                if(q == 2){
+                    path.push_back(child);
+                    break;
+                }
+            }
+        }
+        cout<<"! "<<path.size()<<" ";
+        PRINT(path);
     }
-
-
+    int query(int x,int total){
+        cout<<"? "<<x<<" "<<total<<" ";
+        for(int i=1;i<=total;i++){
+            cout<<i<<" ";
+        }
+        N();
+        cout.flush();
+        int response; cin>>response;
+        if(response == -1)exit(0);
+        return response;
+    }
+    int query_2(int x,int y){ //2 - Edge bw x & y exist , 1 - No connection
+        cout<<"? "<<x<<" "<<2<<" "<<x<<" "<<y;
+        N();
+        cout.flush();
+        int response; cin>>response;
+        if(response == -1)exit(0);
+        return response;
+    }
+/*
+Find maxLen - n queries
+Find the path from maxLen => iterate over all maxLen-1, get the relvant one via query_2
+*/
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
@@ -112,23 +152,24 @@ public:
             if(seen.insert(x).second)unique.push_back(x);
         }return unique;
     }
-    /*---------------------NUMBER-THEORY-----------------------*/
-    vector<int>primeFactors(int x){
-        vector<int>f;
-        for(int i=1;i*i<=x;i++){
-            if(x%i == 0){
-                f.push_back(i);
-                if(i != (x/i)){
-                    f.push_back(x/i);
-                }
-            }
-        }
-        sort(f.begin(),f.end());
-        return f;
-    }
 };
 
 signed main(){
     Main OBJ;
     return OBJ.run();
+}
+
+/*---------------------NUMBER-THEORY-----------------------*/
+vector<int>primeFactors(int x){
+    vector<int>f;
+    for(int i=1;i*i<=x;i++){
+        if(x%i == 0){
+            f.push_back(i);
+            if(i != (x/i)){
+                f.push_back(x/i);
+            }
+        }
+    }
+    sort(f.begin(),f.end());
+    return f;
 }

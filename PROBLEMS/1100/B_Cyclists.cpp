@@ -1,13 +1,44 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/2208/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
+        ll n,k,p,m;cin>>n>>k>>p>>m;
         vector<int>nums = readVector<int>(n);
-        
+        int win = -1 , winIdx = p-1 , winCost = nums[winIdx];
+        vector<pair<ll,int>>deck;
+        for(int i=0;i<n;i++){
+            deck.push_back({nums[i],i});
+        }
+        for(int i=0;i<k;i++){
+            if(deck[i].second == winIdx){
+                win = winIdx;
+            }
+        }
+        int cost = 0 , ans = 0;
+        while(win==-1 && deck[k-1].second != winIdx && cost<=m){
+            auto it = min_element(deck.begin(),deck.begin()+k);
+            auto mini = *it;
+            cost += mini.first;
+            deck.erase(it);
+            deck.push_back(mini);
+        }
+        cost += winCost;
+        if(cost <= m){
+            ans++;
+        }
+        int remove = n-k;
+        vector<ll>rest;
+        for(auto x:deck){
+            if(x.second != winIdx)
+                rest.push_back(x.first);
+        }
+        sort(rest.begin(),rest.end());
+        ll smallKSum = accumulate(rest.begin(),rest.begin()+remove,0LL) + winCost;
+        ans += max<ll>(0, (m-cost) / smallKSum );
+        cout<<ans;N();
     }
 
 

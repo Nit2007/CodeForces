@@ -1,15 +1,49 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2246/problem/C*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
+    const int MOD = 1e9 + 7 ;
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        int distinct = 1 ;
+        int gapIsOne = 1;
+        for(int i=0;i<n-1;++i){
+            if(nums[i] != nums[i+1]){
+                distinct++;
+            }
+            if(nums[i]+1 == nums[i+1]){
+                gapIsOne++;
+            }
+        }
+        ll ans = 0;
+        ll base = binPower(2,n-distinct);
+        if(nums[0] != -1){
+            ans = base;
+        }else{
+            ans = (base * gapIsOne) % MOD;
+        }
+        cout<<ans;N();
     }
-
+/*
+Number of Odd_Subsets  + Even_subsets = All subsets {where both the even & odd subsets are equal}
+s = {A,B,C,D} => {} {A,B} {B,C} {A,C} {A,D} {B,D} {C,D} {A,B,C,D}, 2 POWER (ELE-1) Even_COMBOS POSSIBLE
+-1 can seal gap of ONE ,hence multiply the no of such gaps to the base if -1 exist
+*/
+    ll binPower(ll a,ll b){
+        ll res = 1;
+        a %= MOD;
+        while(b>0){
+            if(b&1){
+                res = (res*a)%MOD;
+                res %= MOD;
+            }
+            a = (a * a) % MOD;
+            b >>= 1;
+        }
+        return res%MOD;
+    }
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
@@ -112,23 +146,24 @@ public:
             if(seen.insert(x).second)unique.push_back(x);
         }return unique;
     }
-    /*---------------------NUMBER-THEORY-----------------------*/
-    vector<int>primeFactors(int x){
-        vector<int>f;
-        for(int i=1;i*i<=x;i++){
-            if(x%i == 0){
-                f.push_back(i);
-                if(i != (x/i)){
-                    f.push_back(x/i);
-                }
-            }
-        }
-        sort(f.begin(),f.end());
-        return f;
-    }
 };
 
 signed main(){
     Main OBJ;
     return OBJ.run();
+}
+
+/*---------------------NUMBER-THEORY-----------------------*/
+vector<int>primeFactors(int x){
+    vector<int>f;
+    for(int i=1;i*i<=x;i++){
+        if(x%i == 0){
+            f.push_back(i);
+            if(i != (x/i)){
+                f.push_back(x/i);
+            }
+        }
+    }
+    sort(f.begin(),f.end());
+    return f;
 }

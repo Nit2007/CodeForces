@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://cses.fi/problemset/task/1674/*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,14 +6,37 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<int>parent = readVector<int>(n-1);
+        vector<vector<int>>adj(n);
+        int child = 1;
+        for(auto p:parent){
+            adj[p-1].push_back(child);
+            child++;
+        }
+        vector<int>leaf(n,0);
+        dfs(0,adj,leaf);
+        PRINT(leaf);
     }
+    void dfs(int node,vector<vector<int>>&adj,vector<int>&leaf){
+        leaf[node] = 0;
+        for(auto child : adj[node]){
+            dfs(child,adj,leaf);
+            leaf[node] += 1+leaf[child];
+        }
+    }
+/*
+Input:
+5
+1 1 2 3
 
+Output:
+4 1 1 0 0
+
+*/
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
+        int z=1;
         while(z--){ solve(); }
         return 0;
     }

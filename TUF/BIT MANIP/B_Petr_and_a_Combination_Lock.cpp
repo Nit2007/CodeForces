@@ -1,19 +1,39 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1097/B*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
+    bool valid = false;
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        for(int bit=1;bit<=pow(2,16);bit++){
+            brute(bit,nums);
+        }
+        if(valid){
+            cout<<"YES";
+        }else{
+            cout<<"NO";
+        }
+        N();
     }
-
+    void brute(int bit,vector<int>&nums){
+        int sum = 0;
+        for(int i=0;i<nums.size();++i){
+            if(bit & (1LL<<i) ){
+                sum += nums[i];
+            }else{
+                sum -= nums[i];
+            }
+        }
+        if(sum%360 == 0){
+            valid = true;
+        }
+    }
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
+        int z=1;
         while(z--){ solve(); }
         return 0;
     }

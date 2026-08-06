@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1682/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,7 +7,17 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        vector<int>miss;
+        for(int i=0;i<n;i++){
+            if(nums[i] != i){
+                miss.push_back(nums[i]);
+            }
+        }
+        int ans = miss[0];
+        for(auto x:miss){
+            ans &= x;
+        }
+        cout<<ans;N();
     }
 
 

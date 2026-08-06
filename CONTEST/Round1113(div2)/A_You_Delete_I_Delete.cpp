@@ -1,13 +1,30 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2248/problem/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string s;cin>>s;
+        int n=s.length();
+        int z{} , o {};
+        for(int i=0;i<n;i++){
+            if(s[i] == '0'){
+                if(z == 0){
+                    z++;
+                }else{
+                    cout<<s[i];
+                }
+            }
+            if(s[i] == '1'){
+                if(o == 0){
+                    o++;
+                }else{
+                    cout<<s[i];
+                }
+            }
+        }
+        N();
     }
 
 

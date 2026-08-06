@@ -1,14 +1,55 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1708/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n,l,r;cin>>n>>l>>r;
+        ll d = r - l , valid = true;
+        vector<int>ans(n,0);
+        for(int i=1;i<=n;i++){
+            ll next = l + (i - (l % i)) %i;
+            // P(l,i,next);
+            if(next <= r){
+                ans[i-1] = next;
+            }else{
+                valid = false;
+                break;
+            }
+        }
+        if(valid){
+            cout<<"YES";N();
+            PRINT(ans);
+        }else{
+            cout<<"NO";N();
+        }
     }
+/*
+    (1,)(2,)(3,)....(n,)
+     1   2    3      n
+*/
+
+    // void solve(){
+    //     ll n,l,r;cin>>n>>l>>r;
+    //     ll d = r - l , valid = true;
+    //     vector<int>ans(n,0);
+    //     for(int i=1;i<=n;i++){
+    //         ll next = (l+(l%i));
+    //         if(next <= r){
+    //             ans[i-1] = next;
+    //         }else{
+    //             valid = false;
+    //             break;
+    //         }
+    //     }
+    //     if(valid){
+    //         cout<<"YES";N();
+    //         PRINT(ans);
+    //     }else{
+    //         cout<<"NO";N();
+    //     }
+    // }
 
 
     signed run() {

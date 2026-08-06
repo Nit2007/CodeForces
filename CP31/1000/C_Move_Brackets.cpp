@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1374/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,11 +6,22 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string s;cin>>s;
+        int bal{}, moves{};
+        for(int i=0;i<n;i++){
+            if(s[i] == '(')bal++;
+            else bal--;
+            if(bal < 0){
+                moves += abs(bal);
+                bal = 0;
+            }
+        }
+        cout<<moves;N();
     }
-
-
+/*
+)))(())())(((
+)()(
+*/
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;

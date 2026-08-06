@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2247/problem/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,7 +7,17 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        int s = 0 , o = 0 , O = n/2;
+        for(auto x:nums){
+            s += x;
+            if(x == 1)o++;
+        }
+        if(n%2 == 0 && (o%2 == O%2)){
+            cout<<"YES";
+        }else{
+            cout<<"NO";
+        }
+        N();
     }
 
 

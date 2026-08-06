@@ -1,19 +1,35 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/gym/102694/problem/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
-public:  
-
+public: 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<vector<int>>adj(n);
+        for(int i=1;i<n;i++){
+            int u,v;cin>>u>>v;
+            u--;v--;
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+        }
+        vector<int>dist(n,0);
+        dfs(0,-1,adj,dist);
+        int A = distance(dist.begin() , max_element(dist.begin(),dist.end()));
+        vector<int>distA(n,0);
+        dfs(A,-1,adj,distA);
+        cout<<3ll * (*max_element(distA.begin(),distA.end()));
     }
-
+    void dfs(int node,int parent,vector<vector<int>>&adj,vector<int>&dist){
+        for(auto child:adj[node]){
+            if(child == parent)continue;
+            dist[child] = dist[node] + 1; 
+            dfs(child,node,adj,dist);
+        }
+    }
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
+        int z=1;
         while(z--){ solve(); }
         return 0;
     }

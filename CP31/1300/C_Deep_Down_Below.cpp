@@ -1,15 +1,89 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1561/C*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int cave;cin>>cave;
+        vector<pair<int,int>>minGain(cave);
+        for(int i=0;i<cave;i++){
+            int k;cin>>k;
+            vector<int>nums = readVector<int>(k);
+            int minPower = 0 , gained = 0;
+            for(auto power:nums){
+                minPower = max(minPower,power-gained+1);
+                gained += 1;
+            }
+            minGain[i] = make_pair(minPower,k);
+        }
+        sort(minGain.begin(),minGain.end());//Caves in any order ,but monster in given order
+        int low = 1;
+        int high = 2e9;
+        int ans = high;
+        while(low <= high){
+            int mid = low + (high-low)/2;
+            if(check(mid,minGain)){
+                ans = mid;
+                high = mid - 1;
+            }else{
+                low = mid + 1;
+            }
+        }
+        cout<<ans;N();
+        // PRINT(bareMin);
+        // PRINT(afterKill);
+    }
+    bool check(int mid,vector<pair<int,int>>&minGain){
+        for(int i=0;i<minGain.size();i++){
+            auto [minPower,gain] = minGain[i];
+            if(mid < minPower){
+                return false;
+            }
+            mid += gain ;
+        }
+        return true;
     }
 
+    //Sorted the caves which is prohibited
+    // void solve(){
+    //     int cave;cin>>cave;
+    //     vector<vector<int>>v;
+    //     for(int i=0;i<cave;i++){
+    //         int k;cin>>k;
+    //         vector<int>nums = readVector<int>(k);
+    //         sort(nums.begin(),nums.end());
+    //         v.push_back(nums);
+    //     }
+    //     vector<int>bareMin(cave,0);
+    //     vector<int>afterKill(cave,0);
+    //     int i=0;
+    //     for(auto &x:v){
+    //         bareMin[i] = *(x.end()-1) - (x.size()-1) + 1;
+    //         afterKill[i] = bareMin[i] + x.size() ;
+    //         i++;
+    //     }
+    //     sort(afterKill.begin(),afterKill.end());
+    //     int low = *min_element(bareMin.begin(),bareMin.end());
+    //     int high = *max_element(bareMin.begin(),bareMin.end());
+    //     int ans = high;
+    //     while(low <= high){
+    //         int mid = low + (high-low)/2;
+    //         if(check(mid,afterKill)){
+    //             ans = mid;
+    //             high = mid - 1;
+    //         }else{
+    //             low = mid + 1;
+    //         }
+    //     }
+    //     cout<<ans;N();
+    //     // PRINT(bareMin);
+    //     // PRINT(afterKill);
+    // }
+    // bool check(int mid,vector<int>&afterKill){
+    //     auto it = upper_bound(afterKill.begin(),afterKill.end(),mid);
+    //     return it != afterKill.end();
+    // }
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
@@ -112,23 +186,24 @@ public:
             if(seen.insert(x).second)unique.push_back(x);
         }return unique;
     }
-    /*---------------------NUMBER-THEORY-----------------------*/
-    vector<int>primeFactors(int x){
-        vector<int>f;
-        for(int i=1;i*i<=x;i++){
-            if(x%i == 0){
-                f.push_back(i);
-                if(i != (x/i)){
-                    f.push_back(x/i);
-                }
-            }
-        }
-        sort(f.begin(),f.end());
-        return f;
-    }
 };
 
 signed main(){
     Main OBJ;
     return OBJ.run();
+}
+
+/*---------------------NUMBER-THEORY-----------------------*/
+vector<int>primeFactors(int x){
+    vector<int>f;
+    for(int i=1;i*i<=x;i++){
+        if(x%i == 0){
+            f.push_back(i);
+            if(i != (x/i)){
+                f.push_back(x/i);
+            }
+        }
+    }
+    sort(f.begin(),f.end());
+    return f;
 }

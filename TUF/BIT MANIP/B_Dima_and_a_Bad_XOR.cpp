@@ -1,19 +1,109 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1151/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,m;cin>>n>>m;
+        vector<vector<int>>nums(n);
+        for(int i=0;i<n;i++){
+            nums[i] = readVector<int>(m);
+        }
+        int xr = 0;
+        for(int i=0;i<n;i++){
+            xr = xr ^ nums[i][0] ;
+        }
+        bool valid = false;
+        if(xr){
+            valid = true;
+        }
+        vector<int>d(n,false);
+        for(int i=0;i<n;i++){
+            set<int>uni;
+            for(int j=0;j<m;++j){
+                uni.insert(nums[i][j]);
+            }
+            if(uni.size() > 1){
+                d[i] = true;
+                valid = true;
+            }
+        }
+        if(!valid){
+            cout<<"NIE";
+        }else{
+            cout<<"TAK"; N();
+            if(xr != 0){
+                vector<char>Ans(n,'1');
+                PRINT(Ans);
+            }else{
+                for(int i=0;i<n;i++){
+                    int fl = 1;
+                    if(d[i] == true && valid){
+                        valid = false;
+                        for(int j=0;j<m;j++){
+                            if(nums[i][0] != nums[i][j]){
+                                fl = j+1;
+                                break;
+                            }
+                        }
+                    }
+                    cout<<fl<<" ";
+                }
+            }
+        }
     }
+/*
+XOR ALL FIRST ELE => NON-ZERO => ANS(N,1)
+                  => ZERO => TRY AN UNIQUE ELE IN AN ARRAY , THE REST of the ele are FIRST eles
+*/
+    // void solve(){
+    //     int n,m;cin>>n>>m;
+    //     vector<vector<int>>nums(n);
+    //     for(int i=0;i<n;i++){
+    //         nums[i] = readVector<int>(m);
+    //     }
+    //     map<int,int>f;
+    //     for(auto& row:nums){
+    //         set<int>seen;
+    //         sort(row.begin(),row.end());
+    //         for(auto x:row){
+    //             if(seen.count(x) == 0){
+    //                 seen.insert(x);
+    //                 f[x]++;
+    //             }
+    //         }
+    //     }
+    //     bool valid = false;
+    //     vector<int>repeat ;
+    //     for(auto [val,rep] : f){
+    //         repeat.push_back(rep);
+    //         if(rep%2 == 0){
+    //             valid = true;
+    //         }
+    //     }
+    //     if(f.size() == 1 && ((f.begin()->second) %2 == 1) ){
+    //         valid = true;
+    //     }
+    //     vector<int>parity;
+    //     for(auto x:repeat){
+    //         parity.push_back(x%2);
+    //     }
+    //     sort(parity.rbegin(),parity.rend());
+    //     if(parity.size()>=2 && parity[0] == 1 && parity[1] == 1){
+    //         valid = true;
+    //     }
+    //     if(!valid){
+    //         cout<<"NIE";
+    //     }else{
+    //         cout<<"TAK"; N();
+    //     }
+    // }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
+        int z=1;
         while(z--){ solve(); }
         return 0;
     }

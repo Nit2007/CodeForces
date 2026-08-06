@@ -1,15 +1,29 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2248/problem/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
+    const int M = 4e5;
     void solve(){
-        int n;cin>>n;
+        int n;cin>>n; n *= 2;
         vector<int>nums = readVector<int>(n);
-        
+        vector<int>seen(M,false);
+        vector<ll>dp(n+1,0);
+        for(int r=1;r<=n;r++){
+            int x = nums[r-1];
+            dp[r] = dp[r-1] + 1;
+            if(seen[x]){
+                int l = seen[x];
+                dp[r] = max<ll>(dp[r],dp[l-1] + (r-l+1) *1ll* (r-l+1));
+            }else{
+                seen[x] = r;
+            }
+        }
+        cout<<dp[n];N();
     }
+/*
 
+*/
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);

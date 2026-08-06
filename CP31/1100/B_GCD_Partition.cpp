@@ -1,5 +1,5 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1780/B*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
@@ -7,8 +7,45 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        ll maxi = 0;
+        ll sum = accumulate(nums.begin(),nums.end(),0LL);
+        ll track = 0;
+        for(int i=0;i<n-1;i++){
+            track += nums[i];
+            maxi = max<ll>(maxi, gcd(track,sum-track) );
+        }
+        cout<<maxi;N();
     }
+//  MERGING SUBSEGMENTS CAN NEVER DECREASE THE GCD , HENCE TRY THE SMALLEST K{2}   
+
+    //FLAW of assuming divisions are equal
+    // void solve(){
+    //     int n;cin>>n;
+    //     vector<int>nums = readVector<int>(n);
+    //     vector<int>ps = {0};
+    //     for(int i=1;i<=n;i++){
+    //         ps.push_back(ps.back() + nums[i-1]);
+    //     }
+    //     int maxi = 0;
+    //     auto fact = primeFactors(n);
+    //     for(auto f:fact){
+    //         if(f == n)continue;
+    //         int l=0;
+    //         int r=f;
+    //         vector<int>temp;
+    //         while(r<=n){
+    //             temp.push_back(ps[r] - ps[l]);
+    //             l = r;
+    //             r = l + f;
+    //         }
+    //         int gcd = temp[0];
+    //         for(auto x:temp){
+    //             gcd = __gcd(x,gcd);
+    //         }
+    //         maxi = max(maxi,gcd);
+    //     }
+    //     cout<<maxi;N();
+    // }
 
 
     signed run() {
@@ -112,7 +149,6 @@ public:
             if(seen.insert(x).second)unique.push_back(x);
         }return unique;
     }
-    /*---------------------NUMBER-THEORY-----------------------*/
     vector<int>primeFactors(int x){
         vector<int>f;
         for(int i=1;i*i<=x;i++){
@@ -132,3 +168,5 @@ signed main(){
     Main OBJ;
     return OBJ.run();
 }
+
+/*---------------------NUMBER-THEORY-----------------------*/

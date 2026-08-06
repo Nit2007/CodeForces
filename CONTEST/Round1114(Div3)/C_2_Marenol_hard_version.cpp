@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2254/problem/C2*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,10 +6,75 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string a,b;cin>>a>>b;
+        if(!check(a,b)){
+            cout<<-1;N();return;
+        }
+        string aodd ="", aeve = "";
+        for(int i=0;i<n;i++){
+            if(i%2){
+                aodd += a[i];
+            }else{
+                aeve += a[i];
+            }
+        }
+        string bodd ="", beve = "";
+        for(int i=0;i<n;i++){
+            if(i%2){
+                bodd += b[i];
+            }else{
+                beve += b[i];
+            }
+        }
+        // P(aodd,bodd);
+        // P(aeve,beve);
+        ll ans = cost(aodd,bodd) + cost(aeve,beve) ;
+        cout<<ans;N();
+     }
+    ll cost(string a,string b){
+        ll n = a.length(),swap{};
+        vector<ll>a1 , b1;
+        for(int i=0;i<n;i++){
+            if(a[i] == '1'){
+                a1.push_back(i);
+            }
+            if(b[i] == '1'){
+                b1.push_back(i);
+            }
+        }
+        for(int i=0;i<b1.size();i++){
+            swap += abs(a1[i]-b1[i]);
+        }
+        return swap;
     }
-
+    bool check(string a,string b){
+        int n=a.length();
+        int a0 = count(a.begin(),a.end(),'0');        
+        int a1 = count(a.begin(),a.end(),'1');        
+        int b0 = count(b.begin(),b.end(),'0');        
+        int b1 = count(b.begin(),b.end(),'1');
+        if(a0 != b0 || a1 != b1){
+            return 0;
+        }
+        int odd1{} , eve1{} ;
+        for(int i=0;i<n;i++){
+            if(a[i] == '1'){
+                if(i%2)odd1++;
+                else eve1++;
+            }
+        }
+        int odd1exp{} , eve1exp{} ;
+        for(int i=0;i<n;i++){
+            if(b[i] == '1'){
+                if(i%2)odd1exp++;
+                else eve1exp++;
+            }
+        }
+        if(odd1 == odd1exp && eve1 == eve1exp ){
+            return 1;
+        }
+        return 0;
+    }
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);

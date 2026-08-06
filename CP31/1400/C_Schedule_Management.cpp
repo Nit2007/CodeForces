@@ -1,16 +1,55 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1701/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,m;cin>>n>>m;
+        vector<int>pro = readVector<int>(m);
+        sort(pro.begin(),pro.end());
+        map<int,int>f;
+        for(auto x:pro){
+            f[x]++;
+        }
+        int low = 1;
+        int high = (2*m);
+        int ans = high;
+        while(low<=high){
+            int time = low + (high-low)/2;
+            if(v(n,time,f)){
+                high = time-1;
+                ans = time;
+            }else{
+                low = time+1;
+            }
+        }
+        cout<<ans;N();
     }
+    bool v(int n,int time,map<int,int>&f){
+        ll extra = 0 , need = 0; //Task , as time cannot be broken further by workers
+        for(int w=1;w<=n;w++){
+            if(time > f[w]){
+                extra += (time-f[w])/2; //Can contribute to task at half speed to nonPro tasks
+            }else{
+                need += (f[w]-time); 
+            }
+        }
+        if(need > extra){
+            return false;
+        }
+        return true;
+    }
+/*
+Time = {f,f,f,f,f,T,t,t,...}
 
 
+w = {1,2}
+1 - 1h
+1 - 2h
+1 - 1h
+1 - 1h
+*/
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;

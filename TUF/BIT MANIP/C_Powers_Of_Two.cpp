@@ -1,19 +1,61 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1095/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n,k;cin>>n>>k;
+        ll digi = 0 ;
+        vector<ll>bits;
+        for(int bit=BIT;bit>=0;bit--){
+            if((1LL<<bit) & n){
+                digi += (1ll<<bit) ;
+                bits.push_back(1ll<<bit);
+            }
+        }
+        ll setBits = bits.size();
+        if(digi < k || (setBits > k)){
+            cout<<"NO";return;
+        }
+        cout<<"YES";N();
+        if(setBits == k){
+            PRINT(bits);
+        }else{
+            ll rem = (k - setBits);
+            for(int i=0;i<bits.size();i++){
+                if(rem>0){
+                    auto x = bits[i];
+                    priority_queue<ll>q;
+                    q.push(x);
+                    while(!q.empty() && rem > 0){
+                        ll curr = q.top();
+                        q.pop();
+                        if(curr == 1){
+                            q.push(1);
+                            break;
+                        }
+                        ll half = curr/2;
+                        rem--;
+                        q.push(half);
+                        q.push(half);
+                    }
+                    while(!q.empty()){
+                        cout<<q.top()<<" ";
+                        q.pop();
+                    }
+                }
+                else{
+                    cout<<bits[i]<<" ";
+                }
+            }
+        }
     }
 
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
+        int z=1;
         while(z--){ solve(); }
         return 0;
     }

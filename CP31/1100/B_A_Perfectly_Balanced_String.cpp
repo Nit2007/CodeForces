@@ -1,14 +1,60 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1673/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string s;cin>>s;
+        int n=s.length();
+        set<char>uni;
+        for(auto x:s){
+            uni.insert(x);
+        }
+        int k = uni.size();
+        set<char>present;
+        for(int i=0;i<k;i++){
+            char x = s[i];
+            if(!present.count(x)){
+                present.insert(x);
+            }else{
+                cout<<"NO";N();return;
+            }
+        }
+        for(int i=k;i<n;i++){
+            if(s[i-k] == s[i])continue;
+            cout<<"NO";N();return;
+        }        
+        cout<<"YES";N();return;
     }
+/*
+ No of uni = k
+ If a subarray fails ,then it's size cannot exceed k   
+ subarray failed =>  the diffOfCount is more than 1
+  => at least single char repeats more than 1 in subarray
+*/
+    // void solve(){
+    //     string s;cin>>s;
+    //     int n=s.length();
+    //     map<char,int>f;
+    //     for(auto x:s){
+    //         f[x]++;
+    //     }
+    //     if(f.size() == 1){
+    //         cout<<"YES";N();return;
+    //     }
+    //     int maxR = INT_MIN , minR = INT_MAX;
+    //     for(auto [c,r]:f){
+    //         P(r);
+    //         maxR = max(maxR,r);
+    //         minR = min(minR,r);
+    //     }
+    //     if(maxR - minR >= 2){
+    //         cout<<"NO";N();return;
+    //     }
+    //     P(maxR,minR);
+    //     cout<<"YES";N();return;
+    // }
 
 
     signed run() {

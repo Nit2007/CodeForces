@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/2195/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,10 +6,29 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<int>cube = readVector<int>(n);
+        vector<int>dp(n,0);
+        for(int i=1;i<n;i++){
+            if(cube[i-1] == cube[i] || (cube[i-1] == 7-cube[i]) || (7-cube[i-1] == cube[i])){
+                dp[i] = dp[i-1] + 1;
+                // P(cube[i-1],cube[i],i);
+                int next = (i+1<n)? i+1 : i-1 ;
+                for(int x=1;x<=6;x++){
+                    cube[i] = x;
+                    if( (!Bad(cube[i-1],cube[i]) && !Bad(cube[next],cube[i])) ){
+                        break;
+                    }
+                }
+            }else{
+                dp[i] = dp[i-1];
+            }
+        }
+        cout<<dp[n-1];N();
+        // PRINT(dp);
     }
-
+    bool Bad(int a,int b){
+        return ((a == b) || (a == 7-b) || (7-a == b));
+    }
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);

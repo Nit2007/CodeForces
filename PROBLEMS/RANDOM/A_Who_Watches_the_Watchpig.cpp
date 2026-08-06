@@ -1,15 +1,40 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2245/problem/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,k;cin>>n>>k;
+        string pig;cin>>pig;
+        if( (n/2) < k){
+            cout<<-1;N();return;
+        }
+        int lFlip {}, rFlip{};
+        for(int i=0;i<k;i++){
+            if(pig[i] == 'L'){
+                lFlip++;
+            }
+        }
+        for(int i=n-1;i>=n-k;i--){
+            if(pig[i] == 'R'){
+                rFlip++;
+            }
+        }
+        cout<<lFlip + rFlip;N();
     }
-
+/*
+R{L}LR{R}L
+RLLRRL => k = 2
+111233 => r
+321110 => l
+210123
+RRLRLL
+An R needs k Left to its Right
+An L needs k right to its Left
+if first k elements -> we found a L but we cannot have enough rights ,hence we need to make a forced flip
+simlarly for the last k elements __ R
+*/
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);

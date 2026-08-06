@@ -1,19 +1,47 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/670/D1*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,magic;cin>>n>>magic;
+        vector<int>recipe = readVector<int>(n);
+        vector<int>ing = readVector<int>(n);
+        vector<int>cookie(n,0);
+        for(int i=0;i<n;i++){
+            cookie[i] = ing[i] / recipe[i];
+        }
+        // PRINT(cookie);
+        int low = *min_element(cookie.begin(),cookie.end());
+        int high = *max_element(cookie.begin(),cookie.end()) + magic;
+        int ans = low;
+        while(low<=high){
+            int c = low + (high-low)/2;
+            if(valid(c,cookie,ing,recipe,magic)){
+                low = c+1;
+                ans = c;
+            }else{
+                high = c-1;
+            }
+        }
+        cout<<ans;N();
     }
-
+    bool valid(int c,vector<int>&cookie,vector<int>&ing,vector<int>&recipe,int magic){
+        for(int i=0;i<cookie.size();i++){
+            if(cookie[i] >= c)continue;
+            int newcookie = c - cookie[i] - 1;
+            magic -= (newcookie * recipe[i]) + (recipe[i] - (ing[i] % recipe[i]));
+        }
+        if(magic < 0){
+            return false;
+        }
+        return true;
+    }
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
+        int z=1;
         while(z--){ solve(); }
         return 0;
     }

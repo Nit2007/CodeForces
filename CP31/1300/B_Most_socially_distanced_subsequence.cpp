@@ -1,5 +1,5 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1364/B*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int INF = 1e9;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
@@ -7,7 +7,36 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        int inc = false;
+        vector<bool>valid(n,true);
+        for(int i=1;i<n;i++){
+            if(nums[i-1] >= nums[i]){
+                inc += true;
+            }else{
+                inc = false;
+            }
+            if(inc > 1){
+                valid[i-1] = false;
+            }
+        }
+        int dec = 0;
+        for(int i=1;i<n;i++){
+            if(nums[i-1] <= nums[i]){
+                dec += true;
+            }else{
+                dec = false;
+            }
+            if(dec > 1){
+                valid[i-1] = false;
+            }
+        }
+        vector<int>ans;
+        for(int i=0;i<n;i++){
+            if(!valid[i])continue;
+            ans.push_back(nums[i]);
+        }
+        cout<<ans.size();N();
+        PRINT(ans);
     }
 
 
@@ -112,23 +141,24 @@ public:
             if(seen.insert(x).second)unique.push_back(x);
         }return unique;
     }
-    /*---------------------NUMBER-THEORY-----------------------*/
-    vector<int>primeFactors(int x){
-        vector<int>f;
-        for(int i=1;i*i<=x;i++){
-            if(x%i == 0){
-                f.push_back(i);
-                if(i != (x/i)){
-                    f.push_back(x/i);
-                }
-            }
-        }
-        sort(f.begin(),f.end());
-        return f;
-    }
 };
 
 signed main(){
     Main OBJ;
     return OBJ.run();
+}
+
+/*---------------------NUMBER-THEORY-----------------------*/
+vector<int>primeFactors(int x){
+    vector<int>f;
+    for(int i=1;i*i<=x;i++){
+        if(x%i == 0){
+            f.push_back(i);
+            if(i != (x/i)){
+                f.push_back(x/i);
+            }
+        }
+    }
+    sort(f.begin(),f.end());
+    return f;
 }

@@ -1,14 +1,56 @@
-#include <bits/stdc++.h> /*$url$*/
-using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2244/problem/D*/
+using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
+        int n,m;cin>>n>>m;
         vector<int>nums = readVector<int>(n);
-        
+        vector<int>post = readVector<int>(m);
+        vector<ll>ps(n+1,0);
+        for(int i=1;i<=n;++i){
+            ps[i] = ps[i-1] + nums[i-1] ;
+        }
+        int flip = 0;
+        ll gain = 0 ;
+        // PRINT(ps);
+        sort(post.begin(),post.end());
+        for(int i=0;i<m;i++){
+            int prev = (i>0)? post[i-1] : 0;
+            int curr = post[i];
+            gain += abs(ps[curr] - ps[prev]) ;
+        }
+        cout<<gain + (ps[n] - ps[post[m-1]]);N();
     }
+/*
+[i1,i2,i3,i4,i5] -> POST
+just choose the single biggest post , the last post is mandatory
+*/
+
+
+    // void solve(){
+    //     int n,m;cin>>n>>m;
+    //     vector<int>nums = readVector<int>(n);
+    //     vector<int>post = readVector<int>(m);
+    //     sort(post.rbegin(),post.rend());
+    //     vector<ll>ps(n+1,0);
+    //     for(int i=1;i<=n;++i){
+    //         ps[i] = ps[i-1] + nums[i-1] ;
+    //     }
+    //     int flip = 0;
+    //     ll net = 0 ;
+    //     // PRINT(ps);
+    //     for(int i=0;i<m-1;i++){
+    //         ll gain = ps[post[i+1]] - ps[post[i]] ;
+    //         if( (flip%2 == 0 && gain < 0) || (flip%2 == 1 && gain > 0)){
+    //         // if( gain < 0 ){
+    //             net += abs(gain);
+    //             flip++;
+    //         }
+    //     }
+    //     cout<<net;N();
+    // }
 
 
     signed run() {

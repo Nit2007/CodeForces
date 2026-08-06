@@ -1,15 +1,31 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1418/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
-    void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+    ll Ceil(ll a,ll b){
+        return (a+b-1) / b;
     }
+    void solve(){
+        ll x,y,k;cin>>x>>y>>k;
+        ll stick = k;
+        ll coal = Ceil( ((k*y) + (k-1)) , (x-1) );
+        cout<<stick + coal;N();
+    }
+/*
+k torch -> k stick + k coal 
+coal = stick * y
+1 stick , x stick , 2x-1 stick , 3x-2 stick => Trade = x-1
 
+2stick,1stick
+Target{
+    intial stick = 1
+    Reach k stick
+    Reach k coal => (k * y) stick  + k sticks
+    Trade : Sticks gained = x-1
+    k  +   (ky - 1) / x-1
+}
+*/
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);

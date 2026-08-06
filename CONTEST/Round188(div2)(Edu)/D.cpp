@@ -2,7 +2,7 @@
 using namespace std;//AUTHOR : NITHISH JAISARUN
 using ll = long long int; const int INF = 1e9;
 class Main{
-public:  
+public:  //https://claude.ai/chat/7c36d84f-bd26-434d-9730-ec6d28c87155
     void solve(){//2204D
         int n,m;cin>>n>>m;
         vector<vector<int>>graph(n+1,vector<int>(0));
