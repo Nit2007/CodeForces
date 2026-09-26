@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2209/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,7 +7,20 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        vector<int>ans(n,0);
+        for(int i=0;i<n;i++){
+            int big{0} , tiny{0};
+            for(int j=i+1;j<n;j++){
+                if(nums[i] > nums[j]){
+                    big++;
+                } 
+                if(nums[i] < nums[j]){
+                    tiny++;
+                }
+            }
+            ans[i] = max(big,tiny);
+        }
+        PRINT(ans);
     }
 /*
 
@@ -62,10 +75,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

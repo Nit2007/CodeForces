@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/2239/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,10 +7,40 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        int Xor = nums[0];
+        for(int i=1;i<n;i++){
+            Xor = Xor ^ nums[i];
+        }
+        int ans = 0;
+        for(auto x:nums){
+            int exclude = Xor ^ x;
+            if(exclude < x){
+                ans++;
+            }
+        }
+        if(n == 1){
+            ans = 0;
+        }
+        if(Xor == 0){
+            ans = 1;
+        }
+        cout<<ans;N();
+        // P(Xor);
     }
 /*
+The game is monotonic , there can exist only {winning,lossing} configurations
+One-Non-Zero element is a Lossing state
+So transisiton from a state to One-Non-Zero element state is a winning state
+Try zeroing all elements except one , if all_xor < non_zero_element(Target) 
+then we can reach that state 
 
+
+1 4 5 2 6
+
+
+CSP : for every number ,choose a smaller number ; finally the xor of all choosen numbers should be zero
+Should make Alice winning
+Cnt the no of such configs
 */
 
     signed run() {
@@ -62,10 +92,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

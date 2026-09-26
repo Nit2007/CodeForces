@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2259/problem/E*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,11 +7,75 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        vector<int>diff(n+1,0);
+        for(int i=0;i<n;i++){
+            auto x = nums[i];
+            if(x == -1)continue;
+            int l = max(i-x+1,0);
+            int r = min(i+x-1,n-1);
+            if(l>r)continue;
+            diff[l]++;
+            diff[r+1]--;
+        }
+        string ans(n,'0');
+        int sum = 0;
+        for(int i=0;i<n;i++){
+            sum += diff[i];
+            if(sum == 0){
+                ans[i] = '1';
+            }
+        }
+        vector<int>dist(n,MOD);
+        int last = MOD;
+        for(int i=0;i<n;i++){
+            if(ans[i] == '1'){
+                last = i;
+                dist[i] = 0;
+            }
+            else if(last != MOD){
+                int steps = abs(i-last);
+                dist[i] = steps;
+            }
+        }
+        last = MOD;
+        for(int i=n-1;i>=0;i--){
+            if(ans[i] == '1'){
+                last = i;
+                dist[i] = 0;
+            }
+            else if(last != MOD){
+                int steps = abs(i-last);
+                dist[i] = min(dist[i],steps);
+            }
+        }
+        bool valid = true , hasTreasure = false;
+        for(int i=0;i<n;i++){
+            if(ans[i] == '1'){hasTreasure = true;}
+            if(nums[i] == -1)continue;
+            if(nums[i] != dist[i]){
+                valid = false;
+                break;
+            }
+        }
+        valid &= hasTreasure ;
+        if(!valid){
+            cout<<"-1\n";return;
+        }
+        cout<<ans;N();
     }
-/*
-
-*/
+    /*
+Element_withIdx_i , x : gurantees that no treasure at [i-x,i+x]
+Compute a diff array : to mark the islands that are having treasure
+From the constructed ans , validate it via checking the distance from L,R
+    */
+// for(int i=0;i<n;i++){
+//     auto x = nums[i];
+//     if(x == -1)continue;
+//     for(int j=i-x;j<=x+i;j++){
+//         if(j < 0 || j>=n)continue;
+//         diff[j]++;
+//     }
+// }
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
@@ -62,10 +126,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2259/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,11 +7,58 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        int four = 0,odd = 0 , two = 0;
+        for(auto x:nums){
+            if(x%4 == 0){
+                four++;
+            }
+            else if(x%2 == 1){
+                odd++;
+            }
+            else if(x%4 == 2){
+                two++;
+            }
+        }
+        cout<<max({four,odd,two});N();
     }
-/*
+    /*
+    x-2z > 0
+    ele {0,1,2}
+    */
 
-*/
+//    void solve(){
+//        int n;cin>>n;
+//        vector<int>nums = readVector<int>(n);
+//        map<pair<int,int>,int>f;
+//        for(auto x:nums){
+//            int op = x/2;
+//            f[make_pair(x-2*op,op)]++;
+//        }
+//        vector<int>normal;
+//        for(auto F:f){
+//            int inv = 0 , val = F.first.first , op = F.first.second;
+//            if((f.count({-val,op})) && val != 0){
+//                inv = f[{-val,op}];
+//            }
+//            normal.push_back(F.second + inv);
+//        }
+//        cout<<*max_element(normal.begin(),normal.end());N();
+//    }
+
+// void solve(){
+//     int n;cin>>n;
+//     vector<int>nums = readVector<int>(n);
+//     map<pair<int,int>,int>f;
+//     for(auto x:nums){
+//         int op = x/2;
+//         f[make_pair(x-2*op,op)]++;
+//     }
+//     vector<int>normal;
+//     for(auto F:f){
+//         normal.push_back(F.second);
+//     }
+//     cout<<*max_element(normal.begin(),normal.end());N();
+// }
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
@@ -62,10 +109,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

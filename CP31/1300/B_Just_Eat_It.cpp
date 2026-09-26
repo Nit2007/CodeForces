@@ -1,22 +1,41 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1285/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
-    void solve(){
+    void kadanewithcountelement(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<ll>nums = readVector<ll>(n);
+        ll yasserSum = accumulate(nums.begin(),nums.end(),0LL);
+        ll sum = 0 , maxSum = 0 , ele{} , maxEle{};
+        for(int i=0;i<n;i++){
+            sum += nums[i];
+            ele += 1;
+            if(maxSum < sum){
+                maxSum = max(maxSum,sum);
+                maxEle = max(maxEle,ele);
+            }
+            if(sum <= 0){
+                sum = 0;
+                ele = 0;
+            }
+        }
+        // P(yasserSum,maxSum,maxEle);
+        if(yasserSum > maxSum){
+            cout<<"YES";N();return;
+        }
+        if(yasserSum == maxSum && maxEle == n){
+            cout<<"YES";N();return;
+        }
+        cout<<"NO";N();return;
     }
-/*
 
-*/
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
-        while(z--){ solve(); }
+        while(z--){ kadanewithcountelement(); }
         return 0;
     }
 
@@ -62,10 +81,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

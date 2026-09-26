@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2252/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,12 +6,98 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string s;cin>>s;
+        int ones = count(s.begin(),s.end(),'1');
+        int zero = count(s.begin(),s.end(),'0');
+        int del1 {} ,del0{};
+        for(int i=1;i<n;i++){
+            if(s[i-1] == s[i]){
+                (s[i] == '0')? del0++ : del1++ ;
+            }
+        } 
+        if(abs(ones-zero) > 2){
+            cout<<"-1";N();return;
+        }
+        int ans = 2 * max(del1,del0);
+        if(del1 != del0)ans--;
+        cout<<ans;N();
     }
-/*
 
-*/
+
+    // void solve(){
+    //     int n;cin>>n;
+    //     string s;cin>>s;
+    //     int ones = count(s.begin(),s.end(),'1');
+    //     int zero = count(s.begin(),s.end(),'0');
+    //     ll junk{} , zeroJunk{}, oneJunk{} , op{};
+    //     for(int i=1;i<n;i++){
+    //         if(s[i-1] != s[i]){
+    //             junk += (oneJunk-zeroJunk);
+    //             op += max(zeroJunk,oneJunk);
+    //             ones -= oneJunk;
+    //             zero -= zeroJunk;
+    //             zeroJunk = 0 ; oneJunk = 0 ;
+    //         }else{
+    //             if(s[i] == '0'){
+    //                 zeroJunk++;
+    //             }else{
+    //                 oneJunk++;
+    //             }
+    //         }
+    //     }
+    //     junk += (oneJunk-zeroJunk);
+    //     op += max(zeroJunk,oneJunk);
+    //     if(junk < 0){//More zero
+    //         ones -= abs(junk)-1;
+    //         if(ones < 0){cout<<-1;N();return; }
+    //         op += abs(junk)-1;
+    //     }
+    //     if(junk > 0){//More ones
+    //         zero -= abs(junk)-1;
+    //         if(zero < 0){cout<<-1;N();return; }
+    //         op += abs(junk)-1;
+    //     }
+    //     // P(op,junk);
+    //     cout<<op;N();return;     
+    // }
+
+
+    
+    // void solve(){
+    //     int n;cin>>n;
+    //     string s;cin>>s;
+    //     ll junk{} , waste{} , op{};
+    //     for(int i=1;i<n;i++){
+    //         if(s[i-1] != s[i]){
+    //             junk += waste;
+    //             op += abs(waste);
+    //             waste = 0;
+    //         }else{
+    //             if(s[i] == '0'){
+    //                 waste--;
+    //             }else{
+    //                 waste++;
+    //             }
+    //         }
+    //     }   
+    //     junk += waste;
+    //     op += abs(waste);
+    //     // P(junk,waste);
+    //     int sides {};
+    //     if(junk < 0){
+    //         if(s[0] == '0')sides++;
+    //         if(s[n-1] == '0')sides++;
+    //     }
+    //     if(junk > 0){
+    //         if(s[0] == '1')sides++;
+    //         if(s[n-1] == '1')sides++;
+    //     }
+    //     if(abs(junk) > 1+sides){
+    //         op = -1;
+    //     }
+    //     cout<<op;N();return;     
+    // }
+
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
@@ -62,10 +148,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};
@@ -134,7 +216,7 @@ public:
     }
 };
 
-signed main(void){
+signed main(){
     Main OBJ;
     return OBJ.run();
 }

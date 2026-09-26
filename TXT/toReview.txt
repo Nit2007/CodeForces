@@ -36,3 +36,7 @@ CP31\1400\B_Hossam_and_Friends.cpp - subarray breaking using prefix array
 CP31\1400\D_Make_It_Round.cpp - no of zeros depends upon no of {2,5} factor pairs
 CP31\1400\E_Add_Modulo_10.cpp - First principles based observations
 CP31\1400\A_Weird_Sum.cpp - Basic properties of MODULUS & MANHATTAN dist
+CP31\1300\B_Balanced_Tunnel.cpp - Entry & Exit based on timing rather than comparison of position
+C:\Users\DELL\Desktop\CodeForces\CONTEST\round1053(Div. 2) - B,C
+Div_2_PREP\Div_2_C\C_Against_the_Difference.cpp 
+CP31\1400\B_AND_Sequences.cpp

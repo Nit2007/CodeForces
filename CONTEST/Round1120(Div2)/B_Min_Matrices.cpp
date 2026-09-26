@@ -1,16 +1,45 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2263/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,k;cin>>n>>k;
+        int cap = n + n - 1 , bare = n;
+        if((cap < k) || (bare>k)){
+            cout<<"-1\n";return;
+        }
+        vector<vector<int>>ans(n,vector<int>(n,0));
+        int start = 1, i = 0 , j = 0;
+        int sameRow = (k-n);
+        while(k--){
+            if(i>=n || j>=n)break;
+            ans[i][j] = start;
+            if(sameRow<=0){
+                j++;
+            }
+            i++;
+            sameRow--;
+            start++;
+        }
+        for(auto&row:ans){
+            for(auto&ele:row){
+                if(ele == 0){
+                    ele = start++;
+                }
+            }
+        }
+        for(auto row:ans){
+            PRINT(row);
+        }
     }
 /*
-
+1 2 3
+4 5 6 
+7 8 9 
+{1,2,3}
+{1,4,7}
 */
 
     signed run() {
@@ -62,10 +91,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

@@ -1,13 +1,36 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2189/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n,target;cin>>n>>target;
+        vector<ll>a(n),b(n),c(n);
+        for(int i=0;i<n;i++){
+            cin>>a[i]>>b[i]>>c[i];
+        }
+        ll free = 0;
+        for(int i=0;i<n;i++){
+            if(b[i] > 1){
+                free += (b[i]-1) * a[i];
+            }
+        }
+        if(free >= target){ //No Rollbacks
+            cout<<0;N();return;
+        }
+        vector<ll>net(n,0);
+        for(int i=0;i<n;i++){ //Cyclic thing -> Net change matters
+            net[i] = (a[i]*b[i] - c[i]);
+        }
+        sort(net.rbegin(),net.rend());
+        if(net[0] <= 0){ //we want to move forward from FREE to TARGET
+            cout<<-1;N();return;
+        }
+        target -= free;
+        ll rollback = ((target+net[0]-1)/net[0]); 
+        cout<<rollback;N();
+        // PRINT(net);
     }
 /*
 
@@ -62,10 +85,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

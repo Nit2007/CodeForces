@@ -1,17 +1,48 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2252/problem/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,m;cin>>n>>m;
+        vector<int>stable = readVector<int>(n);
+        vector<vector<int>>nums;
+        for(int i=0;i<n;i++){
+            nums.push_back(readVector<int>(m));
+        }
+        multiset<int,greater<int>>largeM;
+        int ans {m};
+        for(int i = n - 1; i >= 0; i--){
+            for(int j=0;j<m;j++){
+                largeM.insert(nums[i][j]);
+            }
+            while(largeM.size() > m){
+                auto small = prev(largeM.end());
+                largeM.erase(small);
+            }
+            int sum {} , ele{};
+            for(auto x:largeM){
+                sum += x;
+                ele++;
+                if(sum >= stable[i]){
+                    ans = min(ele,ans);
+                    break;
+                }
+            }
+        }
+        cout<<ans;N();
     }
-/*
-
-*/
+    
+    // vector<int>sum(m+1);
+    // int k=1;
+    // for(auto x:largeM){
+    //     sum[k] = sum[k-1] +  x;
+    //     k++;
+    // }
+    // auto it = lower_bound(sum.begin(),sum.end(),minStable);
+    // int pointOfBreak = distance(sum.begin(),it);
+    // ans = min(ans,pointOfBreak);
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
@@ -62,10 +93,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};
@@ -134,7 +161,7 @@ public:
     }
 };
 
-signed main(void){
+signed main(){
     Main OBJ;
     return OBJ.run();
 }

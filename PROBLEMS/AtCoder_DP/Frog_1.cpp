@@ -1,21 +1,38 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://atcoder.jp/contests/dp/tasks/dp_a*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
+    int f(int i,vector<int>&nums,vector<int>&memo){
+        int n = nums.size();
+        if(i >= n){
+            return 0;
+        }
+        if(memo[i] != -1){
+            return memo[i];
+        }
+        int single = f(i+1,nums,memo);
+        if(i+1<n){
+            single += abs(nums[i] - nums[i+1]);
+        }
+        int twice = f(i+2,nums,memo);
+        if(i+2<n){
+            twice += abs(nums[i] - nums[i+2]);
+        }else {twice = INT_MAX;}
+        return memo[i] = min(single,twice);
+    }
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        vector<int>memo(n,-1);
+        int ans = f(0,nums,memo);
+        cout<<ans;
     }
-/*
 
-*/
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
+        int z=1;
         while(z--){ solve(); }
         return 0;
     }
@@ -62,10 +79,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

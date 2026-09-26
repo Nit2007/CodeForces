@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2158/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,10 +6,41 @@ public:
 
     void solve(){
         int n;cin>>n;
+        n *= 2;
         vector<int>nums = readVector<int>(n);
-        
+        map<int,int>f;
+        for(auto x:nums){
+            f[x]++;
+        }
+        int odd{} , badEven{} ,goodEven = 0;
+        for(auto [y,x]:f){
+            if((x%2) == 1){
+                odd++;
+            }
+            if((x%4) == 2){
+                goodEven++;
+            }
+            if((x%4) == 0){
+                badEven++;
+            }
+        }
+        int upper = odd + (2*goodEven) + (2*badEven) ;
+        if((odd > 0 && (badEven%2)) || (badEven%2 == 0)){
+            cout<<upper;
+        }else{
+            cout<<upper-2;
+        }
+        N();
     }
 /*
+Odds are good, their size is not going to affect their contribution { 1 1 1 2 | 1 1 2 2 } -freq> [5,3] -Contribution> {2,0}
+4k+2 -> 2k+1,2k+1 -> |p-q| is 0 {goodEven}
+4k   -> 2k-1,2k+1 -> |p-q| is 2 {badEven}
+
+2n -> The number of odd freq is always even -> Imbalance contribution in evens
+UpperBound => odd + (2*goodEven) + (2*badEven)
+BadEvens contributions cancel each other , if badEvens is odd -> then we need to take an odd to satisfy it
+Upper - BadEven_Contribution - odd_contribution = Upper - 1 - 1 = Upper - 2
 
 */
 
@@ -62,10 +93,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

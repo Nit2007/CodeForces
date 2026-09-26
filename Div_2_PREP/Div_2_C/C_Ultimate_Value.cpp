@@ -1,16 +1,57 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2140/problem/c*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
+#define int ll
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        int base{};
+        for(int i=0;i<n;i++){
+            if(i%2)base-=nums[i];
+            else base+=nums[i];
+        }
+        int noChangeSwap = (n%2)? (n-1) : (n-2) ; //Swap at same Parity changes nothing
+        int l_odd = INT_MAX , l_even = INT_MAX , best{};
+        for(int i=0;i<n;i++){
+            if(i%2){
+                if(l_odd != INT_MAX){ //l_odd & r_even
+                    best = max(best, i+2*nums[i]-l_odd);
+                }
+                l_even = min(l_even,i-2*nums[i]);
+            }else{
+                if(l_even != INT_MAX){ //l_even & r_odd
+                    best = max(best, i-2*nums[i]-l_even);
+                }
+                l_odd = min(l_odd,i+2*nums[i]);
+            }
+        }
+        best = max(best,noChangeSwap);
+        cout<<base+best;N();
     }
 /*
+If a player seems winning ,the losing player would stop the game immediately (so 10^100 op never happens)
+Good to swap the smallest_odd +ve with largest_eve +ve |
+                 largest_odd -ve with smallest_eve -ve
+                 => then the game would end ,at cost of their different index
 
+Possible:
+    Either Alice already has reached the max potential - shuffle the end numbers to inflate cost
+    Alice performs the greedy action that increases value
+    =>at both scenario Bob ends the game (as even if Bob tries something ,Alice reverses it {final cost increases} )
+
+CASE :      l_odd          |      l_even
+Gain = (r-l) + 2(Ar-Al)    |  (r-l) + 2(Ar-Al)
+Gain = (r+2Ar) - (l+2Al)   |  (r-2Ar) - (l-2Al)
+As we want maximal score,Look for minimal L
+
+[7,1,8,4] => 10
+[7,8]
+[1,4]
++2 [7,4,8,1] => 12
+[7,8]
+[4,1]
 */
 
     signed run() {
@@ -62,10 +103,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

@@ -1,18 +1,34 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2166/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll a,b,n;cin>>a>>b>>n;//TotalLen,sizeOfTab,NoofTab
+        if(b>=a){
+            cout<<1;N();return;
+        }
+        ll ans = 1;
+        if(n-(a/b)>0){
+            ans++;
+        }
+        cout<<ans;N();
     }
-/*
-
-*/
-
+    /*
+    5 5 6
+    6 2 7
+    */
+//    void solve(){
+//        ll a,b,n;cin>>a>>b>>n;//TotalLen,sizeOfTab,NoofTab
+//        ll len = min(b,a/n);
+//        ll equalTab = min(n,(a/b));
+//        ll unEqualTab = n-equalTab;
+//        ll move = min(equalTab,unEqualTab);
+//        cout<<1+move;N();
+//        // P(len,unEqualTab);
+//    }
+   
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
@@ -62,10 +78,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

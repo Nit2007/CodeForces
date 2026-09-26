@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2267/problem/D*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,10 +7,49 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        map<int,int>ind;
+        for(int i=0;i<n;i++){
+            ind[nums[i]-1] = (i%2);
+        }
+        int ans=true;
+        for(int i=n%2;i<n-1;i+=2){
+            if(ind[i] == ind[i+1]){
+                ans = false;
+                break;
+            }
+        }
+        yn(ans);
+    }
+    void Hill_Bidirectional(){
+        int n;cin>>n;
+        vector<int>nums = readVector<int>(n);
+        map<int,int>ind;
+        for(int i=0;i<n;i++){
+            ind[nums[i]-1] = i;
+        }
+        int l=0 , r=n-1 , ans=true;
+        for(int i=0;i<n;i++){
+            auto x = ind[i];
+            if((x%2) == (l%2))l++;
+            else if((x%2) == (r%2))r--;
+            else{
+                ans = false;
+                break;
+            }
+        }
+        yn(ans);
     }
 /*
-
+Arr has unique numbers
+Hill doesnt needs to be same , break can happen at any index
+ends are going to have the smallest number :
+    odd,odd - Transition to odd,eve
+    eve,eve - Transition to eve,odd
+    If no transitions possible due to missing element of same parity ,then invalid 
+    Iterating from the smallest numbers,the invalid cases are : 
+        odd,odd - eve number
+        eve,eve - odd number
+    (odd,eve) or (eve,odd) - put any element
 */
 
     signed run() {

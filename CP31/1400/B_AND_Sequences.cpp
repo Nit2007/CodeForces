@@ -1,21 +1,76 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1513/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
+    vector<ll>fact;
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n;cin>>n;
+        vector<ll>nums = readVector<ll>(n);
+        ll ans=0 , fullAnd = nums[0];
+        for(auto x:nums){
+            fullAnd &= x;
+        }
+        //Mini != FullAND => ans doesnt exist
+        ll countAnd = count(nums.begin(),nums.end(),fullAnd);
+        ans = (((countAnd) * (countAnd-1))%MOD) * (fact[n-2]%MOD);
+        cout<<ans%MOD;N();
     }
+    
 /*
+a1 & a2 & ... & an = fullAnd
+a1              = a2 & ... & an  - Pre[1] = Suf[2]
+a1 & a2         = a3 & ... & an  - Pre[2] = Suf[3]
+a1 & a2 & a3    = a4 & ... & an  - Pre[3] = Suf[4]
+a1 & ... & an-1 = an             - Pre[n-1] = Suf[n]
+Pre[1] >= Pre[2] >= Pre[3]
+Suf[1] <= Suf[2] <= Suf[3]
+If both condition Pre[1] & Pre[n-1]  holds true , then 
+The ans is supermask of All Elements
 
+    AND : Bit i, either all set at both sides | failing at both sides
+    For every Bit_i
+    ALL set - GOOD
+    1 unset - Zero
+    2>=unset- Compute combos
+    Take GCDs of all ans,but it wont work because it lacks appropriate info
 */
+void WRONG_APPROACH(){
+    ll n;cin>>n;
+    vector<ll>nums = readVector<ll>(n);
+    ll ans = 0;
+    for(int bit=BIT;bit>=0;bit--){
+        ll set = 0;
+        for(auto x:nums){
+            if(x & (1<<bit)){
+                set++;
+            }
+        }
+        if(set == n){
+            continue;
+        }
+        if(set+1 == n){
+            ans = 0;
+            break;
+        }
+        ll unset = n - set;
+        ll combo = (set*unset);
+        if(ans == 0){
+            ans = combo;
+        }else{
+            ans = gcd(combo,ans);
+        }
+    }
+    cout<<ans;N();
+}
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
+        fact.resize(2e5+10,1LL);
+        for(ll i=1;i<fact.size();i++){
+            fact[i] = (fact[i-1] * (i))%MOD;
+        }
         while(z--){ solve(); }
         return 0;
     }
@@ -62,10 +117,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1520/E*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,12 +6,98 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string s;cin>>s;      
+        vector<ll>left(n),right(n);
+        ll ans = LLONG_MAX , seen{false} , sheep{};
+        for(auto j=0;j<n;j++){
+            if(s[j] == '*' && seen){
+                left[j] = left[j-1]; 
+            }
+            else if(s[j] == '.' && seen){
+                left[j] = left[j-1] + sheep; 
+            }
+            if(s[j] == '*'){
+                seen = true;
+                sheep++;
+            }
+        }
+        seen = false , sheep = {0};
+        for(auto j=n-1;j>=0;j--){
+            if(s[j] == '*' && seen){
+                right[j] = right[j+1]; 
+            }
+            else if(s[j] == '.' && seen){
+                right[j] = right[j+1] + sheep; 
+            }
+            if(s[j] == '*'){
+                seen = true;
+                sheep++;
+            }
+        }
+        for(int i=0;i<n;i++){
+            ans = min(ans,left[i] + right[i]);
+        }
+        cout<<ans;N();
+        // cout<<s;N();
+        // PRINT(left);
+        // PRINT(right);
     }
-/*
 
+    void ACCEPTED(){
+        int n,i{};cin>>n;
+        string s;cin>>s; 
+        vector<int>sheep;
+        for(auto c:s){
+            if(c == '*'){
+                sheep.push_back(i);
+            }i++;
+        }       
+        ll ans = 0 , mid = (sheep.size()-1)/2 ;
+        for(auto j=0;j<sheep.size();j++){
+            ans += abs( sheep[j] - (sheep[mid] - mid + j) );
+            // P(sheep[j],sheep[mid],mid,j,ans);
+        }
+        cout<<ans;N();
+    }
+
+ /*
+*..**..*..*****
+End states => 9* 6.
+*.*.* -> good to place all sheep at middle ,than L/R
 */
+
+    // void solve(){
+    //     int n;cin>>n;
+    //     string s;cin>>s; 
+    //     int grass{} , sheep{};
+    //     for(auto c:s){
+    //         (c == '.')? grass++ : sheep++ ;
+    //     }       
+    //     int ans = INT_MAX;
+    //     for(int start=0;start<=grass;start++){
+    //         string pos = string(start,'.') + string(sheep,'*') + string(n-sheep-start,'.');
+    //         ans = min(ans,cost(pos,s));
+    //         // cout<<pos;N();
+    //     }
+    //     cout<<ans;N();
+    // }
+    // int cost(string pos,string s){
+    //     vector<int>sheep1 , sheep2;
+    //     for(int i=0;i<s.length();i++){
+    //         if(pos[i] == '*'){
+    //             sheep1.push_back(i);
+    //         }
+    //         if(s[i] == '*'){
+    //             sheep2.push_back(i);
+    //         }
+    //     }
+    //     int swap{};
+    //     for(auto i=0;i<sheep1.size();i++){
+    //         swap += abs(sheep1[i] - sheep2[i]);
+    //     }
+    //     return swap;
+    // }
+    
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
@@ -62,10 +148,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

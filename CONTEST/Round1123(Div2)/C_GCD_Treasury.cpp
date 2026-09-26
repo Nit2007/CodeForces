@@ -1,16 +1,48 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2267/problem/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
-
+#define int ll
     void solve(){
-        int n;cin>>n;
+        int n,x;cin>>n>>x;
         vector<int>nums = readVector<int>(n);
-        
+        vector<int>factors = primeFactors(x);
+        vector<int>score(factors.size(),0);
+        for(int f=0;f<factors.size();f++){
+            int con = 0;
+            for(int i=0;i<n;i++){
+                if(nums[i] % factors[f] == 0){
+                    con += nums[i];
+                }
+            }
+            score[f] = con;
+        }
+        score.push_back(0);
+        cout<<*max_element(score.begin(),score.end());N();
+        // PRINT(score);
     }
 /*
+gcd(ai,x) = g
+ai - g , x = g
 
+a1 - g1 =  a1 - gcd(a1,x)
+a2 - g2
+a3 - g3
+gcd(a3,gcd(a2,gcd(a1,x))) = gcd(a1,a2,a3,x)
+
+Factors of x = x1,x2,x3
+Possible ai :
+    Pure factors of x    ==== complete kill
+    Partial factors of x ==== Individual factor only can kill,but loses other factors
+    No factors of x      ==== Nil
+
+2*3,2*5 -> 2,2*4 -> Eat all
+2*3,2*7 -> 2,2*6 -> 2,3 (Non factors are given up,factors do remain)
+6,15 -> 3,12
+6,21 -> 3,18
+6,22 -> 2,11
+6,45 -> 3,42 -> 3,14
 */
 
     signed run() {
@@ -121,14 +153,17 @@ public:
     /*---------------------NUMBER-THEORY-----------------------*/
     vector<int>primeFactors(int x){
         vector<int>f;
-        for(int i=1;i*i<=x;i++){
+        for(int i=2;i*i<=x;i++){
             if(x%i == 0){
                 f.push_back(i);
-                if(i != (x/i)){
-                    f.push_back(x/i);
+                while((x%i) == 0){
+                    x /= i;
                 }
+
             }
         }
+        if(x > 1)
+            f.push_back(x);
         sort(f.begin(),f.end());
         return f;
     }

@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2267/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,7 +7,19 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        map<int,int,greater<int>>f;
+        for(auto x:nums){
+            f[x]++;
+        }
+        vector<int>ans;
+        while(ans.size() < n){
+            for(auto [val,rep]:f){
+                if(rep == 0)continue;
+                ans.push_back(val);
+                f[val]--;
+            }
+        }
+        PRINT(ans);
     }
 /*
 

@@ -1,16 +1,38 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2260/problem/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll x,y;cin>>x>>y;
+        ll sum = x+y;
+        ll cons = 0;
+        for(int bit=BIT;bit>=0;bit--){
+            ll curr = (1LL<<bit);
+            if(!(sum&curr))continue;
+            if(cons + curr <= x){
+                cons += curr;
+            }
+        }
+        cout<<sum<<" "<<(x-cons);N();
     }
 /*
+XOR = OR - AND
+Which means , either X|Y can have a bit but both shouldnt have it
+x+y = (x^y) + 2 (x & y)
+as 2(x&y) >= 0 , we can say that the max of x xor y is the SUM
 
+The number of operations performed is k = x - x'.
+To minimize k, we need to maximize x'.
+The entire problem perfectly reduces to one simple task: 
+Find the largest submask of S that is less than or equal to x.
+
+6 4
+5 5
+4 6
+3 7
+2 8
 */
 
     signed run() {
@@ -62,10 +84,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

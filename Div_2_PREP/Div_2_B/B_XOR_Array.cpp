@@ -1,16 +1,29 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2175/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,l,r;cin>>n>>l>>r;
+        vector<int>prefixXOR(n+1,0);
+        iota(prefixXOR.begin(),prefixXOR.end(),1);
+        prefixXOR[l-1] = prefixXOR[r];
+        vector<int>ans(n,0);
+        for(int i=1;i<=n;++i){
+            ans[i-1] = prefixXOR[i]^prefixXOR[i-1];
+        }
+        PRINT(ans);
     }
 /*
+[a1,a2,a3,...,al,...,ar,...an]
+bi = a1^a2^...^ai
+f(l,r) = br^b(l-1) , hence br and b(l-1) should be equal
+Then we can fill the rest of the B-array with unique values (as duplicates would mean ,some XOR_Range is 0)
+As we have the Prefix_XOR B-array,we can recontruct the A-array via a[i] = b[i]^b[i-1]
 
+Same ele cannot be used as they make some other XOR_Range as 0
+[,x,y,a,a,b,b,c,d,e]
 */
 
     signed run() {
@@ -62,10 +75,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

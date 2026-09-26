@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2253/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,11 +7,54 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        int bare = 0 , block{1};
+        for(int i=1;i<n;i++){
+            if(nums[i-1] == nums[i]){
+                block++;
+            }else{
+                bare += min(block,1);
+                block = 1;
+            }
+        }
+        bare += min(block,1);
+        int swap = 0;
+        for(int i=1;i<n;i++){//{i-3 , i-2 , {i-1,i} , i+1 , i+2}
+            if(nums[i-1] == nums[i]){
+                if(i+1<n){
+                    if(i+2<n){
+                        if(nums[i] != nums[i+2] && nums[i-1] != nums[i+1]){
+                            if(nums[i+1] == nums[i+2]){
+                                swap = max(swap,2);
+                            }else{
+                                swap = max(swap,1);
+                            }
+                        }
+                    }else if(nums[i-1] != nums[i+1]){
+                        swap = max(swap,1);
+                    }
+                }
+                if(i-2 >= 0){
+                    if(nums[i-2] != nums[i]){
+                        if(i-3 >= 0){
+                            if(nums[i-3] != nums[i-1]){
+                                if(nums[i-3] == nums[i-2]){
+                                    swap = max(swap,2);
+                                }else{
+                                    swap = max(swap,1);
+                                }
+                            }
+                        }else {
+                            swap = max(swap,1);
+                        }
+                    }
+                }
+            }
+        }
+        int ans = bare + swap;
+        // P(bare,swap);
+        cout<<ans;N();
     }
-/*
 
-*/
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
@@ -62,10 +105,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};
@@ -134,7 +173,7 @@ public:
     }
 };
 
-signed main(void){
+signed main(){
     Main OBJ;
     return OBJ.run();
 }

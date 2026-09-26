@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/2222/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,10 +7,38 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        int median = findMedian(nums);
+        vector<int>dp(n+1,-MOD);
+        dp[0] = 0;
+        for(int i=1;i<=n;i++){
+            int small = 0 , big = 0 , equal = 0;
+            for(int j=i;j>0;j--){ //Take previous & try to form subarrays 
+                if(nums[j-1] < median)small++;
+                if(nums[j-1] == median)equal++;
+                if(nums[j-1] > median)big++;
+                if((small+equal+big)%2 == 1 && ((small+equal) > big) && ((big+equal) > small)){
+                    dp[i] = max(dp[i],dp[j-1]+1);
+                }
+            }
+        }
+        cout<<dp[n];N();
+    }
+    int findMedian(vector<int>nums){
+        sort(nums.begin(),nums.end());
+        return nums[nums.size()/2];
     }
 /*
+#Odd length subarrays only , Same medians for all k segements , maximize the parition
+#Let y be the median : 
+    a = cnt of smaller than y
+    b = cnt of equal to y
+    c = cnt of greater than y
+    => a < (b+c) should hold true
+#Let a subSegement's median be x , then Ax < (Bx+Cx)
+#As all subsegements has same median as per Qn , this should hold true for all k subsegements : Ax < (Bx+Cx)
+Which translates to x is y . Hence we can say that global median should be the median of every subsegments
 
+TC : O(n^2)
 */
 
     signed run() {
@@ -62,10 +90,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

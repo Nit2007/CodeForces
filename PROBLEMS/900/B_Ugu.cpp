@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/1732/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,12 +6,35 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string s;cin>>s;
+        int flip = {};
+        for(int i=1;i<n;i++){
+            if(s[i] != s[i-1]){
+                flip++;
+            }
+        }
+        if(s[0] == '0'){
+            flip--;
+        }
+        cout<<max(flip,0);N();
     }
-/*
 
-*/
+    // void solve(){
+    //     int n;cin>>n;
+    //     string s;cin>>s;
+    //     int flip = {};
+    //     for(int i=1;i<n;i++){
+    //         char curr = s[i];
+    //         if((flip%2)){
+    //             curr = (curr == '0')? '1' : '0' ;
+    //         }
+    //         if(s[0] != curr){
+    //             flip++;
+    //         }
+    //     }
+    //     cout<<flip;N();
+    // }
+
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
@@ -62,10 +85,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};
@@ -134,7 +153,7 @@ public:
     }
 };
 
-signed main(void){
+signed main(){
     Main OBJ;
     return OBJ.run();
 }

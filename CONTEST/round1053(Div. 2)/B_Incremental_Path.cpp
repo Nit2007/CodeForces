@@ -1,17 +1,69 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2151/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,m;cin>>n>>m;
+        string s;cin>>s;
+        vector<int>black = readVector<int>(m);
+        set<int>isBlack;
+        for(auto x:black){
+            isBlack.insert(x);
+        }
+        int curr = 1;
+        for(int i=0;i<n;i++){
+            curr++;
+            if(s[i] == 'B'){
+                while(isBlack.count(curr)){
+                    curr++;
+                }
+            }
+            isBlack.insert(curr);
+            if(s[i] == 'B'){
+               while(isBlack.count(curr)){
+                   curr++;
+               }
+           }
+        }
+        cout<<isBlack.size();N(); vector<int>ans(isBlack.begin(),isBlack.end());
+        PRINT(ans);
     }
-/*
+    
+    // void solve(){
+    //     int n,m;cin>>n>>m;
+    //     string s;cin>>s;
+    //     vector<int>black = readVector<int>(m);
+    //     map<int,int>isBlack;
+    //     for(auto x:black){
+    //         isBlack[x]++;
+    //     }
+    //     int curr = 1;
+    //     for(int i=0;i<n;i++){
+    //         char cmd = s[i];
+    //         if(cmd == 'A'){
+    //             curr++;
+    //         }
+    //         else if(cmd == 'B'){
+    //             curr++;
+    //             while(isBlack.count(curr)){
+    //                 curr++;
+    //             }
+    //         }
+    //         if(curr > 1e9)break;
+    //         P(cmd);
+    //         PRINT(black);
+    //         if(!isBlack.count(curr))
+    //         {
+    //             black.push_back(curr);
+    //         }
+    //     }
+    //     sort(black.begin(),black.end());
+    //     cout<<black.size();N();
+    //     PRINT(black);
+    // }
 
-*/
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
@@ -19,6 +71,14 @@ public:
         while(z--){ solve(); }
         return 0;
     }
+    // vector<int>nextWhite(n,MOD);
+    // int white{MOD};
+    // for(int i=n-1;i>=0;i--){
+    //     nextWhite[i] = white;
+    //     if(!isBlack.count(i+1)){
+    //         white = i+1;
+    //     }
+    // }
 
     
 
@@ -62,10 +122,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

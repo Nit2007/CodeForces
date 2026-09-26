@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1119/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,8 +6,29 @@ public:
 
     void solve(){
         int n;cin>>n;
+        ll h;cin>>h;
         vector<int>nums = readVector<int>(n);
-        
+        int l = 0 , r = n , ans = -1;
+        while(l<=r){
+            int m = (r-l)/2 + (l);
+            // P(l,r,m);
+            vector<int>bottle;
+            for(int i=0;i<m;i++){
+                bottle.push_back(nums[i]);
+            }
+            sort(bottle.rbegin(),bottle.rend());
+            ll sum = 0;
+            for(int j=0;j<bottle.size();j+=2){
+                sum += bottle[j];
+            }
+            if(sum > h){
+                r = m-1;
+            }else{
+                ans = m; 
+                l = m+1;
+            }
+        }
+        cout<<ans;
     }
 /*
 
@@ -15,7 +36,7 @@ public:
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
+        int z=1;
         while(z--){ solve(); }
         return 0;
     }
@@ -62,10 +83,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

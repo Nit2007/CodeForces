@@ -1,0 +1,31 @@
+https://codeforces.com/contest/2128/problem/B - Learned up/down construction, failed with basic greedy
+
+https://codeforces.com/contest/2128/problem/C - Missed simulation , hoping mine should work without any proof
+
+
+### LOG before 15-sept-2026
+https://codeforces.com/contest/2256/problem/B - Failed to understand the testcase / Q , missed Question deduction
+https://codeforces.com/contest/2209/problem/B - Killed ,10 mins
+https://codeforces.com/contest/2189/problem/B - 40 mins , no hint after manual tracing
+https://codeforces.com/contest/2176/problem/B - around 15 mins
+https://codeforces.com/contest/2175/problem/B - 30 mins + 20 mins of Editorial , if a segement of XOR is zero ,it means there prefixXORs are Equal
+https://codeforces.com/contest/2158/problem/B - Failed clearly at 25mins ,took more than hour ->  missed to notate observations mathematically. 
+https://codeforces.com/contest/2156/problem/B - 20mins , Missed the case where all A's would TLE
+https://codeforces.com/contest/2154/problem/B - 20mins , confused at implementation & indexing 
+https://codeforces.com/contest/2160/problem/B - Failed 40mins, cannot derive index of one case
+https://codeforces.com/contest/2153/problem/B - 10 mins
+https://codeforces.com/contest/2216/problem/B - Missed multiple T's case which lead to multiple WA
+https://codeforces.com/contest/2155/problem/B - 1.5Hour , multiple WA via missing odd n case
+https://codeforces.com/contest/2146/problem/B - 20 mins ,clear Kill
+https://codeforces.com/contest/2143/problem/B - 25 mins ,clear Kill
+https://codeforces.com/contest/2140/problem/B - 25 mins ,missed : formulate complex things , simplify them
+https://codeforces.com/contest/2139/problem/B - 10 mins ,with proof derivation
+https://codeforces.com/contest/2136/problem/B - 15 mins ,got struck but figured out the pruning condition
+https://codeforces.com/contest/2264/problem/B - Missed the formula simplification , easy implementation
+
+https://codeforces.com/contest/2256/problem/C - 20mins with hints
+https://codeforces.com/contest/2143/problem/C - Figured out the alg ,studied Kahn alg for first time , then clean implementation
+https://codeforces.com/contest/2153/problem/C - 1Hour , figured out everything ,implementation bug : missed the independent logic 
+https://codeforces.com/contest/2140/problem/c - Decomposed problem, learned that instead of bruteforcing {l,r}, we can use independent logic and do search in single pass via fixing L for every R
+https://codeforces.com/contest/2136/problem/C - Found out its DP , understood the implementation but cannot implement it myself
+https://codeforces.com/contest/2264/problem/C - Found out the alg , but formula is Hard to derive

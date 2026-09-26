@@ -1,13 +1,31 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2156/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,q;cin>>n>>q;
+        string s;cin>>s;
+        vector<int>query = readVector<int>(q);
+        int A = count(s.begin(),s.end(),'A');
+        for(auto &Q:query){
+            if(A == n){
+                cout<<Q;N();continue;
+            }
+            int i=0 , op=0;
+            while(Q){
+                if(s[i] == 'A'){
+                    Q--;
+                }else{
+                    Q /= 2;
+                }
+                i++;
+                op++;
+                i%=n;
+            }
+            cout<<op;N();
+        }
     }
 /*
 
@@ -62,10 +80,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

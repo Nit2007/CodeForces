@@ -1,17 +1,89 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2253/problem/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,m,x,y;cin>>n>>m>>x>>y;
+        vector<int>a = readVector<int>(x); //Row
+        vector<int>b = readVector<int>(y); //Col
+        map<int,int>A,B;
+        set<int>all;
+        for(auto e:a){A[e]++;all.insert(e);}
+        for(auto e:b){B[e]++;all.insert(e);}
+        vector<int>joined(all.begin(),all.end());
+        reverse(joined.rbegin(),joined.rend());//GREEDY
+        ll rowEle{} , colEle{} , tot{} , ans{};
+        for(auto J:joined){
+            if(tot >= (n+m-1))break;
+            if(A.count(J) == 1 && B.count(J) == 0){
+                if(rowEle<n){
+                    rowEle++;
+                    tot++;
+                    ans += J;
+                }
+            }
+            else if(A.count(J) == 0 && B.count(J) == 1){
+                if(colEle<m){
+                    colEle++;
+                    tot++;
+                    ans += J;
+                }
+            }
+            else if(A.count(J) == 1 && B.count(J) == 1){
+                tot++;
+                ans += J;
+            }
+        }
+        cout<<ans;N();
     }
-/*
 
+    // void solve(){
+    //     int n,m,x,y;cin>>n>>m>>x>>y;
+    //     vector<int>a = readVector<int>(x); //Row
+    //     vector<int>b = readVector<int>(y); //Col
+    //     x-- , y--;
+    //     set<int>ans;
+    //     while(x >= 0 && y >= 0 && n > 0 && m > 0){
+    //         if(a[x] > b[y]){
+    //             ans.insert(a[x]);
+    //             x--; n--;
+    //         }else if(a[x] == b[y]){
+    //             ans.insert(a[x]);
+    //             x-- , y--;
+    //             // if(n > m)n--;
+    //             // else m--;
+    //         }else if(a[x] < b[y]){
+    //             ans.insert(b[y]);
+    //             y--; m--;
+    //         }else{
+    //             break;
+    //         }
+    //     }
+    //     while(x >= 0 && n > 0){
+    //         ans.insert(a[x]);
+    //         x-- , n--;
+    //     }
+    //     while(y >= 0 && m > 0){
+    //         ans.insert(b[y]);
+    //         y-- , m--;
+    //     }
+    //     int sum = 0;
+    //     for(auto x:ans){
+    //         sum += x;
+    //     }
+    //     cout<<sum;N();
+    // }
+
+/*
+a[x] > b[y] -> Eat N
+a[x] ==b[y] -> Eat either N/M
+a[x] < b[y] -> Eat M
+if(N is -ve || M is -ve)cannot be eaten 
+Sum of unique a[x] and b[y] is ans
 */
+
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
@@ -62,10 +134,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};
@@ -134,7 +202,7 @@ public:
     }
 };
 
-signed main(void){
+signed main(){
     Main OBJ;
     return OBJ.run();
 }

@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2259/problem/D*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,10 +7,51 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        int zero = 0;
+        for(auto x:nums){
+            if(x == 0){
+                zero++;
+            }
+        }
+        string ans(n,'Z');
+        if(zero == 1){
+            cout<<"NO";N();return;
+        }
+        cout<<"YES";N();
+        for(int i=0;i<n;i++){
+            if(nums[i] == 0){
+                if(zero > 1){
+                    ans[i] = 'B';
+                    zero--;
+                }
+            }
+        }
+        for(int i=0;i<n;i++){
+            if(nums[i] == 0 && ans[i] == 'Z'){
+                ans[i] = 'A';
+            }
+        }
+        for(int i=0;i<n;i++){
+            if(ans[i] == 'Z'){
+                ans[i] = 'C';
+            }
+        }
+        cout<<ans;N();
     }
 /*
+MEX(A)+MEX(B)+MEX(C)≥2⋅max(MEX(A),MEX(B),MEX(C))
+MEX(A)+MEX(B)+MEX(C)  ≥ 2.MEX(A)
+MEX(B)+MEX(C)  ≥ MEX(A)
+=>Sum of 2 MEXs should be larger than the Largest_MEX
+B - all zero except one - 1
+C - all other no - 0
+A - one zero - 1
 
+1 0 0 1 2 1
+ABABCA
+A = 0 1 1 
+B = 0 1 
+C = 2
 */
 
     signed run() {
@@ -62,10 +103,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

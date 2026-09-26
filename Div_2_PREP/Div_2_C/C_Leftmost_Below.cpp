@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2128/problem/c*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,9 +7,41 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        int mini = MOD, ans = true;
+        for(int i=0;i<n;i++){
+            if(2*mini <= nums[i]){
+                ans = false;
+            }
+            mini = min(nums[i],mini);
+        }
+        if(ans){
+            cout<<"YES\n";
+        }else{
+            cout<<"NO\n";
+        }
     }
 /*
+Smallest number at left side makes right side unreachable
+Ascending order - spawn directly
+Equal elements - only first can be touched before second
+Descending order - spawn until (mini-1) , then call mini
+for reaching i, (mini-1) + mini = 2*mini-1 is the max permitted value
+6 2 3 
+0 0 0 
+6 0 0
+6 2 0 
+6 3 2
+
+
+3 1 2
+0 0 0
+3 0 0 
+3 1 0
+3 3 0
+
+2 3
+0 0
+2 0
 
 */
 
@@ -62,10 +94,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

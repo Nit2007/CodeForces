@@ -1,16 +1,71 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2153/problem/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n;cin>>n;
+        vector<ll>nums = readVector<ll>(n);
+        map<ll,ll>f;
+        for(auto x:nums){
+            f[x]++;
+        }
+        ll even = 0, edge = 0;
+        vector<ll>single;
+        for(auto& [val,rep]:f){
+            if(rep%2 == 0){
+                even += (val * rep);
+                edge += rep;
+            }else if(rep!=1){
+                rep--;
+                even += (val * rep) ;
+                edge += rep;
+                single.push_back(val);
+            }else{
+                single.push_back(val);
+            }
+        }
+        sort(single.begin(),single.end());
+        ll extra = 0 ,foundPair=false;
+        //Single extra
+        for(auto odd:single){
+            if(odd<even){
+                extra = max(extra,odd);
+            }
+        }
+        if(extra!=0)edge++;
+        //Double extra
+        for(int i=1;i<single.size();++i){
+            if(single[i]<(even+single[i-1])){
+                extra = max(extra,single[i-1]+single[i]);
+                foundPair = true;
+            }
+        }
+        if(foundPair)edge+=2;
+        if(edge<=2){
+            cout<<0;
+        }else{
+            cout<<even+extra;
+        }
+        N();
+        // PRINT(single);
+        // P(even,edge);
     }
 /*
-
+    Bug because the condition was checked only for the first stick ,missed check for second stick
+        ll extra = 0;
+        while(!single.empty() && even <= single.back()){
+            single.pop_back();
+        }
+        if(!single.empty() && (even) > single.back()){
+            extra += single.back();
+            edge++;
+            if(single.size() >= 2){
+                extra += single[single.size()-2];
+                edge++;
+            }
+        }
 */
 
     signed run() {
@@ -62,10 +117,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

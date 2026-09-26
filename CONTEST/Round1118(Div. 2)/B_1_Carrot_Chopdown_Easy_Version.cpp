@@ -1,17 +1,54 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2258/problem/B1*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
+        int n,m;cin>>n>>m;
         vector<int>nums = readVector<int>(n);
-        
+        vector<int>f(m+1,0);
+        for(int i=0;i<n;i++){
+            f[nums[i]]++;
+        }
+        vector<int>pre(m+1,0);
+        pre[m] = f[m];
+        for(int i=m;i>=1;--i){
+            pre[i-1] = pre[i] + f[i-1];
+        }
+        vector<int>ans(m,0);
+        for(int i=m-1;i>=0;i--){
+            ans[i] = pre[i];
+            if((i)*2 <= m){
+                ans[i] += f[(i)*2];
+            }
+        }
+        cout<<*max_element(ans.begin(),ans.end());N();
+        // PRINT(f);
+        // PRINT(pre);
+        // PRINT(ans);
+        // ND();
     }
-/*
+    /*
+    Every big carrot contributes to smaller carrot
+    big carrot contributes twice when they are even 
+    */
 
-*/
+// void solve(){
+//     int n,m;cin>>n>>m;
+//     vector<int>nums = readVector<int>(n);
+//     vector<int>f(m,0);
+//     for(int i=0;i<n;i++){
+//         f[nums[i]-1]++;
+//     }
+//     vector<int>pre(m+1,0);
+//     for(int i=1;i<=m;++i){
+//         pre[i] = pre[i-1] + f[i-1];
+//     }
+//     reverse(pre.begin(),pre.end());
+//     PRINT(f);
+//     PRINT(pre);ND();
+// }
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
@@ -62,10 +99,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

@@ -1,18 +1,27 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2151/problem/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,m;cin>>n>>m;
+        vector<int>b = readVector<int>(m);
+        if(!is_inc(b)){
+            cout<<1;N();return;
+        }
+        cout<<(n-b[m-1]+1);N();
+    }
+    bool is_inc(vector<int>&b){
+        for(int i=1;i<b.size();i++){
+            if(b[i-1] < b[i])continue;
+            return false;
+        }
+        return true;
     }
 /*
-
+Non inc subarray occurs exactly once
 */
-
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
@@ -62,10 +71,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

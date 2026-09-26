@@ -1,13 +1,28 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2257/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,m;cin>>n>>m;        
+        vector<int>a = readVector<int>(n);
+        vector<int>b = readVector<int>(m);
+        int A = a.back();
+        int B = b.back();
+        for(int i=1;i<n;i++){
+            A += a[i-1]-a[i]+1;
+        }
+        for(int i=1;i<m;i++){
+            B += b[i-1]-b[i]+1;
+        }
+        if(A>=B){
+            cout<<1;
+        }else{
+            cout<<2;
+        }
+        // P(A,B);
+        N();
     }
 /*
 
@@ -62,10 +77,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

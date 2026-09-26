@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1237/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,16 +6,73 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<int>entry = readVector<int>(n);
+        vector<int>exit = readVector<int>(n);
+        // for(int i=0;i<n;i++){P(entry[i],exit[i]);}
+        map<int,int>posExit;
+        for(auto i=0;i<n;i++){
+            posExit[exit[i]] = i+1;
+        }
+        vector<int>time(n);
+        for(int i=0;i<n;i++){
+            time[i] = posExit[entry[i]];
+        }
+        int overTakes = 0 , maxTime = time[0];
+        for(int i=1;i<n;i++){// i'th car should be behind [0,1...,i-1] cars
+            if(maxTime > time[i])overTakes++; // i'th car completed earlier than any car {max([0,1...,i-1])}
+            maxTime = max(time[i],maxTime);
+        } 
+        cout<<overTakes;N();
     }
+    // void solve(){
+    //     int n;cin>>n;
+    //     vector<int>entry = readVector<int>(n);
+    //     vector<int>exit = readVector<int>(n);
+    //     // for(int i=0;i<n;i++){P(entry[i],exit[i]);}
+    //     map<int,int>seen;
+    //     int overTakes = 0 , e{} , x{};
+    //     while(x<n){
+    //         seen[exit[x]] = true;
+    //         if(entry[e] == exit[x]){
+    //             e++;
+    //             x++;
+    //             continue;
+    //         }
+    //         if(!seen.count(entry[e]))overTakes++;
+    //         x++;
+    //     }
+    //     cout<<overTakes;N();
+    // }
+
+    // void solve(){
+    //     int n;cin>>n;
+    //     vector<int>entry = readVector<int>(n);
+    //     vector<int>exit = readVector<int>(n);
+    //     map<int,int>entryPos , exitPos;
+    //     for(int i=0;i<n;i++){
+    //         entryPos[entry[i]] = i;
+    //         exitPos [exit[i] ] = i;
+    //     }
+    //     int overTakes = 0;
+    //     for(int i=0;i<n;i++){
+    //         P(entry[i],exit[i],entryPos[entry[i]] , exitPos[entry[i]]);
+    //         if(entryPos[entry[i]] > exitPos[entry[i]]){
+    //             overTakes++;
+    //         }
+    //     }
+    //     cout<<overTakes;N();
+    // }
+
 /*
-
+1 1
+2 4
+3 3
+4 2
+5 5
 */
-
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
-        int z;cin>>z;
+        int z=1;
         while(z--){ solve(); }
         return 0;
     }
@@ -62,10 +119,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

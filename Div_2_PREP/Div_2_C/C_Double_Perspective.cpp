@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2130/problem/c*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,11 +6,45 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<pair<int,int>>nums;
+        for(int i=0;i<n;i++){
+            int a,b;cin>>a>>b;
+            nums.push_back({a,b});
+        }
+        map<int,int>ab;
+        for(auto x:nums){
+            if(ab.count(x.first)){
+                ab[x.first] = max(ab[x.first],x.second);
+            }
+            else{
+                ab[x.first] = x.second;
+            }
+        }
+        // for(auto x:ab){cout<<x.first<<" $ "<<x.second;N();}
+        vector<int>ans;
+        for(int i=0;i<n;i++){
+            if(ab[nums[i].first] == nums[i].second){
+                ans.push_back(i+1);
+            }
+        }
+        cout<<ans.size();N();
+        PRINT(ans);
     }
 /*
+Large segement covers fully : delete some segs
+Large segement covers partly: dosent form cycles
 
+        x----------x
+x-------x
+x------------------x
+Cycle formed 
+If same starting point , then choose the larger segement for maximizing f(S') without forming cycles
+
+Disjoint sets : no problem
+1 2
+2 3
+1 3
+3 5
 */
 
     signed run() {
@@ -62,10 +96,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

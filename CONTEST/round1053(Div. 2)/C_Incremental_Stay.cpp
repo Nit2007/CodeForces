@@ -1,17 +1,47 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2151/problem/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n;cin>>n;
+        vector<ll>nums = readVector<ll>(2*n);
+        vector<ll>ps(2*n+1,0LL);
+        for(int i=1;i<=2*n;i++){
+            ps[i] = ps[i-1] + nums[i-1];
+        }
+        nums.insert(nums.begin(),0);
+        for(int i=1;i<=2*n;i++){
+            nums[i] -= nums[i-1];
+        }
+        for(int k=1;k<=n;k++){
+            ll l= ps[k-1] , r = ps[2*n] - ps[2*n-k+1];
+            ll outer = r-l ;
+            ll inner = nums[2*n-k+1] - nums[k-1];
+            ll sum = outer + inner;
+            cout<<sum<<" ";
+        }
+        N();
     }
-/*
+    void Brute(){
+        ll n;cin>>n;
+        vector<ll>nums = readVector<ll>(2*n);
+        for(int k=1;k<=n;k++){
+            ll sum = 0 , l = 0 , r = 2*n-1;
+            while(l<k-1){
+                sum += (nums[r] - nums[l]);
+                l++ , r-- ;
+            }
+            while(l<r){
+                sum += nums[l+1] - nums[l];
+                l += 2;
+            }
+            cout<<sum<<" ";
+        }
+        N();
+    }
 
-*/
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
@@ -62,10 +92,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

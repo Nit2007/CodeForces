@@ -1,13 +1,33 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2256/problem/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n,k;cin>>n>>k;
+        string s;cin>>s;
+        n *= 2;
+        auto t = s;
+        ll round = 1;
+        while(round++<=1LL){
+            for(int i=0;i<n;i++){
+                if(t[i] == '1'){
+                    if(t[(i+1)%n] == '0'){
+                        swap(s[i],s[(i+1)%n]);
+                    }
+                }
+            }
+        }
+        int red = 0 , blue = 0;
+        for(int i=0;i<n;i++){
+            if(i%2){
+                if(s[i] == '1')red++;
+            }else{
+                if(s[i] == '1')blue++;
+            }
+        }
+        cout<<red<<" "<<blue;N();
     }
 /*
 
@@ -62,10 +82,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

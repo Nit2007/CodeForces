@@ -1,13 +1,47 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2146/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,m;cin>>n>>m;
+        vector<vector<int>>sets;
+        for(int i=0;i<n;i++){
+            int l;cin>>l;
+            vector<int>set_temp = readVector<int>(l);
+            sets.push_back(set_temp);
+        }
+        map<int,int>f;
+        for(auto s:sets){
+            for(auto e:s){
+                f[e]++;
+            }
+        }
+        vector<int>possible;
+        for(auto s:sets){
+            bool curr = true;
+            for(auto e:s){
+                if(f[e] <= 1){
+                    curr = false;
+                    break;
+                }
+            }
+            possible.push_back(curr);
+        }
+        int sum = accumulate(possible.begin(),possible.end(),0);
+        for(int i=1;i<=m;i++){
+            if(f[i] == 0){
+                sum = 0;
+            }
+        }
+        // PRINT(possible);
+        if(sum >= 2){
+            cout<<"YES";
+        }else{
+            cout<<"NO";
+        }
+        N();
     }
 /*
 
@@ -62,10 +96,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

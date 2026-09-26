@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2263/problem/C1*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,12 +6,58 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<int>mex = readVector<int>(n);
+        vector<int>ans , bad(n+1,0);
+        for(int k=1;k<=n;k++){
+            int lo = (mex[k-1] * k);
+            int hi = (mex[k-1] * k) + k;
+            lo = min(lo,n) , hi = min(hi,n);
+            bad[lo]++;
+            bad[hi]--;
+        }
+        // PRINT(bad);
+        int poison = 0;
+        for(int i=0;i<n;i++){
+            poison += bad[i];
+            if(!poison){
+                ans.push_back(i);
+            }
+        }
+        cout<<ans.size();N();
+        PRINT(ans);
     }
-/*
+    /*
+    MEX should never appear when dividing by any number k , hence the bad range is [mex*k,mex*k+k]
+    Mark the bad range with poison , if a range is not poisoned ,include it in the ans
+    k = [1,2,3,4...n]
+    0 - starts with 1
+    
+    0 3 2 2 2 1
+    Biggest = [-1,2,1,1,1,0]
+    [1,4,5]
+    2 1 1 1 1
+    
+    1 2 1 1 1 1
+    */
 
-*/
+// void solve(){
+//     int n;cin>>n;
+//     vector<int>nums = readVector<int>(n);
+//     vector<int>big = nums;
+//     for(auto&x:big){
+//         x--;
+//     }
+//     vector<int>ans;
+//     for(int k=1;k<=n;k++){
+//         if(big[k-1] <= 0)continue;
+//         // P(big[k-1],k);
+//         auto x = big[k-1] * k;
+//         ans.push_back(x);
+//     }
+//     ans = makeUnique(ans);
+//     cout<<ans.size();N();
+//     PRINT(ans);
+// }
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
@@ -62,10 +108,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

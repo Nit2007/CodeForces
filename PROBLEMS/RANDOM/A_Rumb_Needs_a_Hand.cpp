@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/2264/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,7 +7,23 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        vector<int>s = nums;
+        sort(s.begin(),s.end());
+        vector<int>toRev;
+        for(int i=0;i<n;i++){
+            if(nums[i] != s[i]){
+                toRev.push_back(nums[i]);
+                nums[i] = -1;
+            }
+        }
+        reverse(toRev.begin(),toRev.end());
+        int i=0;
+        for(auto&x:nums){
+            if(x == -1){
+                x = toRev[i++];
+            }
+        }
+        yn(is_sorted(nums.begin(),nums.end()));
     }
 /*
 

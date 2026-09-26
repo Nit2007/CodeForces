@@ -1,16 +1,33 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2153/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll x,y,z;cin>>x>>y>>z;
+        ll a , b , c ;
+        a = x | z ;
+        b = x | y ;
+        c = y | z ;
+        if(((a&b)==x) && ((b&c)==y) && ((a&c)==z)){
+            cout<<"YES";
+        }else{
+            cout<<"NO";
+        }
+        N();
+        // P(a,b,c,a&b,x,b&c,y,a&c,z);
     }
 /*
-
+a&b=x
+b&c=y
+a&c=z
+1001 - ab
+1010 - bc
+1100 - ac
+a = 1101
+b = 1011
+c = 1110
 */
 
     signed run() {
@@ -62,10 +79,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

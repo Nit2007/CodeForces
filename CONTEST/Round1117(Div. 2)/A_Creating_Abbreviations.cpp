@@ -1,13 +1,40 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2257/problem/A*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,m;cin>>n>>m;
+        vector<char>seq;
+        for(int i=0;i<n;i++){
+            string s;cin>>s;
+            seq.push_back(s[0]);
+        } 
+        int ans = true;
+        vector<string>abb;
+        for(int i=0;i<m;i++){
+            string s;cin>>s;
+            abb.push_back(s);
+        } 
+        map<char,int>fseq;
+        for(auto x:seq){
+            fseq[x]++;
+        }
+        for(auto&x:abb){
+            for(auto&w:x){
+                w = tolower(w);
+                if(!fseq.count(w)){
+                    ans = false;
+                }
+            }
+        }
+        if(ans){
+            cout<<"YES";
+        }else{
+            cout<<"NO";
+        }
+        N();
     }
 /*
 
@@ -62,10 +89,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

@@ -1,13 +1,28 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2266/problem/E*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n,k;cin>>n>>k;
+        vector<ll>nums = readVector<ll>(n);
+        vector<ll>dp(n+1,0);
+        for(ll i=2;i<=n;i++){
+            vector<ll>factors = primes(i);
+            if(i > k){
+                dp[i] = LLONG_MAX;
+                for(auto f:factors){
+                    if(dp[i/f] == LLONG_MAX)continue;
+                    dp[i] = min(dp[i], 1 + (dp[i/f] * f));
+                }
+            }
+        }
+        ll ans = 0;
+        for(auto x:nums){
+            ans += dp[x];
+        }
+        cout<<ans;N();
     }
 /*
 
@@ -119,16 +134,17 @@ public:
         }return unique;
     }
     /*---------------------NUMBER-THEORY-----------------------*/
-    vector<int>primeFactors(int x){
-        vector<int>f;
-        for(int i=1;i*i<=x;i++){
+    vector<ll>primes(ll x){
+        vector<ll>f;
+        for(ll i=2;i*i<=x;i++){
             if(x%i == 0){
                 f.push_back(i);
-                if(i != (x/i)){
-                    f.push_back(x/i);
+                while(x%i == 0){
+                    x /= i;
                 }
             }
         }
+        if(x > 1)f.push_back(x);
         sort(f.begin(),f.end());
         return f;
     }

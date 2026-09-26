@@ -1,17 +1,40 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1497/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
+        int n,m;cin>>n>>m;
         vector<int>nums = readVector<int>(n);
-        
+        vector<int>rem;
+        for(auto x:nums){
+            rem.push_back(x%m);
+        }
+        sort(rem.begin(),rem.end());
+        int ans{};
+        if(rem[0] == 0)ans++;
+        map<int,int>frem;
+        for(auto x:rem){
+            if(x == 0)continue;
+            frem[x]++;
+        }
+        int l{1},r{m-1};
+        while(l<=r){
+            if(l==r){
+                if(frem[l] != 0)ans++;
+                break;
+            }
+            if((abs(frem[l] - frem[r]) < 2) && (frem[l]>0) && (frem[r]>0) )ans++; //Pair things
+            else{
+                ans +=  abs(frem[l] - frem[r]);//Individual arr for extras
+            }
+            l++ , r--;
+        }
+        cout<<ans;N();
+        // PRINT(rem);
     }
-/*
 
-*/
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
@@ -62,10 +85,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

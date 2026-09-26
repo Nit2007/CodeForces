@@ -1,16 +1,27 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2140/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll x;cin>>x;
+        cout<<2*x;N();
     }
 /*
+x#y = x⋅10^d+y  where d is the no of digits in Y
+x⋅10^d+y % (x+y) == 0
 
+x+y = 0 (mod x+y) , y = -x mod (x+y)
+x⋅10^d-x % (x+y) == 0
+x(10^d-1) % (x+y) == 0
+x(10^d-1) = 0 mod (x+y)
+3x should divide x(10^d-1):
+    put x = 8 , d = 3
+    8(999) % 8(3) = 0
+    x cancels x , 3 cancels 9s at (10^d-1)
+x+y = 3x
+y = 2x
 */
 
     signed run() {
@@ -62,10 +73,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

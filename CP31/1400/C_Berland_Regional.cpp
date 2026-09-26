@@ -1,13 +1,48 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1519/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        ll n;cin>>n;
+        vector<ll>clg = readVector<ll>(n);
+        vector<ll>skill = readVector<ll>(n);
+        vector<vector<ll>>clgSkill(n);
+        for(int i=0;i<n;i++){
+            clgSkill[clg[i]-1].push_back(skill[i]);
+        }
+        vector<vector<ll>>csps;
+        for(auto&skillSet:clgSkill){
+            sort(skillSet.rbegin(),skillSet.rend());
+            csps.push_back(skillSet);
+        }
+        for(auto&s:csps){
+            for(int i=1;i<s.size();i++){
+                s[i] += s[i-1];
+            }
+        }
+        vector<ll>ans;
+        vector<ll>university(n,0);
+        for(int i=0;i<n;i++){
+            university[i] = i;
+        }
+        for(int k=1;k<=n;k++){
+            vector<ll>contributed;
+            ll sum = 0;
+            for(ll uniIdx:university){
+                int csize = clgSkill[uniIdx].size();
+                int leftOver = (csize)%k;
+                if(csize >= k){
+                    contributed.push_back(uniIdx);
+                }else{continue;}
+                int usable = csize - leftOver - 1;
+                sum += csps[uniIdx][usable];
+            }
+            swap(university , contributed);
+            ans.push_back(sum);
+        }
+        PRINT(ans);
     }
 /*
 
@@ -62,10 +97,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

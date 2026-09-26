@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/1504/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,13 +6,31 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string a,b;cin>>a>>b;
+        vector<int>pre0(n+1,0);       
+        vector<int>pre1(n+1,0);    
+        for(int i=1;i<=n;i++){
+            pre0[i] = (a[i-1] == '0')? pre0[i-1] + 1 : pre0[i-1] ;
+            pre1[i] = (a[i-1] == '1')? pre1[i-1] + 1 : pre1[i-1] ;
+        }
+        int f{} , ans = true; 
+        for(int i=n-1;i>=0;i--){
+            if( (a[i] == b[i] && f%2 == 0) || (a[i] != b[i] && f%2 == 1) )continue;
+            if(pre0[i+1] == pre1[i+1]){
+                f++;
+            }else{ans = false;/*P(i,a[i],b[i],f);*/}
+        }
+        if(ans){
+            cout<<"YES";
+        }else{
+            cout<<"NO";
+        }
+        N();
     }
 /*
-
+0111010000
+0100101100
 */
-
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
         int z;cin>>z;
@@ -62,10 +80,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};
@@ -134,7 +148,7 @@ public:
     }
 };
 
-signed main(void){
+signed main(){
     Main OBJ;
     return OBJ.run();
 }

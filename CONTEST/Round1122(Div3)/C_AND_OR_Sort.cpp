@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2266/problem/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,11 +6,49 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string s;cin>>s;
+        int totalOnes{};
+        for(auto x:s){
+            if(x == '1')totalOnes++;
+        }
+        int totalZero = n - totalOnes;
+        if(s[0] == '1'){
+            cout<<totalZero;N();return;
+        }
+        int cnt = false ,zero = 0;
+        vector<int>l(n,0),r(n,0);
+        for(int i=0;i<n;i++){
+            if(s[i] == '0'){
+                zero += cnt;
+                cnt = 0;
+            }
+            if(s[i] == '1'){
+                cnt++;
+            }
+            l[i] = zero;
+        } 
+        int ones = 0;cnt = false;
+        for(int i=n-1;i>=0;i--){
+            if(s[i] == '1'){
+                ones += cnt;
+                cnt = 0;
+            }
+            if(s[i] == '0'){
+                cnt++;
+            }
+            r[i] = ones;
+        } 
+        int ans = INT_MAX;
+        for(int i=0;i<n;i++){
+            ans = min(ans,l[i]+r[i]);
+        }
+        cout<<ans;N();
+
     }
 /*
-
+01001101
+Or - -ones
+And - zero
 */
 
     signed run() {

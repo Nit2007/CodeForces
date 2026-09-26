@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2257/problem/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,12 +6,77 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<vector<int>> adj(n + 1);
+        vector<int>parent(1,0);
+        for (int i = 1; i < n; ++i) {
+            int p; cin >> p;
+        }
+        int m;cin>>m;
+        vector<int>dams = readVector<int>(m);
+        sort(dams.begin(),dams.end());
+        dams.erase(dams.begin());
+        cout<<dams.size()<<" "; PRINT(dams);
     }
-/*
+    /*
+    
+    */
 
-*/
+    // void solve(){
+    //     int n;cin>>n;
+    //     vector<vector<int>> adj(n + 1);
+    //     vector<int>parent(1,0);
+    //     for (int i = 1; i < n; ++i) {
+    //         int p; cin >> p;
+    //         parent.push_back(p);
+    //         adj[p-1].push_back(i); 
+    //     }
+    //     int m;cin>>m;
+    //     vector<int>dams = readVector<int>(m);
+    //     set<int>dam;
+    //     for(auto d:dams){
+    //         dam.insert(d-1);
+    //     }
+    //     vector<int>subDams(n,0);
+    //     vector<int>ans;
+    //     dfs(0,adj,dam,subDams,ans);
+    //     int remove = -1;
+    //     for(auto curr:dam){
+    //         int d = curr;
+    //         bool hasDam = false; //Direct from curr to Root, skip one camera as if no camera finds beaver ,it must have visted this node
+    //         while(d){
+    //             d = parent[d];
+    //             if(dam.count(d)){
+    //                 hasDam = true; break;
+    //             }
+    //         }
+    //         if(hasDam){
+    //             remove = curr; break;
+    //         }
+    //     }
+    //     int camera = 0;
+    //     for(int i=0;i<ans.size();i++){
+    //         if(ans[i] == remove)continue;
+    //         camera++;
+    //     }
+    //     cout<<camera<<" "; 
+    //     for(int i=0;i<ans.size();i++){
+    //         if(ans[i] == remove)continue;
+    //         cout<<ans[i]<<" ";
+    //     }N();
+    // }
+    // void dfs(int curr,vector<vector<int>>&adj,set<int>&dam,vector<int>&subDams,vector<int>&ans){
+    //     if(dam.count(curr)){
+    //         subDams[curr] = 1;
+    //     }
+    //     for(auto child:adj[curr]){
+    //         dfs(child,adj,dam,subDams,ans);
+    //         if(subDams[child] == 1){
+    //             ans.push_back(child+1);
+    //         }
+    //         subDams[curr] += subDams[child];
+    //     }
+    // }
+
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
@@ -62,10 +127,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

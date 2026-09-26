@@ -1,17 +1,93 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/problemset/problem/2248/D*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,Q;cin>>n>>Q;
+        string s,t;cin>>s>>t;
+        vector<int>match,mismatch;
+        match.push_back(0);
+        mismatch.push_back(0);
+        for(int i=0;i<n;i++){
+            match.push_back(match.back() + (s[i]==t[i]) );
+            mismatch.push_back(mismatch.back() + PAIR(s[i],t[i]) );
+        }
+        for(int q=0;q<Q;q++){
+            int l,r;cin>>l>>r;
+            int good = match[r] - match[l-1];
+            int bad = mismatch[r] - mismatch[l-1];
+            if(abs(bad) > good){
+                cout<<"NO\n";continue;
+            }
+            cout<<"YES";N();continue;
+        }
     }
-/*
+    int PAIR(char a,char b){
+        if(a == b)return 0;
+        if(a == '1')return 1;
+        if(b == '1')return -1;
+    }
+    /*    
+Cases : 
+N | s t
+a   0 0
+b   1 1 
+c   1 0
+d   0 1
+a,b are not going to cause no trouble
+c,d can be paired with themselves , abs(c-d) is going to cause trouble 
+We can pair those abs(c-d) with {a,b}
 
-*/
+
+    00001
+    01111
+    
+    11100
+    10000
+    
+    00011
+    01111
+    
+    0001
+    1111
+    
+    00
+    11
+    */
+void WrongAns_Missed_joint_distribution_of_chars(){ //Missed relative positions matter
+    int n,Q;cin>>n>>Q;
+    string s,t;cin>>s>>t;
+    vector<int>s1,t1;
+    s1.push_back(0);
+    t1.push_back(0);
+    for(int i=0;i<n;i++){
+        s1.push_back(s1.back() + s[i]-'0');
+        t1.push_back(t1.back() + t[i]-'0');
+    }
+    // PRINT(s1);
+    // PRINT(t1);
+    for(int q=0;q<Q;q++){
+        int l,r;cin>>l>>r;
+        int s_ones = s1[r] - s1[l-1];
+        int t_ones = t1[r] - t1[l-1];
+        int s_zero = (r-l+1) - s_ones;
+        int t_zero = (r-l+1) - t_ones;
+        int major = max({s_ones,t_ones,s_zero,t_zero});
+        if(major == s_zero || major == t_zero){
+            s_ones = s_zero;
+            t_ones = t_zero;
+        }
+        if(s_ones > 2*t_ones){
+            cout<<"NO\n";continue;
+        }
+        if(t_ones > 2*s_ones){
+            cout<<"NO\n";continue;
+        }
+        cout<<"YES";N();continue;
+    }
+}
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
@@ -62,10 +138,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

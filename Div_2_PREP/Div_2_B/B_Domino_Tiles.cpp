@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2256/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,12 +6,90 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        string s;cin>>s;
+        int startWithZero{true} , startWithOne{true};
+        for(int i=0;i<n;i+=2){
+            if(s[i] == '?')continue;
+            int k = i/2;
+            char p1 = (k%2)? '1' : '0' ;
+            char p2 = (p1 == '1')? '0' : '1' ;
+            if(s[i] != p1){
+                startWithOne = false;
+            }
+            if(s[i] != p2){
+                startWithZero = false;
+            }
+        }  
+        int odd = startWithOne + startWithZero ;
+        startWithZero = true , startWithOne = true;
+        for(int i=1;i<n;i+=2){
+            if(s[i] == '?')continue;
+            int k = (i-1)/2;
+            char p1 = (k%2)? '1' : '0' ;
+            char p2 = (p1 == '1')? '0' : '1' ;
+            if(s[i] != p1){
+                startWithOne = false;
+            }
+            if(s[i] != p2){
+                startWithZero = false;
+            }
+        }  
+        int even = startWithOne + startWithZero ;
+        cout<<(odd*even);N();      
     }
-/*
+    /*
+s[i] + s[i+1] != s[i+1] + s[i+2]
+s[i] != s[i+2] -> Alternate
+Odd -> 10101 or 01010
+Eve -> 10101 or 01010
 
+    # Domino {0,1,2}
+    # X?X is invalid
+    # X?Y is +1
+    Sum(si,si+1) != Sum(si+1,si+2)
+
+1??
+[1+,++]
+
+0?1??
+[0+,+1,1+,++]
+[{0,1},{1,2},{1,2},{0,1,2}]
+
+0?0??
+[0+,+0,0+,++]
+
+01010
+01001
+00000
+01011
 */
+
+// void solve(){
+//     int n;cin>>n;
+//     string s;cin>>s;
+//     if(s.length() == 2){
+//         int Q = count(s.begin(),s.end(),'?');
+//         cout<<Q*2;N();return;
+//     }
+//     int ans{1};
+//     for(int i=0;i+2<n;i++){
+//         if(s[i+1] == '?'){
+//             if(s[i] == s[i+2]){
+//                 if(s[i] == '?'){
+//                     ans *= 4;
+//                 }else{
+//                     cout<<0;N();return;
+//                 }
+//             }else if(s[i] == '?' || s[i+2] == '?'){
+//                 ans += 1;
+//             }
+//             else{
+//                 ans *= 2;
+//             }
+//         }
+//     }  
+//     cout<<ans;N();      
+// }
 
     signed run() {
         ios_base::sync_with_stdio(false);   cin.tie(NULL);
@@ -62,10 +140,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

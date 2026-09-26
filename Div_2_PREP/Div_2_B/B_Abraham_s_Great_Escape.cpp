@@ -1,16 +1,97 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2155/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        int n,escape;cin>>n>>escape;
+        int totalCells = n * n;
+        int loops = totalCells-escape;
+        if(loops == 1){
+            cout<<"NO";N();return;
+        }
+        cout<<"YES";N();
+        vector<string>grid(n,string(n,'U'));
+        int row=n-1,col=0;
+        while(loops>0){
+            if(col+1<n){
+                grid[row][col] = 'R';
+                grid[row][col+1] = 'L';
+                loops -= 2;
+            }else{
+                grid[row][col] = 'L';
+                loops--;
+            }
+            if(loops<0)break;
+            row--;
+            if(row==-1){
+                row = n-1;
+                col += 2;
+            }
+        }
+        // P(loops,col,row);
+        if(loops == -1 && col>0){
+            grid[row][col] = 'L'; //Proceed infinite Loop
+            grid[row][col+1] = 'R'; //Get outside
+        }else if(loops == -1){
+            grid[row][col] = 'D'; //Proceed infinite Loop
+            grid[row][col+1] = 'U'; //Get outside
+        }
+        PRINT(grid);
     }
-/*
 
+
+    // void solve(){
+    //     int n,escape;cin>>n>>escape;
+    //     int totalCells = n * n;
+    //     int loops = totalCells-escape;
+    //     if(loops == 1){
+    //         cout<<"NO";N();return;
+    //     }
+    //     cout<<"YES";N();
+    //     vector<string>grid(n,string(n,'U'));
+    //     int row1=n-1,row2=n-1,col1=0,col2=1;
+    //     while(loops>0){
+    //         grid[row1][col1] = 'R';
+    //         grid[row2][col2] = 'L';
+    //         loops -= 2;
+    //         if(loops<0)break;
+    //         row1--;
+    //         row2--;
+    //         if(row1==-1){
+    //             row1 = n-1;
+    //             col1 += 2;
+    //             row2 = n-1;
+    //             col2 += 2;
+    //         }
+    //     }
+    //     if(loops == -1 && col1>0){
+    //         grid[row1][col1] = 'L'; //Proceed infinite Loop
+    //         grid[row2][col2] = 'R'; //Get outside
+    //     }else if(loops == -1){
+    //         grid[row1][col1] = 'D'; //Proceed infinite Loop
+    //         grid[row2][col2] = 'U'; //Get outside
+    //     }
+    //     PRINT(grid);
+    // }
+
+/*
+RLRLRLU
+RLRLRLU
+RLRLRLU
+RLRLRLU
+RLRLRLU
+RLRLRLL
+RLRLRLR
+
+RLRLRLU
+RLRLRLU
+RLRLRLU
+RLRLRLU
+RLRLRLU
+RLRLRLL
+RLRLRLR
 */
 
     signed run() {
@@ -25,8 +106,7 @@ public:
 
     template<typename T>
     void PRINT(const vector<T>& v){
-        for(int i1=0;i1<(int)v.size();i1++) cout<<v[i1]<<" ";
-        cout<<endl;
+        for(int i1=0;i1<(int)v.size();i1++) cout<<v[i1]<<"\n";
     }
 
     template<typename T>
@@ -62,10 +142,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

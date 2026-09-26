@@ -1,16 +1,37 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2130/problem/B*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
 public:  
 
     void solve(){
-        int n;cin>>n;
+        int n,target;cin>>n>>target;
         vector<int>nums = readVector<int>(n);
-        
+        int sum = accumulate(nums.begin(),nums.end(),0);
+        if(target < sum){
+            PRINT(nums);return;
+        }
+        map<int,int>f;
+        for(auto x:nums){
+            f[x]++;
+        }
+        if(sum+1 == target){
+            while(f[0]--){cout<<0<<" ";}
+            while(f[2]--){cout<<2<<" ";}
+            while(f[1]--){cout<<1<<" ";}
+            N();return;
+        }
+        cout<<"-1\n";
     }
 /*
-
+Min sum Reachable = sum
+Possible Hops : 
+0 1 - 1,2,3
+0 2 - 2,4,6
+1 2 - 3,6,9
+{0,1 =>sum is 1} &  {0,2 => sum is 2} & {1,2 => sum is 3} 
+More than 1 can be easily farmed , so the only case is how to farm one
+Block 0 & 1 with 2 inbetween
 */
 
     signed run() {
@@ -62,10 +83,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};

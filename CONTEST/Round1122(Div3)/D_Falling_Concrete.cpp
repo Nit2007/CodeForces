@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2266/problem/D*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -6,11 +6,36 @@ public:
 
     void solve(){
         int n;cin>>n;
-        vector<int>nums = readVector<int>(n);
-        
+        vector<ll>nums = readVector<ll>(n);
+        for(int i=0;i<n;i++){
+            nums[i] -= i;
+        }
+        sort(nums.begin(),nums.end());
+        nums.erase(unique(nums.begin(), nums.end()), nums.end());
+        int ans = 1;
+        for(int i=0,j=i;i<nums.size();i=j){
+            while(j<nums.size() && nums[i] == nums[j]-(j-i)){
+                j++;
+            }
+            ans = max(ans,(j-i));
+        }
+        cout<<ans;N();
     }
 /*
+flat numbers [x,x,x,x] =>  [x,x+1,x+2,x+3]
+All numbers must have been consecutive to form such an sequence 
+Order doesnt matter because
+    x = Ai - i , Ai is brought from index i far 
+    Elements goes Left - (-1) , Right - (+1)
+    Element goes left : index -1 , value +1 which makes no change at c
 
+5 6 70 8 9 
+
+6 7 70 8 9 
+68 7 8 8 9
+
+68 6 7 8 9
+5 5 68 5 5 
 */
 
     signed run() {
@@ -121,7 +146,7 @@ public:
     /*---------------------NUMBER-THEORY-----------------------*/
     vector<int>primeFactors(int x){
         vector<int>f;
-        for(int i=1;i*i<=x;i++){
+        for(int i=2;i*i<=x;i++){
             if(x%i == 0){
                 f.push_back(i);
                 if(i != (x/i)){

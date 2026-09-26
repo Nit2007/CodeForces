@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> /*$url$*/
+#include <bits/stdc++.h> /*https://codeforces.com/contest/2166/problem/C*/
 using namespace std;/*AUTHOR : NITHISH JAISARUN*/using ll = long long int; const int MOD = 1e9+7;const int BIT = 32;
 #define P(...) debugPrint(#__VA_ARGS__, __VA_ARGS__)
 class Main{
@@ -7,10 +7,32 @@ public:
     void solve(){
         int n;cin>>n;
         vector<int>nums = readVector<int>(n);
-        
+        vector<int>small;
+        for(int i=0;i<n;i++){
+            int nextId = (i+1)%n;
+            small.push_back(max(nums[i],nums[nextId]));
+        }
+        sort(small.begin(),small.end());
+        cout<<accumulate(small.begin(),small.end()-1,0LL);N();
     }
 /*
+As i am removing the smallest , there is no need to form new connections again because 
+    N1
+   s   b
+ N2     N3
+ N4  N5  N6
 
+Remove N1(as N1<N2) , form connections bw N2 & N3 , (remove N1,N3 connection) (remove N1,N2 connection)
+the cost of new connection - add b 
+(remove N1,N3 connection)  - rem b
+(remove N1,N2 connection)  - rem s , ans += s
+
+
+Use a multiset for adj Max , save with index
+remove the smallest ,mark the left and right of adj as invalid 
+Insert max(arr[sid+1],arr[sid-1])
+if invalid small remove and continue
+cost is computed as removed ones
 */
 
     signed run() {
@@ -62,10 +84,6 @@ public:
             cout << TO_STRING(x.first) << '\t'
                 << TO_STRING(x.second) << '\n';
         }
-    }
-    void yn(bool Yes){
-        if(Yes)cout<<"YES\n";
-        else cout<<"NO\n";
     }
     template<typename T>
     struct is_map : false_type {};
